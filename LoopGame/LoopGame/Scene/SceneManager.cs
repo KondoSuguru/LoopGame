@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using LoopGame.Device;
 using Microsoft.Xna.Framework;
 
 namespace LoopGame.Scene
@@ -57,11 +57,15 @@ namespace LoopGame.Scene
 
         public void Draw()
         {
+            GameDevice.Instance().GetRenderer().Begin();
+
             if (mCurrentScene == null)
             {
                 return;
             }
             mCurrentScene.Draw();
+
+            GameDevice.Instance().GetRenderer().End();
         }
     }
 }

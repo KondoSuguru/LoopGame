@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using LoopGame.Device;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,10 +52,12 @@ namespace LoopGame.Actor
 
         public void Draw()
         {
+            
             foreach (var a in mActors)
             {
                 a.Draw();
             }
+            
         }
 
         public void Clear()

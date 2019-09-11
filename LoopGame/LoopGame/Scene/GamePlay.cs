@@ -7,19 +7,24 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using LoopGame.Utility;
 using Microsoft.Xna.Framework.Input;
+using LoopGame.Actor;
 
 namespace LoopGame.Scene
 {
     class GamePlay : IScene
     {
+        private Player p;
         private bool mIsEndFlag;
 
         public void Draw()
         {
+            ActorManager.Instance().Draw();
         }
 
         public void Initialize()
         {
+            p = new Player();
+            ActorManager.Instance().AddActor(p);
             mIsEndFlag = false;
         }
 
