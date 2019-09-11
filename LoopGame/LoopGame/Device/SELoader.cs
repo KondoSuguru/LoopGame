@@ -5,30 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace LoopGame.Device
-{
-    class SELoader : Loader
-    {
-        private Sound mSound;
-
-        public SELoader(string[,] resources) : base(resources)
-        {
-            mSound = GameDevice.Instance().GetSound();
+namespace LoopGame.Device {
+    class SELoader : Loader {
+        public SELoader(string[,] resources) : base(resources) {
             base.Initialize();
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            // まず終了フラグを有効にして
+        public override void Update(GameTime gameTime) {
             mIsEndFlag = true;
-            // カウンタが最大に達していないか？
-            if (mCounter < mMaxNumber)
-            {
-                // SEの読み込み
-                mSound.LoadSE(mResources[mCounter, 0], mResources[mCounter, 1]);
-                // カウンタを増やす
+            if (mCounter < mMaxNumber) {
+                GameDevice.Instance().GetSound().LoadSE(mResources[mCounter, 0], mResources[mCounter, 1]);
                 mCounter += 1;
-                // 読み込むものがあったので終了フラグを継続に設定
                 mIsEndFlag = false;
             }
 
