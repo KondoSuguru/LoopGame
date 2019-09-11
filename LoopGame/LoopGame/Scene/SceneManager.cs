@@ -5,87 +5,63 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
-using Oikake.Device;
 
-namespace Oikake.Scene
+namespace LoopGame.Scene
 {
     class SceneManager
     {
         // シーン管理用ディクショナリ
-        private Dictionary<Scene, IScene> scenes = new Dictionary<Scene, IScene>();
+        private Dictionary<Scene, IScene> mScenes = new Dictionary<Scene, IScene>();
         // 現在のシーン
-        private IScene currentScene = null;
+        private IScene mCurrentScene = null;
 
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
         public SceneManager()
         { }
 
-        /// <summary>
-        /// シーンの追加
-        /// </summary>
-        /// <param name="name">シーン名</param>
-        /// <param name="scene">具体的なシーンオブジェクト</param>
+
         public void Add(Scene name, IScene scene)
         {
-            // すでにシーン名が登録されていたら
-            if (scenes.ContainsKey(name))
+            if (mScenes.ContainsKey(name))
             {
-                // 何もしない
                 return;
             }
-            // シーンの追加
-            scenes.Add(name, scene);
+            mScenes.Add(name, scene);
         }
 
         public void Change(Scene name)
         {
-            // 何かシーンが登録されていたら
-            if (currentScene != null)
+            if (mCurrentScene != null)
             {
-                // 現在のシーンの終了処理
-                currentScene.Shutdown();
+                mCurrentScene.Shutdown();
             }
 
-            // ディクショナリから次のシーンを取り出し、
-            // 現在のシーンに設定
-            currentScene = scenes[name];
+            mCurrentScene = mScenes[name];
 
-            // シーンの初期化
-            currentScene.Initialize();
+            mCurrentScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
         {
-            // シーンが登録されていないか？
-            if (currentScene == null)
+            if (mCurrentScene == null)
             {
-                // 何もしない
                 return;
             }
 
-            // 現在のシーンの更新
-            currentScene.Update(gameTime);
+            mCurrentScene.Update(gameTime);
 
-            // 現在のシーンが終了しているか？
-            if (currentScene.IsEnd())
+            if (mCurrentScene.IsEnd())
             {
-                // 次のシーンを取り出し、シーン切り替え
-                Change(currentScene.Next());
+                Change(mCurrentScene.Next());
             }
         }
 
-        public void Draw(Renderer renderer)
+        public void Draw()
         {
-            // 現在のシーンがまだないか？
-            if (currentScene == null)
+            if (mCurrentScene == null)
             {
-                // 何もしない
                 return;
             }
-            // 現在のシーンを描画
-            currentScene.Draw(renderer);
+            mCurrentScene.Draw();
         }
     }
 }

@@ -4,17 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Oikake.Scene
+namespace LoopGame.Scene
 {
-    /// <summary>
-    /// シーン名の列挙型
-    /// </summary>
     enum Scene
     {
-        Load,
-        Title,
-        GamePlay,
-        Ending,
-        GoodEnding,
+        None,
     };
 }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
 
-namespace Oikake.Util
+namespace LoopGame.Utility
 {
     class CountDownTimer : Timer
     {
         public CountDownTimer()
             : base()
         {
-            // 自分の初期化メソッドで初期化
             Initialize();
         }
 
@@ -25,28 +24,22 @@ namespace Oikake.Util
 
         public override void Initialize()
         {
-            currentTime = limitTime;
+            mCurrentTime = mLimitTime;
         }
 
         public override bool IsTime()
         {
-            // 0以下になってたら設定した時間を超えたのでtrueを返す
-            return currentTime <= 0.0f;
+            return mCurrentTime <= 0.0f;
         }
 
-        /// <summary>
-        /// 割合
-        /// </summary>
-        /// <returns>はじめ0、制限時間で1</returns>
         public override float Rate()
         {
-            return 1.0f - currentTime / limitTime;
+            return 1.0f - mCurrentTime / mLimitTime;
         }
 
         public override void Update(GameTime gameTime)
         {
-            // 現在の時間を減らす。ただし最小値は0.0
-            currentTime = Math.Max(currentTime - 1f, 0.0f);
+            mCurrentTime = Math.Max(mCurrentTime - 1f, 0.0f);
         }
     }
 }

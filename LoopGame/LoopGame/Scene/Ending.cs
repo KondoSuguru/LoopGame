@@ -5,66 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
-using Oikake.Device;
-using Microsoft.Xna.Framework.Input;
 
-namespace Oikake.Scene
+namespace LoopGame.Scene
 {
     class Ending : IScene
     {
-        private bool isEndFlag;
-        private Sound sound;
-        IScene backGroundScene;
+        private bool mIsEndFlag;
 
-        public Ending(IScene scene)
+        public Ending()
         {
-            isEndFlag = false;
-            backGroundScene = scene;
-            var gameDevice = GameDevice.Instance();
-            sound = gameDevice.GetSound();
         }
 
-        public void Draw(Renderer renderer)
+        public void Draw()
         {
-            // シーンごとにrenderer.Begin()～End()を
-            // 書いているのに注意
-            // 背景となるゲームプレイシーン
-            backGroundScene.Draw(renderer);
 
-            renderer.Begin();
-            renderer.DrawTexture("ending", new Vector2(150, 150));
-            renderer.End();
         }
 
         public void Initialize()
         {
-            isEndFlag = false;
+            mIsEndFlag = false;
         }
 
         public bool IsEnd()
         {
-            return isEndFlag;
+            return mIsEndFlag;
         }
 
         public Scene Next()
         {
-            return Scene.Title;
+            return Scene.None;
         }
 
         public void Shutdown()
         {
-            sound.StopBGM();
         }
 
         public void Update(GameTime gameTime)
         {
-            sound.PlayBGM("endingbgm");
-
-            if (Input.GetKeyTrigger(Keys.Space))
-            {
-                sound.PlaySE("endingse");
-                isEndFlag = true;
-            }
         }
     }
 }
