@@ -10,10 +10,8 @@ using Microsoft.Xna.Framework.Audio; // WAVデータ
 using System.Deployment; // Assert用
 using System.Diagnostics;
 
-namespace Oikake.Device
-{
-    class Sound
-    {
+namespace LoopGame.Device {
+    class Sound {
         #region フィールドとコンストラクタ
         // コンテンツ管理者
         private ContentManager contentManager;
@@ -32,8 +30,7 @@ namespace Oikake.Device
         /// コンストラクタ
         /// </summary>
         /// <param name="content">Game1のコンテンツ管理者</param>
-        public Sound(ContentManager content)
-        {
+        public Sound(ContentManager content) {
             // Game1クラスのコンテンツ管理者と紐づけ
             contentManager = content;
             // BGMは繰り返し再生
@@ -53,8 +50,7 @@ namespace Oikake.Device
         /// <summary>
         /// 解放
         /// </summary>
-        public void Unload()
-        {
+        public void Unload() {
             // ディクショナリをクリア
             bgms.Clear();
             soundEffects.Clear();
@@ -69,8 +65,7 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="name">使えないであろうアセット名</param>
         /// <returns></returns>
-        private string ErrorMessage(string name)
-        {
+        private string ErrorMessage(string name) {
             return "再生する音のアセット名(" + name + ")がありません" +
                 "アセット名の確認、Dictionaryに登録しているか確認してください";
         }
@@ -82,11 +77,9 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="name">アセット名</param>
         /// <param name="filepath">ファイルパス</param>
-        public void LoadBGM(string name, string filepath = "./")
-        {
+        public void LoadBGM(string name, string filepath = "./") {
             // すでに登録されているか？
-            if (bgms.ContainsKey(name))
-            {
+            if (bgms.ContainsKey(name)) {
                 return;
             }
             // MP3の読み込みとDictionaryへ登録
@@ -97,8 +90,7 @@ namespace Oikake.Device
         /// BGMが停止中か？
         /// </summary>
         /// <returns>停止中ならtrue</returns>
-        public bool IsStoppedBGM()
-        {
+        public bool IsStoppedBGM() {
             return (MediaPlayer.State == MediaState.Stopped);
         }
 
@@ -106,8 +98,7 @@ namespace Oikake.Device
         /// BGMが再生中か？
         /// </summary>
         /// <returns>再生中ならtrue</returns>
-        public bool IsPlayingBGM()
-        {
+        public bool IsPlayingBGM() {
             return (MediaPlayer.State == MediaState.Playing);
         }
 
@@ -115,16 +106,14 @@ namespace Oikake.Device
         /// BGMが一時停止中か？
         /// </summary>
         /// <returns>一時停止中ならtrue</returns>
-        public bool IsPauseBGM()
-        {
+        public bool IsPauseBGM() {
             return (MediaPlayer.State == MediaState.Paused);
         }
 
         /// <summary>
         /// BGMを停止
         /// </summary>
-        public void StopBGM()
-        {
+        public void StopBGM() {
             MediaPlayer.Stop();
             currentBGM = null;
         }
@@ -133,21 +122,18 @@ namespace Oikake.Device
         /// BGM再生
         /// </summary>
         /// <param name="name"></param>
-        public void PlayBGM(string name)
-        {
+        public void PlayBGM(string name) {
             // アセット名がディクショナリに登録されているか？
             Debug.Assert(bgms.ContainsKey(name), ErrorMessage(name));
 
             // 同じ曲か？
-            if (currentBGM == name)
-            {
+            if (currentBGM == name) {
                 // 同じ曲だったら何もしない
                 return;
             }
 
             // BGMは再生中か？
-            if (IsPlayingBGM())
-            {
+            if (IsPlayingBGM()) {
                 // 再生中なら、停止処理
                 StopBGM();
             }
@@ -165,10 +151,8 @@ namespace Oikake.Device
         /// <summary>
         /// BGMの一時停止
         /// </summary>
-        public void PauseBGM()
-        {
-            if (IsPauseBGM())
-            {
+        public void PauseBGM() {
+            if (IsPauseBGM()) {
                 MediaPlayer.Pause();
             }
         }
@@ -176,17 +160,14 @@ namespace Oikake.Device
         /// <summary>
         /// 一時停止からの再生
         /// </summary>
-        public void ResumeBGM()
-        {
-            if (IsPauseBGM())
-            {
+        public void ResumeBGM() {
+            if (IsPauseBGM()) {
                 MediaPlayer.Resume();
             }
         }
 
 
-        public void ChangeBGMLoopFlag(bool loopFlag)
-        {
+        public void ChangeBGMLoopFlag(bool loopFlag) {
             MediaPlayer.IsRepeating = loopFlag;
         }
         #endregion BGM(MP3:MediaPlayer)関連
@@ -199,11 +180,9 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="name">アセット名</param>
         /// <param name="filepath">ファイルパス</param>
-        public void LoadSE(string name, string filepath = "./")
-        {
+        public void LoadSE(string name, string filepath = "./") {
             // すでに登録されているか？
-            if (soundEffects.ContainsKey(name))
-            {
+            if (soundEffects.ContainsKey(name)) {
                 return;
             }
             // MP3の読み込みとDictionaryへ登録
@@ -214,8 +193,7 @@ namespace Oikake.Device
         /// BGM再生
         /// </summary>
         /// <param name="name"></param>
-        public void PlaySE(string name)
-        {
+        public void PlaySE(string name) {
             // アセット名が登録されているか？
             Debug.Assert(soundEffects.ContainsKey(name), ErrorMessage(name));
 
@@ -232,11 +210,9 @@ namespace Oikake.Device
         /// WAVインスタンスの作成
         /// </summary>
         /// <param name="name">アセット名</param>
-        public void CreateSEInstance(string name)
-        {
+        public void CreateSEInstance(string name) {
             // すでに登録されていたら何もしない
-            if (seInstances.ContainsKey(name))
-            {
+            if (seInstances.ContainsKey(name)) {
                 return;
             }
 
@@ -256,14 +232,12 @@ namespace Oikake.Device
         /// <param name="name">アセット名</param>
         /// <param name="no">管理番号</param>
         /// <param name="loopFlag"></param>
-        public void PlaySEInstances(string name, int no, bool loopFlag = false)
-        {
+        public void PlaySEInstances(string name, int no, bool loopFlag = false) {
             Debug.Assert(
                 seInstances.ContainsKey(name), ErrorMessage(name));
 
             // 再生管理用ディクショナリに登録されていたら何もしない
-            if (sePlayDict.ContainsKey(name + no))
-            {
+            if (sePlayDict.ContainsKey(name + no)) {
                 return;
             }
             var data = seInstances[name];
@@ -277,15 +251,12 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="name"></param>
         /// <param name="no"></param>
-        public void StoppedSE(string name, int no)
-        {
+        public void StoppedSE(string name, int no) {
             // 再生管理用ディクショナリになければ何もしない
-            if (sePlayDict.ContainsKey(name + no) == false)
-            {
+            if (sePlayDict.ContainsKey(name + no) == false) {
                 return;
             }
-            if (sePlayDict[name + no].State == SoundState.Playing)
-            {
+            if (sePlayDict[name + no].State == SoundState.Playing) {
                 sePlayDict[name + no].Stop();
             }
         }
@@ -293,12 +264,9 @@ namespace Oikake.Device
         /// <summary>
         /// 再生中のSEをすべて停止
         /// </summary>
-        public void StoppedSE()
-        {
-            foreach (var se in sePlayDict)
-            {
-                if (se.Value.State == SoundState.Playing)
-                {
+        public void StoppedSE() {
+            foreach (var se in sePlayDict) {
+                if (se.Value.State == SoundState.Playing) {
                     se.Value.Stop();
                 }
             }
@@ -309,11 +277,9 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="name">アセット名</param>
         /// <param name="no">管理番号</param>
-        public void RemoveSE(string name, int no)
-        {
+        public void RemoveSE(string name, int no) {
             // 再生管理用ディクショナリになければ何もしない
-            if (sePlayDict.ContainsKey(name + no) == false)
-            {
+            if (sePlayDict.ContainsKey(name + no) == false) {
                 return;
             }
             sePlayDict.Remove(name + no);
@@ -322,8 +288,7 @@ namespace Oikake.Device
         /// <summary>
         /// すべてのSEを削除
         /// </summary>
-        public void RemoveSE()
-        {
+        public void RemoveSE() {
             sePlayDict.Clear();
         }
 
@@ -332,16 +297,13 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="name">アセット名/param>
         /// <param name="no">管理番号</param>
-        public void PauseSE(string name, int no)
-        {
+        public void PauseSE(string name, int no) {
             // 再生管理用ディクショナリになければ何もしない
-            if (sePlayDict.ContainsKey(name + no) == false)
-            {
+            if (sePlayDict.ContainsKey(name + no) == false) {
                 return;
             }
             // 再生中なら一時停止
-            if (sePlayDict[name + no].State == SoundState.Playing)
-            {
+            if (sePlayDict[name + no].State == SoundState.Playing) {
                 sePlayDict[name + no].Pause();
             }
         }
@@ -349,12 +311,9 @@ namespace Oikake.Device
         /// <summary>
         /// すべてのSEを一時停止
         /// </summary>
-        public void PauseSE()
-        {
-            foreach (var se in sePlayDict)
-            {
-                if (se.Value.State == SoundState.Playing)
-                {
+        public void PauseSE() {
+            foreach (var se in sePlayDict) {
+                if (se.Value.State == SoundState.Playing) {
                     se.Value.Pause();
                 }
             }
@@ -365,16 +324,13 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="name">アセット名</param>
         /// <param name="no">管理番号</param>
-        public void ResumeSE(string name, int no)
-        {
+        public void ResumeSE(string name, int no) {
             // 再生管理用ディクショナリになければ何もしない
-            if (sePlayDict.ContainsKey(name + no) == false)
-            {
+            if (sePlayDict.ContainsKey(name + no) == false) {
                 return;
             }
 
-            if (sePlayDict[name + no].State == SoundState.Paused)
-            {
+            if (sePlayDict[name + no].State == SoundState.Paused) {
                 sePlayDict[name + no].Resume();
             }
         }
@@ -382,12 +338,9 @@ namespace Oikake.Device
         /// <summary>
         /// 一時停止中のすべてのSEを復帰
         /// </summary>
-        public void ResumeSE()
-        {
-            foreach (var se in sePlayDict)
-            {
-                if (se.Value.State == SoundState.Paused)
-                {
+        public void ResumeSE() {
+            foreach (var se in sePlayDict) {
+                if (se.Value.State == SoundState.Paused) {
                     se.Value.Resume();
                 }
             }
@@ -399,8 +352,7 @@ namespace Oikake.Device
         /// <param name="name">アセット名</param>
         /// <param name="no">管理番号</param>
         /// <returns>再生中ならtrue</returns>
-        public bool IsPlayingSEInstance(string name, int no)
-        {
+        public bool IsPlayingSEInstance(string name, int no) {
             return sePlayDict[name + no].State == SoundState.Playing;
         }
 
@@ -410,8 +362,7 @@ namespace Oikake.Device
         /// <param name="name">アセット名</param>
         /// <param name="no">管理番号</param>
         /// <returns>停止中ならtrue</returns>
-        public bool IsStoppedSEInstance(string name, int no)
-        {
+        public bool IsStoppedSEInstance(string name, int no) {
             return sePlayDict[name + no].State == SoundState.Stopped;
         }
 
@@ -421,8 +372,7 @@ namespace Oikake.Device
         /// <param name="name"></param>
         /// <param name="no"></param>
         /// <returns></returns>
-        public bool IsPausedSEInstance(string name, int no)
-        {
+        public bool IsPausedSEInstance(string name, int no) {
             return sePlayDict[name + no].State == SoundState.Paused;
         }
 

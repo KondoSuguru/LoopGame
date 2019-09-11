@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace Oikake.Def
 {
-    /// <summary>
-    /// 静的画面サイズクラス
-    /// </summary>
     static class Screen
     {
-        // C#
-        public static readonly int Width = 800; // 画面横幅
-        public static readonly int Height = 600; // 画面縦幅
+        public static readonly int WIDTH = 1024; // 画面横幅 64*16
+        public static readonly int HEIGHT = 768; // 画面縦幅 64*12
     }
 }

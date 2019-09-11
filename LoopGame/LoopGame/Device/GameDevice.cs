@@ -8,139 +8,73 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Oikake.Device
-{
-    /// <summary>
-    /// ゲームデバイスクラス
-    /// 継承できないので sealed で明示的に
-    /// </summary>
-    sealed class GameDevice
-    {
+namespace LoopGame.Device {
+    sealed class GameDevice {
         // 唯一のインスタンス
-        private static GameDevice instance;
+        private static GameDevice mInstance;
 
         // デバイス関連のフィールド
-        private Renderer renderer;
-        private Sound sound;
-        private static Random random;
-        private ContentManager content;
-        private GraphicsDevice graphics;
-        private GameTime gameTime;
+        private Renderer mRenderer;
+        private Sound mSound;
+        private static Random mRandom;
+        private ContentManager mContent;
+        private GraphicsDevice mGraphics;
+        private GameTime mGameTime;
 
-        /// <summary>
-        /// コンストラクタ
-        /// private 宣言で外部からの new での実体生成はさせない
-        /// </summary>
-        /// <param name="content"></param>
-        /// <param name="graphics"></param>
-        private GameDevice(ContentManager content, GraphicsDevice graphics)
-        {
-            renderer = new Renderer(content, graphics);
-            sound = new Sound(content);
-            random = new Random();
-            this.content = content;
-            this.graphics = graphics;
+        private GameDevice(ContentManager content, GraphicsDevice graphics) {
+            mRenderer = new Renderer(content, graphics);
+            mSound = new Sound(content);
+            mRandom = new Random();
+            this.mContent = content;
+            this.mGraphics = graphics;
         }
 
-        /// <summary>
-        /// GameDevice インスタンスの取得
-        /// (Game1 クラスで使う実体生成用)
-        /// </summary>
-        /// <param name="content">コンテンツ管理者</param>
-        /// <param name="graphics">グラフィック機器</param>
-        /// <returns>GameDeviceインスタンス</returns>
-        public static GameDevice Instance(ContentManager content, GraphicsDevice graphics)
-        {
+        public static GameDevice Instance(ContentManager content, GraphicsDevice graphics) {
             // インスタンスがまだ生成されていなければ生成する
-            if (instance == null)
-            {
-                instance = new GameDevice(content, graphics);
+            if (mInstance == null) {
+                mInstance = new GameDevice(content, graphics);
             }
-            return instance;
+            return mInstance;
         }
 
-        /// <summary>
-        /// インスタンスの取得
-        /// </summary>
-        /// <returns>GameDeviceインスタンス</returns>
-        public static GameDevice Instance()
-        {
+        public static GameDevice Instance() {
             // まだインスタンスが生成されていなければエラー分を出す
-            Debug.Assert(instance != null,
+            Debug.Assert(mInstance != null,
                 "Game1クラスのInitializeメソッド内で引数付きInstanceメソッドを呼んでくる");
 
-            return instance;
+            return mInstance;
         }
 
-        /// <summary>
-        /// 初期化
-        /// </summary>
-        public void Initialize()
-        { }
+        public void Initialize() { }
 
-        /// <summary>
-        /// 更新
-        /// </summary>
-        /// <param name="gameTime">ゲーム時間</param>
-        public void Update(GameTime gameTime)
-        {
+        public void Update(GameTime gameTime) {
             // デバイスで絶対に1回のみ更新が必要なもの
             Input.Update();
-            this.gameTime = gameTime;
+            this.mGameTime = gameTime;
         }
 
-        /// <summary>
-        /// レンダラーオブジェクトの取得
-        /// </summary>
-        /// <returns>描画オブジェクト</returns>
-        public Renderer GetRenderer()
-        {
-            return renderer;
+        public Renderer GetRenderer() {
+            return mRenderer;
         }
 
-        /// <summary>
-        /// サウンドオブジェクトの取得
-        /// </summary>
-        /// <returns>サウンドオブジェクト</returns>
-        public Sound GetSound()
-        {
-            return sound;
+        public Sound GetSound() {
+            return mSound;
         }
 
-        /// <summary>
-        /// 乱数オブジェクトの取得
-        /// </summary>
-        /// <returns>乱数オブジェクト</returns>
-        public Random GetRandom()
-        {
-            return random;
+        public Random GetRandom() {
+            return mRandom;
         }
 
-        /// <summary>
-        /// コンテンツ管理者の取得
-        /// </summary>
-        /// <returns>コンテンツ管理者オブジェクト</returns>
-        public  ContentManager GetContentManager()
-        {
-            return content;
+        public ContentManager GetContentManager() {
+            return mContent;
         }
 
-        /// <summary>
-        /// グラフィックスデバイスの取得
-        /// </summary>
-        /// <returns>グラフィックデバイスオブジェクト</returns>
-        public  GraphicsDevice GetGraphicsDevice()
-        {
-            return graphics;
+        public GraphicsDevice GetGraphicsDevice() {
+            return mGraphics;
         }
 
-        /// <summary>
-        /// ゲーム時間の取得
-        /// </summary>
-        /// <returns></returns>
-        public GameTime GetGameTime()
-        {
-            return gameTime;
+        public GameTime GetGameTime() {
+            return mGameTime;
         }
     }
 }

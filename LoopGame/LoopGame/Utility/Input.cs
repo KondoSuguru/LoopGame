@@ -7,70 +7,60 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Oikake.Device
-{
-    static class Input
-    {
+namespace LoopGame.Utility {
+    static class Input {
         // 移動量
         private static Vector2 velocity = Vector2.Zero;
         // キーボード
-        private static KeyboardState currentKey; // 現在のキーの状態
-        private static KeyboardState previousKey; // 1フレーム前のキーの状態
+        private static KeyboardState mCurrentKey; // 現在のキーの状態
+        private static KeyboardState mPreviousKey; // 1フレーム前のキーの状態
         // マウス
-        private static MouseState currentMouse; // 現在のマウスの状態
-        private static MouseState previousMouse; // 1フレーム前のマウスの状態
+        private static MouseState mCurrentMouse; // 現在のマウスの状態
+        private static MouseState mPreviousMouse; // 1フレーム前のマウスの状態
 
-        public static void Update()
-        {
+        public static void Update() {
             // キーボード
-            previousKey = currentKey;
-            currentKey = Keyboard.GetState();
+            mPreviousKey = mCurrentKey;
+            mCurrentKey = Keyboard.GetState();
             // マウス
-            previousMouse = currentMouse;
-            currentMouse = Mouse.GetState();
+            mPreviousMouse = mCurrentMouse;
+            mCurrentMouse = Mouse.GetState();
 
             // 更新
             UpdateVelocity();
         }
 
         // キーボード関連
-        public static Vector2 Velocity()
-        {
+        public static Vector2 Velocity() {
             return velocity;
         }
 
-        private static void UpdateVelocity()
-        {
+        private static void UpdateVelocity() {
             // 毎ループ初期化
             velocity = Vector2.Zero;
 
             // 右
-            if (currentKey.IsKeyDown(Keys.Right) || (currentKey.IsKeyDown(Keys.D)))
-            {
+            if (mCurrentKey.IsKeyDown(Keys.Right) || (mCurrentKey.IsKeyDown(Keys.D))) {
                 velocity.X += 1.0f;
             }
 
             // 左
-            if (currentKey.IsKeyDown(Keys.Left) || (currentKey.IsKeyDown(Keys.A)))
-            {
+            if (mCurrentKey.IsKeyDown(Keys.Left) || (mCurrentKey.IsKeyDown(Keys.A))) {
                 velocity.X -= 1.0f;
             }
 
             // 上
-            if (currentKey.IsKeyDown(Keys.Up) || (currentKey.IsKeyDown(Keys.W)))
-            {
+            if (mCurrentKey.IsKeyDown(Keys.Up) || (mCurrentKey.IsKeyDown(Keys.W))) {
                 velocity.Y -= 1.0f;
             }
 
             // 下
-            if (currentKey.IsKeyDown(Keys.Down) || (currentKey.IsKeyDown(Keys.S)))
-            {
+            if (mCurrentKey.IsKeyDown(Keys.Down) || (mCurrentKey.IsKeyDown(Keys.S))) {
                 velocity.Y += 1.0f;
             }
 
             // 正規化
-            if (velocity.Length() != 0)
-            {
+            if (velocity.Length() != 0) {
                 velocity.Normalize();
             }
         }
@@ -80,9 +70,8 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="key">チェックしたいキー</param>
         /// <returns>現在キーが押されていて、1フレーム前に押されていなければtrue</returns>
-        public static bool IsKeyDown(Keys key)
-        {
-            return currentKey.IsKeyDown(key) && !previousKey.IsKeyDown(key);
+        public static bool IsKeyDown(Keys key) {
+            return mCurrentKey.IsKeyDown(key) && !mPreviousKey.IsKeyDown(key);
         }
 
         /// <summary>
@@ -90,8 +79,7 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="key">チェックしたいキー</param>
         /// <returns>押された瞬間ならtrue</returns>
-        public static bool GetKeyTrigger(Keys key)
-        {
+        public static bool GetKeyTrigger(Keys key) {
             return IsKeyDown(key);
         }
 
@@ -100,9 +88,8 @@ namespace Oikake.Device
         /// </summary>
         /// <param name="key">調べたいキー</param>
         /// <returns>キーが押されていたらtrue</returns>
-        public static bool GetKeyState(Keys key)
-        {
-            return currentKey.IsKeyDown(key);
+        public static bool GetKeyState(Keys key) {
+            return mCurrentKey.IsKeyDown(key);
         }
 
         // マウス関連
@@ -110,65 +97,57 @@ namespace Oikake.Device
         /// マウスの左ボタンが押された瞬間か？
         /// </summary>
         /// <returns>現在押されていて、1フレーム前に押されていなければtrue</returns>
-        public static bool IsMouseLButtonDown()
-        {
-            return currentMouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released;
+        public static bool IsMouseLButtonDown() {
+            return mCurrentMouse.LeftButton == ButtonState.Pressed && mPreviousMouse.LeftButton == ButtonState.Released;
         }
 
         /// <summary>
         /// マウスの左ボタンが離された瞬間か？
         /// </summary>
         /// <returns>現在はなされていて、1フレーム前に押されていたらtrue</returns>
-        public static bool IsMouseLButtonUp()
-        {
-            return currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed;
+        public static bool IsMouseLButtonUp() {
+            return mCurrentMouse.LeftButton == ButtonState.Released && mPreviousMouse.LeftButton == ButtonState.Pressed;
         }
 
         /// <summary>
         /// マウスの左ボタンが押されているか？
         /// </summary>
         /// <returns>左ボタンが押されていたらtrue</returns>
-        public static bool IsMouseLButton()
-        {
-            return currentMouse.LeftButton == ButtonState.Pressed;
+        public static bool IsMouseLButton() {
+            return mCurrentMouse.LeftButton == ButtonState.Pressed;
         }
 
         /// <summary>
         /// マウスの右ボタンが押された瞬間か？
         /// </summary>
         /// <returns>現在押されていて、1フレーム前に押されていなければtrue</returns>
-        public static bool IsMouseRButtonDown()
-        {
-            return currentMouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released;
+        public static bool IsMouseRButtonDown() {
+            return mCurrentMouse.LeftButton == ButtonState.Pressed && mPreviousMouse.LeftButton == ButtonState.Released;
         }
 
         /// <summary>
         /// マウスの右ボタンが離された瞬間か？
         /// </summary>
         /// <returns>現在はなされていて、1フレーム前に押されていたらtrue</returns>
-        public static bool IsMouseRButtonUp()
-        {
-            return currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed;
+        public static bool IsMouseRButtonUp() {
+            return mCurrentMouse.LeftButton == ButtonState.Released && mPreviousMouse.LeftButton == ButtonState.Pressed;
         }
 
         /// <summary>
         /// マウスのボタンが押されているか？
         /// </summary>
         /// <returns>右ボタンが押されていたらtrue</returns>
-        public static bool IsMouseRButton()
-        {
-            return currentMouse.LeftButton == ButtonState.Pressed;
+        public static bool IsMouseRButton() {
+            return mCurrentMouse.LeftButton == ButtonState.Pressed;
         }
 
         /// <summary>
         /// マウスの位置を返す
         /// </summary>
-        public static Vector2 MousePosition
-        {
+        public static Vector2 MousePosition {
             // プロパティでGetterを生成
-            get
-            {
-                return new Vector2(currentMouse.X, currentMouse.Y);
+            get {
+                return new Vector2(mCurrentMouse.X, mCurrentMouse.Y);
             }
         }
 
@@ -176,9 +155,8 @@ namespace Oikake.Device
         /// マウスのスクロールホイールの変化量
         /// </summary>
         /// <returns>1フレーム前と現在のホイール量の差分</returns>
-        public static int GetMouseWheel()
-        {
-            return previousMouse.ScrollWheelValue - currentMouse.ScrollWheelValue;
+        public static int GetMouseWheel() {
+            return mPreviousMouse.ScrollWheelValue - mCurrentMouse.ScrollWheelValue;
         }
     }
 }

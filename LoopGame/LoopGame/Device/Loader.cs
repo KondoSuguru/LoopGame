@@ -6,71 +6,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Oikake.Device
-{
-    abstract class Loader
-    {
-        protected string[,] resources; // リソースアセット名群
-        protected int counter; // 現在登録しているカウンタ
-        protected int maxNum; // 最大登録数
-        protected bool isEndFlag; // 終了フラグ
+namespace LoopGame.Device {
+    abstract class Loader {
+        protected string[,] mResources; // リソースアセット名群
+        protected int mCounter; // 現在登録しているカウンタ
+        protected int mMaxNumber; // 最大登録数
+        protected bool mIsEndFlag; // 終了フラグ
 
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="resources"></param>
-        public Loader(string[,] resources)
-        {
-            this.resources = resources;
+        public Loader(string[,] resources) {
+            mResources = resources;
         }
 
-        /// <summary>
-        /// 初期化
-        /// </summary>
-        public void Initialize()
-        {
-            counter = 0;
-            isEndFlag = false;
-            maxNum = 0;
+        public void Initialize() {
+            mCounter = 0;
+            mIsEndFlag = false;
+            mMaxNumber = 0;
 
             //  条件がFalseのときに、エラー分を出す
-            Debug.Assert(resources != null,
+            Debug.Assert(mResources != null,
                 "リソースデータ登録情報がおかしいです");
             // 配列から、配列から
-            maxNum = resources.GetLength(0);
+            mMaxNumber = mResources.GetLength(0);
         }
 
-        /// <summary>
-        /// 最大登録数
-        /// </summary>
-        /// <returns></returns>
-        public int RegistMAXNum()
-        {
-            return maxNum;
+        public int RegistMAXNum() {
+            return mMaxNumber;
         }
 
-        /// <summary>
-        /// 現在の登録している番号を取得
-        /// </summary>
-        /// <returns></returns>
-        public int CurrentCount()
-        {
-            return counter;
+        public int CurrentCount() {
+            return mCounter;
         }
 
-        /// <summary>
-        /// 終了か？
-        /// </summary>
-        /// <returns></returns>
-        public bool IsEnd()
-        {
-            return isEndFlag;
+        public bool IsEnd() {
+            return mIsEndFlag;
         }
 
-        /// <summary>
-        /// 抽象更新メソッド
-        /// </summary>
-        /// <param name="gameTime"></param>
-        public abstract void Update(GameTime gameTime);
+        public abstract void Update(GameTime deltaTime);
     }
 }

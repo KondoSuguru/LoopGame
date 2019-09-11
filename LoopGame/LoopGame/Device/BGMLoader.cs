@@ -5,31 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Oikake.Device
-{
-    class BGMLoader : Loader
-    {
-        private Sound sound;
+namespace LoopGame.Device {
+    class BGMLoader : Loader {
+        private Sound mSound;
 
-        public BGMLoader(string[,] resources) : base(resources)
-        {
-            sound = GameDevice.Instance().GetSound();
+        public BGMLoader(string[,] resources) : base(resources) {
+            mSound = GameDevice.Instance().GetSound();
             base.Initialize();
         }
 
-        public override void Update(GameTime gameTime)
-        {
+        public override void Update(GameTime deltaT) {
             // まず終了フラグを有効にして
-            isEndFlag = true;
+            mIsEndFlag = true;
             // カウンタが最大に達していないか？
-            if (counter < maxNum)
-            {
+            if (mCounter < mMaxNumber) {
                 // BGMの読み込み
-                sound.LoadBGM(resources[counter, 0], resources[counter, 1]);
+                mSound.LoadBGM(mResources[mCounter, 0], mResources[mCounter, 1]);
                 // カウンタを増やす
-                counter += 1;
+                mCounter += 1;
                 // 読み込むものがあったので終了フラグを継続に設定
-                isEndFlag = false;
+                mIsEndFlag = false;
             }
         }
     }

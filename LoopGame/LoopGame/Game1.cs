@@ -8,13 +8,13 @@ namespace LoopGame
     public class Game1 : Game
     {
         // フィールド（このクラスの情報を記述）
-        private GraphicsDeviceManager graphicsDeviceManager;//グラフィックスデバイスを管理するオブジェクト
-        private SpriteBatch spriteBatch;//画像をスクリーン上に描画するためのオブジェクト
+        private GraphicsDeviceManager mGraphicsDeviceManager;//グラフィックスデバイスを管理するオブジェクト
+        private SpriteBatch mSpriteBatch;//画像をスクリーン上に描画するためのオブジェクト
 
         public Game1()
         {
             //グラフィックスデバイス管理者の実体生成
-            graphicsDeviceManager = new GraphicsDeviceManager(this);
+            mGraphicsDeviceManager = new GraphicsDeviceManager(this);
             //コンテンツデータ（リソースデータ）のルートフォルダは"Contentに設定
             Content.RootDirectory = "Content";
         }
@@ -27,7 +27,7 @@ namespace LoopGame
         protected override void LoadContent()
         {
             // 画像を描画するために、スプライトバッチオブジェクトの実体生成
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            mSpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         protected override void UnloadContent()
