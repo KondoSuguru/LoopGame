@@ -9,7 +9,7 @@ namespace LoopGame.Utility
     class Range
     {
         private int mFirst; 
-        private int mEnd; 
+        private int mEnd;  
 
         public Range(int first, int end)
         {
