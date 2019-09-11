@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using LoopGame.Device;
+using LoopGame.Utility;
+
 namespace LoopGame
 {
     public class Game1 : Game
