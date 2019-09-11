@@ -8,6 +8,10 @@ namespace LoopGame.Scene
 {
     enum Scene
     {
+        Title,
+        GamePlay,
+        Ending,
+
         None,
     };
 }

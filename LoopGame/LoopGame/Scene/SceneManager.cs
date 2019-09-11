@@ -16,8 +16,8 @@ namespace LoopGame.Scene
         private IScene mCurrentScene = null;
 
         public SceneManager()
-        { }
-
+        {
+        }
 
         public void Add(Scene name, IScene scene)
         {

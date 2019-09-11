@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
+using LoopGame.Utility;
+using Microsoft.Xna.Framework.Input;
 
 namespace LoopGame.Scene
 {
@@ -28,7 +30,7 @@ namespace LoopGame.Scene
 
         public Scene Next()
         {
-            return Scene.None;
+            return Scene.Ending;
         }
 
         public void Shutdown()
@@ -37,7 +39,9 @@ namespace LoopGame.Scene
 
         public void Update(GameTime gameTime)
         {
-            
+            if (Input.GetKeyTrigger(Keys.Space)) {
+                mIsEndFlag = true;
+            }
         }
     }
 }

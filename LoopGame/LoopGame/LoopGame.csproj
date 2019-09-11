@@ -44,6 +44,12 @@
     <Compile Include="Device\BGMLoader.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Device\GameDevice.cs" />
+    <Compile Include="Scene\Ending.cs" />
+    <Compile Include="Scene\GamePlay.cs" />
+    <Compile Include="Scene\IScene.cs" />
+    <Compile Include="Scene\Scene.cs" />
+    <Compile Include="Scene\SceneManager.cs" />
+    <Compile Include="Scene\Title.cs" />
     <Compile Include="Utility\Input.cs" />
     <Compile Include="Device\Loader.cs" />
     <Compile Include="Program.cs" />

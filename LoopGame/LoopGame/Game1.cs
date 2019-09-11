@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 using LoopGame.Device;
 using LoopGame.Utility;
+using LoopGame.Scene;
 
 namespace LoopGame
 {
@@ -13,6 +14,7 @@ namespace LoopGame
         // フィールド（このクラスの情報を記述）
         private GraphicsDeviceManager mGraphicsDeviceManager;//グラフィックスデバイスを管理するオブジェクト
         private SpriteBatch mSpriteBatch;//画像をスクリーン上に描画するためのオブジェクト
+        private SceneManager mSceneManager;
 
         public Game1()
         {
@@ -20,10 +22,22 @@ namespace LoopGame
             mGraphicsDeviceManager = new GraphicsDeviceManager(this);
             //コンテンツデータ（リソースデータ）のルートフォルダは"Contentに設定
             Content.RootDirectory = "Content";
+
+            // Screenクラスの値で画面サイズを設定
+            mGraphicsDeviceManager.PreferredBackBufferWidth = Screen.WIDTH;
+            mGraphicsDeviceManager.PreferredBackBufferHeight = Screen.HEIGHT;
         }
 
         protected override void Initialize()
         {
+            GameDevice.Instance(Content, GraphicsDevice);
+
+            mSceneManager = new SceneManager();
+            mSceneManager.Add(Scene.Scene.Title, new Title());
+            mSceneManager.Add(Scene.Scene.GamePlay, new GamePlay());
+            mSceneManager.Add(Scene.Scene.Ending, new Ending());
+            mSceneManager.Change(Scene.Scene.Title);
+
             base.Initialize();// 親クラスの初期化処理呼び出し。絶対に消すな！！
         }
 
@@ -46,6 +60,9 @@ namespace LoopGame
                 Exit();
             }
 
+            GameDevice.Instance().Update(gameTime);
+            mSceneManager.Update(gameTime);
+
             base.Update(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
         }
 
@@ -53,6 +70,8 @@ namespace LoopGame
         {
             // 画面クリア時の色を設定
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            mSceneManager.Draw();
 
             base.Draw(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
         }
