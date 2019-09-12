@@ -23,5 +23,9 @@ namespace LoopGame.Actor
         {
             mPosition = position;
         }
+
+        public Vector2 GetPosition() {
+            return mPosition;
+        }
     }
 }

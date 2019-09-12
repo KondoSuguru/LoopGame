@@ -14,7 +14,7 @@ namespace LoopGame.Scene
     class GamePlay : IScene
     {
         private Player p;
-        
+        private Stage mStage;
         private bool mIsEndFlag;
 
         public void Draw()
@@ -25,6 +25,8 @@ namespace LoopGame.Scene
         public void Initialize()
         {
             p = new Player();
+            mStage = new Stage();
+            //mStage.Load()
             ActorManager.Instance().AddActor(p);
             ActorManager.Instance().AddActor(new Wall());
             ActorManager.Instance().AddActor(new Box());
