@@ -10,7 +10,7 @@ namespace LoopGame.Actor
 {
     class Box : Actor
     {
-        public Box() : base("boss_LEFT")
+        public Box() : base("box")
         {
             GameDevice.Instance().GetRenderer().LoadContent(mFilename);
         }

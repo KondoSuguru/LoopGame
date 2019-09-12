@@ -74,15 +74,17 @@ namespace LoopGame.Actor {
                 for (int col = x - 1; col <= (x + 1); col++) // 横3列分
                 {
                     // 配列外なら何もしない
-                    if (xRange.IsOutOfRange(col) || yRange.IsOutOfRange(row))
+                    if (xRange.IsOutOfRange(col) || yRange.IsOutOfRange(row)) {
                         continue;
+                    }
 
                     // その場所のオブジェクトを取得
                     Actor obj = mMapList[row][col];
 
                     // objがSpaceクラスのオブジェクトなら次へ
-                    //if (obj is Space)
-                    //    continue;
+                    if (obj is Space) {
+                        continue;
+                    }
 
                     // 衝突判定
                     //if (obj.IsCollision(actor))

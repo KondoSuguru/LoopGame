@@ -10,7 +10,7 @@ namespace LoopGame.Actor
 {
     class Goal : Actor
     {
-        public Goal() : base("boss_LEFT")
+        public Goal() : base("goal")
         {
             GameDevice.Instance().GetRenderer().LoadContent(mFilename);
         }

@@ -10,7 +10,7 @@ namespace LoopGame.Actor
 {
     class Wall : Actor
     {
-        public Wall() : base("boss_LEFT")
+        public Wall() : base("wall")
         {
             GameDevice.Instance().GetRenderer().LoadContent(mFilename);
         }
