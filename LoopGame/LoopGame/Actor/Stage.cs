@@ -30,8 +30,8 @@ namespace LoopGame.Actor {
                     switch (s) {
                         case "0": work = new Space(); break;
                         case "1": work = new Wall(); break;
-                        case "2": work = new Player(mMediator); break;
-                        case "3": work = new Box(); break;
+                        case "2": work = new Space(); Player p = new Player(mMediator); p.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
+                        case "3": work = new Space(); Box b = new Box(); b.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
                         case "4": work = new Goal(); break;
                         default: Debug.Assert(false); break;
                     }
