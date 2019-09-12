@@ -9,11 +9,10 @@ namespace LoopGame.Actor
 {
     class Space : Actor
     {
-        public Space() { }
+        public Space() : base("")
+            { }
 
-        public override void Draw()
-        {
-            
+        public override void Draw() {
         }
 
         public override void Update(GameTime gameTime)

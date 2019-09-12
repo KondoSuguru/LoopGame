@@ -10,15 +10,14 @@ namespace LoopGame.Actor
 {
     class Goal : Actor
     {
-        public Goal()
+        public Goal() : base("boss_LEFT")
         {
-            mPosition = new Vector2(GridSize.GRID_SIZE * 5, GridSize.GRID_SIZE * 9);
-            GameDevice.Instance().GetRenderer().LoadContent("boss_LEFT");
+            GameDevice.Instance().GetRenderer().LoadContent(mFilename);
         }
 
         public override void Draw()
         {
-            GameDevice.Instance().GetRenderer().DrawTexture("boss_LEFT", mPosition);
+            GameDevice.Instance().GetRenderer().DrawTexture(mFilename, mPosition);
         }
 
         public override void Update(GameTime gameTime)

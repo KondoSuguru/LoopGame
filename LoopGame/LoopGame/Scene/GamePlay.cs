@@ -13,7 +13,6 @@ namespace LoopGame.Scene
 {
     class GamePlay : IScene
     {
-        private Player p;
         private Stage mStage;
         private bool mIsEndFlag;
 
@@ -24,13 +23,8 @@ namespace LoopGame.Scene
 
         public void Initialize()
         {
-            p = new Player();
             mStage = new Stage();
-            //mStage.Load()
-            ActorManager.Instance().AddActor(p);
-            ActorManager.Instance().AddActor(new Wall());
-            ActorManager.Instance().AddActor(new Box());
-            ActorManager.Instance().AddActor(new Goal());
+            mStage.Load("TestStage.csv");
             mIsEndFlag = false;
         }
 
@@ -46,6 +40,8 @@ namespace LoopGame.Scene
 
         public void Shutdown()
         {
+            mStage.Unload();
+            ActorManager.Instance().Clear();
         }
 
         public void Update(GameTime gameTime)

@@ -14,16 +14,15 @@ namespace LoopGame.Actor
     {
         ActorMove mMove;
 
-        public Player()
+        public Player() : base("boss_LEFT")
         {
-            mPosition = new Vector2(Screen.WIDTH / 2, Screen.HEIGHT / 2);
             mMove = new ActorMove();
-            GameDevice.Instance().GetRenderer().LoadContent("boss_LEFT");
+            GameDevice.Instance().GetRenderer().LoadContent(mFilename);
         }
 
         public override void Draw()
         {
-            GameDevice.Instance().GetRenderer().DrawTexture("boss_LEFT",mPosition);
+            GameDevice.Instance().GetRenderer().DrawTexture(mFilename, mPosition);
         }
 
         public override void Update(GameTime gameTime)

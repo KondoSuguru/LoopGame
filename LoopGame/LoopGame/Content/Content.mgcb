@@ -13,7 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin boss_LEFT.png
+#begin csv/TestStage.csv
+/copy:csv/TestStage.csv
+
+#begin csv/TestStage.xlsx
+/copy:csv/TestStage.xlsx
+
+#begin Textures/boss_LEFT.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,5 +29,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:boss_LEFT.png
+/build:Textures/boss_LEFT.png
 

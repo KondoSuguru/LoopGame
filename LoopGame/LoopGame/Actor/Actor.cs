@@ -10,10 +10,14 @@ namespace LoopGame.Actor
     abstract class Actor
     {
         protected Vector2 mPosition;
+        protected string mFilename;
 
-        public Actor()
+        public Actor(string filename)
         {
-            mPosition = new Vector2(0, 0);
+            ActorManager.Instance().AddActor(this);
+
+            mPosition = Vector2.Zero;
+            mFilename = filename;
         }
 
         public abstract void Update(GameTime gameTime);

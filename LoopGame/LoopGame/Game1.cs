@@ -68,10 +68,14 @@ namespace LoopGame
 
         protected override void Draw(GameTime gameTime)
         {
+            GameDevice.Instance().GetRenderer().Begin();
+
             // 画面クリア時の色を設定
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             mSceneManager.Draw();
+
+            GameDevice.Instance().GetRenderer().End();
 
             base.Draw(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
         }

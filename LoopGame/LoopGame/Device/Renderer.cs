@@ -25,7 +25,7 @@ namespace LoopGame.Device {
             mSpriteBatch = new SpriteBatch(mGraphicsDevice);
         }
 
-        public void LoadContent(string assetName, string filepath = "./") {
+        public void LoadContent(string assetName, string filepath = "./Textures/") {
             //すでにキー（assetName：アセット名）が登録されているとき
             if (mTextures.ContainsKey(assetName)) {
 #if DEBUG //DEBUGモードの時のみ下記エラー分をコンソールへ表示

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using LoopGame.Device;
 using LoopGame.Utility;
+using System.Diagnostics;
 
 namespace LoopGame.Actor {
     class Stage {
@@ -16,13 +17,6 @@ namespace LoopGame.Actor {
         }
 
         private List<Actor> AddBlock(int lineCnt, string[] line) {
-            // コピー元オブジェクト登録用でディクショナリ
-            Dictionary<string, Actor> objectDict = new Dictionary<string, Actor>();
-
-            objectDict.Add("1", new Wall());
-            objectDict.Add("2", new Player());
-            objectDict.Add("3", new Box());
-
             // 作業用リスト
             var workList = new List<Actor>();
 
@@ -30,8 +24,15 @@ namespace LoopGame.Actor {
             // 渡された1行から1つずつ作業リストに登録
             foreach (var s in line) {
                 try {
-                    // ディクショナリから元データ取り出し、クローン機能で複製
-                    Actor work = objectDict[s];
+                    Actor work = null;
+                    switch (s) {
+                        case "0": work = new Space(); break;
+                        case "1": work = new Wall(); break;
+                        case "2": work = new Player(); break;
+                        case "3": work = new Box(); break;
+                        case "4": work = new Goal(); break;
+                        default: Debug.Assert(false); break;
+                    }
                     work.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE));
                     workList.Add(work);
                 } catch (Exception e) {
@@ -57,23 +58,6 @@ namespace LoopGame.Actor {
 
         public void Unload() {
             mMapList.Clear();
-        }
-
-        public void Initialize() {
-        }
-
-        public void Updata(GameTime gameTime) {
-            foreach (var list in mMapList) {
-                foreach (var obj in list) {
-                    // objがSpaceクラスのオブジェクトなら次へ
-                    //if (obj is Space) {
-                    //    continue;
-                    //}
-
-                    // 更新
-                    obj.Update(gameTime);
-                }
-            }
         }
 
         public void Hit(Actor actor) {

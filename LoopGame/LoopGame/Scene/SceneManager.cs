@@ -57,15 +57,11 @@ namespace LoopGame.Scene
 
         public void Draw()
         {
-            GameDevice.Instance().GetRenderer().Begin();
-
             if (mCurrentScene == null)
             {
                 return;
             }
             mCurrentScene.Draw();
-
-            GameDevice.Instance().GetRenderer().End();
         }
     }
 }
