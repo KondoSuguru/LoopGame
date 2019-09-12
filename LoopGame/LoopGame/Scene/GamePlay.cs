@@ -30,6 +30,7 @@ namespace LoopGame.Scene
             ActorManager.Instance().AddActor(p);
             ActorManager.Instance().AddActor(new Wall());
             ActorManager.Instance().AddActor(new Box());
+            ActorManager.Instance().AddActor(new Goal());
             mIsEndFlag = false;
         }
 
