@@ -52,8 +52,8 @@ namespace LoopGame.Actor
                             pos.X += mSpeed;
                         }
                         if (mHitBox != null) {
-                            if (mHitBox.GetPosition().X <= 1) {
-                                mHitBox.SetPosition(new Vector2(Screen.WIDTH - GridSize.GRID_SIZE, mHitBox.GetPosition().Y));
+                            if (mHitBox.GetPosition().X <= 0) {
+                                mHitBox.SetPosition(new Vector2(Screen.WIDTH, mHitBox.GetPosition().Y));
                             } else {
                                 mHitBox.Translate(new Vector2(mSpeed, 0f));
                             }
@@ -77,8 +77,8 @@ namespace LoopGame.Actor
                             pos.X += mSpeed;
                         }
                         if (mHitBox != null) {
-                            if (mHitBox.GetPosition().X >= Screen.WIDTH - GridSize.GRID_SIZE - 1) {
-                                mHitBox.SetPosition(new Vector2(0f, mHitBox.GetPosition().Y));
+                            if (mHitBox.GetPosition().X >= Screen.WIDTH - GridSize.GRID_SIZE) {
+                                mHitBox.SetPosition(new Vector2(-GridSize.GRID_SIZE, mHitBox.GetPosition().Y));
                             } else {
                                 mHitBox.Translate(new Vector2(mSpeed, 0f));
                             }
@@ -102,8 +102,8 @@ namespace LoopGame.Actor
                             pos.Y += mSpeed;
                         }
                         if (mHitBox != null) {
-                            if (mHitBox.GetPosition().Y <= 1) {
-                                mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.HEIGHT - GridSize.GRID_SIZE));
+                            if (mHitBox.GetPosition().Y <= 0) {
+                                mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.HEIGHT));
                             } else {
                                 mHitBox.Translate(new Vector2(0f, mSpeed));
                             }
@@ -127,8 +127,8 @@ namespace LoopGame.Actor
                             pos.Y += mSpeed;
                         }
                         if (mHitBox != null) {
-                            if (mHitBox.GetPosition().Y >= Screen.HEIGHT - GridSize.GRID_SIZE - 1) {
-                                mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, 0f));
+                            if (mHitBox.GetPosition().Y >= Screen.HEIGHT - GridSize.GRID_SIZE) {
+                                mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, -GridSize.GRID_SIZE));
                             } else {
                                 mHitBox.Translate(new Vector2(0f, mSpeed));
                             }
