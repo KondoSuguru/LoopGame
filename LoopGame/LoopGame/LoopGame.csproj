@@ -45,6 +45,8 @@
     <Compile Include="Actor\ActorManager.cs" />
     <Compile Include="Actor\Player.cs" />
     <Compile Include="Device\BGMLoader.cs" />
+    <Compile Include="Device\CSVReader.cs" />
+    <Compile Include="Actor\Stage.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Device\GameDevice.cs" />
     <Compile Include="Scene\Ending.cs" />
