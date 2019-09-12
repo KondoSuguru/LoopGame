@@ -18,5 +18,10 @@ namespace LoopGame.Actor
 
         public abstract void Update(GameTime gameTime);
         public abstract void Draw();
+
+        public void SetPosition(Vector2 position)
+        {
+            mPosition = position;
+        }
     }
 }
