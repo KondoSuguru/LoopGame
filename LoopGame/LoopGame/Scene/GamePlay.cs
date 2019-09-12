@@ -14,6 +14,7 @@ namespace LoopGame.Scene
     class GamePlay : IScene
     {
         private Player p;
+        
         private bool mIsEndFlag;
 
         public void Draw()
@@ -25,6 +26,8 @@ namespace LoopGame.Scene
         {
             p = new Player();
             ActorManager.Instance().AddActor(p);
+            ActorManager.Instance().AddActor(new Wall());
+            ActorManager.Instance().AddActor(new Box());
             mIsEndFlag = false;
         }
 
@@ -47,6 +50,8 @@ namespace LoopGame.Scene
             if (Input.GetKeyTrigger(Keys.Space)) {
                 mIsEndFlag = true;
             }
+
+            ActorManager.Instance().Update(gameTime);
         }
     }
 }

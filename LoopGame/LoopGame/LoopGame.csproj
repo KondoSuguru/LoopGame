@@ -43,8 +43,12 @@
   <ItemGroup>
     <Compile Include="Actor\Actor.cs" />
     <Compile Include="Actor\ActorManager.cs" />
+    <Compile Include="Actor\ActorMove.cs" />
+    <Compile Include="Actor\Box.cs" />
     <Compile Include="Actor\Player.cs" />
+    <Compile Include="Actor\Wall.cs" />
     <Compile Include="Device\BGMLoader.cs" />
+    <Compile Include="Device\GridSize.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Device\GameDevice.cs" />
     <Compile Include="Scene\Ending.cs" />
