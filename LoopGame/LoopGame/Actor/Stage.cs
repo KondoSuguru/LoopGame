@@ -31,7 +31,7 @@ namespace LoopGame.Actor {
                         case "0": work = new Space(); break;
                         case "1": work = new Wall(); break;
                         case "2": work = new Space(); Player p = new Player(mMediator); p.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
-                        case "3": work = new Space(); Box b = new Box(); b.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
+                        case "3": work = new Space(); Box b = new Box(mMediator); b.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
                         case "4": work = new Goal(); break;
                         default: Debug.Assert(false); break;
                     }
@@ -78,11 +78,9 @@ namespace LoopGame.Actor {
 
             Actor obj = mMapList[posY][posX];
 
-            if (obj is Space || obj is Goal || obj is Player) {
+            if (obj is Space || obj is Goal) {
                 return false;
             } else if (obj is Wall) {
-                return true;
-            } else if (obj is Box) {
                 return true;
             } else {
                 Debug.Assert(false);

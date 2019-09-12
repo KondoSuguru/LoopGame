@@ -64,5 +64,9 @@ namespace LoopGame.Actor
         {
             mActors.Clear();
         }
+
+        public List<Actor> GetActors() {
+            return mActors;
+        }
     }
 }
