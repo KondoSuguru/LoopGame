@@ -5,16 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Microsoft.Xna.Framework;
 using LoopGame.Device;
 
 namespace LoopGame.Actor
 {
     class ActorMove
     {
-        Vector2 mMovePoint;
-        float mSpeed;
-
         enum MoveState
         {
             LEFT,
@@ -25,6 +21,8 @@ namespace LoopGame.Actor
         }
         MoveState mState;
 
+        Vector2 mMovePoint;
+        float mSpeed;
         IGameMediator mMediator;
 
         public ActorMove(IGameMediator mediator)
@@ -103,7 +101,7 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return;
-            if (mMediator.GetStage().IsCollisionSide(new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y)))
+            if (mMediator.GetStage().IsCollision(new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y)))
                 return;
             mState = MoveState.LEFT;
             mMovePoint = new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y);
@@ -118,7 +116,7 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return;
-            if (mMediator.GetStage().IsCollisionSide(new Vector2(pos.X + GridSize.GRID_SIZE, pos.Y)))
+            if (mMediator.GetStage().IsCollision(new Vector2(pos.X + GridSize.GRID_SIZE, pos.Y)))
                 return;
             mState = MoveState.RIGHT;
             mMovePoint = new Vector2( pos.X + GridSize.GRID_SIZE, pos.Y);
@@ -133,7 +131,7 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return;
-            if (mMediator.GetStage().IsCollisionVertical(new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE))) 
+            if (mMediator.GetStage().IsCollision(new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE))) 
                 return;
             mState = MoveState.UP;
             mMovePoint = new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE);
@@ -149,7 +147,7 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return;
-            if (mMediator.GetStage().IsCollisionVertical(new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE))) 
+            if (mMediator.GetStage().IsCollision(new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE))) 
                 return;
             mState = MoveState.DOWN;
             mMovePoint = new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE);

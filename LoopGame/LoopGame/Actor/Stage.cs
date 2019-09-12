@@ -62,58 +62,12 @@ namespace LoopGame.Actor {
             mMapList.Clear();
         }
 
-        public void Hit(Actor actor) {
-            Vector2 pos = actor.GetPosition(); // 左上の座標を取得
-            // 配列の何行目何列目にいるかを計算
-            int x = (int)pos.X / GridSize.GRID_SIZE;
-            int y = (int)pos.Y / GridSize.GRID_SIZE;
-
-            Range yRange = new Range(0, mMapList.Count() - 1); // 行の範囲
-            Range xRange = new Range(0, mMapList[0].Count() - 1); // 列の範囲
-
-            for (int row = y - 1; row <= (y + 1); row++) // 縦3行分
-            {
-                for (int col = x - 1; col <= (x + 1); col++) // 横3列分
-                {
-                    // 配列外なら何もしない
-                    if (xRange.IsOutOfRange(col) || yRange.IsOutOfRange(row)) {
-                        continue;
-                    }
-
-                    // その場所のオブジェクトを取得
-                    Actor obj = mMapList[row][col];
-
-                    // objがSpaceクラスのオブジェクトなら次へ
-                    if (obj is Space) {
-                        continue;
-                    }
-
-                    // 衝突判定
-                    //if (obj.IsCollision(actor))
-                    //    actor.Hit(obj);
-                }
-            }
-        }
-
-        public bool IsCollisionSide(Vector2 nextPos) {
+        public bool IsCollision(Vector2 nextPos) {
             if (nextPos.X < 0) {
                 nextPos.X = Screen.WIDTH - GridSize.GRID_SIZE;
             } else if (nextPos.X > Screen.WIDTH - GridSize.GRID_SIZE) {
                 nextPos.X = 0;
             }
-            int posX = (int)nextPos.X / GridSize.GRID_SIZE;
-            int posY = (int)nextPos.Y / GridSize.GRID_SIZE;
-
-            Actor obj = mMapList[posY][posX];
-
-            if (obj is Space || obj is Goal || obj is Player) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        public bool IsCollisionVertical(Vector2 nextPos) {
             if (nextPos.Y < 0) {
                 nextPos.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
             } else if (nextPos.Y > Screen.HEIGHT - GridSize.GRID_SIZE) {
@@ -126,7 +80,12 @@ namespace LoopGame.Actor {
 
             if (obj is Space || obj is Goal || obj is Player) {
                 return false;
+            } else if (obj is Wall) {
+                return true;
+            } else if (obj is Box) {
+                return true;
             } else {
+                Debug.Assert(false);
                 return true;
             }
         }
