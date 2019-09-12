@@ -48,12 +48,7 @@
     <Compile Include="Actor\Player.cs" />
     <Compile Include="Actor\Wall.cs" />
     <Compile Include="Device\BGMLoader.cs" />
-<<<<<<< HEAD
-    <Compile Include="Device\CSVReader.cs" />
-    <Compile Include="Actor\Stage.cs" />
-=======
     <Compile Include="Device\GridSize.cs" />
->>>>>>> origin/master
     <Compile Include="Game1.cs" />
     <Compile Include="Device\GameDevice.cs" />
     <Compile Include="Scene\Ending.cs" />
