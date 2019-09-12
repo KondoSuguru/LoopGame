@@ -13,10 +13,12 @@ namespace LoopGame.Actor
     class Player : Actor
     {
         ActorMove mMove;
+        IGameMediator mMediator;
 
-        public Player() : base("boss_LEFT")
+        public Player(IGameMediator mediator) : base("boss_LEFT")
         {
-            mMove = new ActorMove();
+            mMediator = mediator;
+            mMove = new ActorMove(mMediator);
             GameDevice.Instance().GetRenderer().LoadContent(mFilename);
         }
 

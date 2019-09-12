@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Microsoft.Xna.Framework;
 using LoopGame.Device;
 
 namespace LoopGame.Actor
@@ -24,8 +25,11 @@ namespace LoopGame.Actor
         }
         MoveState mState;
 
-        public ActorMove()
+        IGameMediator mMediator;
+
+        public ActorMove(IGameMediator mediator)
         {
+            mMediator = mediator;
             mState = MoveState.NONE;
         }
 
@@ -99,6 +103,8 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return;
+            if (mMediator.GetStage().IsCollisionSide(new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y)))
+                return;
             mState = MoveState.LEFT;
             mMovePoint = new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y);
             if (mMovePoint.X <= -GridSize.GRID_SIZE)
@@ -111,6 +117,8 @@ namespace LoopGame.Actor
         public void MoveRight(Vector2 pos)
         {
             if (mState != MoveState.NONE)
+                return;
+            if (mMediator.GetStage().IsCollisionSide(new Vector2(pos.X + GridSize.GRID_SIZE, pos.Y)))
                 return;
             mState = MoveState.RIGHT;
             mMovePoint = new Vector2( pos.X + GridSize.GRID_SIZE, pos.Y);
@@ -125,9 +133,12 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return;
+            if (mMediator.GetStage().IsCollisionVertical(new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE))) 
+                return;
             mState = MoveState.UP;
             mMovePoint = new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE);
             if (mMovePoint.Y <= -GridSize.GRID_SIZE)
+
             {
                 mMovePoint.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
             }
@@ -137,6 +148,8 @@ namespace LoopGame.Actor
         public void MoveDown(Vector2 pos)
         {
             if (mState != MoveState.NONE)
+                return;
+            if (mMediator.GetStage().IsCollisionVertical(new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE))) 
                 return;
             mState = MoveState.DOWN;
             mMovePoint = new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE);
