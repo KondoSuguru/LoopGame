@@ -11,9 +11,11 @@ using System.Diagnostics;
 namespace LoopGame.Actor {
     class Stage {
         private List<List<Actor>> mMapList; // ListのListで縦横の2次元配列を表現
+        private IGameMediator mMediator;
 
-        public Stage() {
+        public Stage(IGameMediator mediator) {
             mMapList = new List<List<Actor>>();
+            mMediator = mediator;
         }
 
         private List<Actor> AddBlock(int lineCnt, string[] line) {
@@ -28,7 +30,7 @@ namespace LoopGame.Actor {
                     switch (s) {
                         case "0": work = new Space(); break;
                         case "1": work = new Wall(); break;
-                        case "2": work = new Player(); break;
+                        case "2": work = new Player(mMediator); break;
                         case "3": work = new Box(); break;
                         case "4": work = new Goal(); break;
                         default: Debug.Assert(false); break;
@@ -61,10 +63,10 @@ namespace LoopGame.Actor {
         }
 
         public void Hit(Actor actor) {
-            Vector2 work = actor.GetPosition(); // 左上の座標を取得
+            Vector2 pos = actor.GetPosition(); // 左上の座標を取得
             // 配列の何行目何列目にいるかを計算
-            int x = (int)work.X / GridSize.GRID_SIZE;
-            int y = (int)work.Y / GridSize.GRID_SIZE;
+            int x = (int)pos.X / GridSize.GRID_SIZE;
+            int y = (int)pos.Y / GridSize.GRID_SIZE;
 
             Range yRange = new Range(0, mMapList.Count() - 1); // 行の範囲
             Range xRange = new Range(0, mMapList[0].Count() - 1); // 列の範囲
@@ -90,6 +92,42 @@ namespace LoopGame.Actor {
                     //if (obj.IsCollision(actor))
                     //    actor.Hit(obj);
                 }
+            }
+        }
+
+        public bool IsCollisionSide(Vector2 nextPos) {
+            if (nextPos.X < 0) {
+                nextPos.X = Screen.WIDTH - GridSize.GRID_SIZE;
+            } else if (nextPos.X > Screen.WIDTH - GridSize.GRID_SIZE) {
+                nextPos.X = 0;
+            }
+            int posX = (int)nextPos.X / GridSize.GRID_SIZE;
+            int posY = (int)nextPos.Y / GridSize.GRID_SIZE;
+
+            Actor obj = mMapList[posY][posX];
+
+            if (obj is Space || obj is Goal || obj is Player) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        public bool IsCollisionVertical(Vector2 nextPos) {
+            if (nextPos.Y < 0) {
+                nextPos.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
+            } else if (nextPos.Y > Screen.HEIGHT - GridSize.GRID_SIZE) {
+                nextPos.Y = 0;
+            }
+            int posX = (int)nextPos.X / GridSize.GRID_SIZE;
+            int posY = (int)nextPos.Y / GridSize.GRID_SIZE;
+
+            Actor obj = mMapList[posY][posX];
+
+            if (obj is Space || obj is Goal || obj is Player) {
+                return false;
+            } else {
+                return true;
             }
         }
     }
