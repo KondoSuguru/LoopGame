@@ -32,25 +32,25 @@ namespace LoopGame.Actor {
                 if (mPosition.X <= 0f) {
                     pos.X = Screen.WIDTH - GridSize.GRID_SIZE;
                 } else {
-                    pos.X = mPosition.X - GridSize.GRID_SIZE + 5;
+                    pos.X = mPosition.X - GridSize.GRID_SIZE;
                 }
             } else if (state == ActorMove.MoveState.RIGHT) {
                 if (mPosition.X >= Screen.WIDTH - GridSize.GRID_SIZE) {
                     pos.X = 0f;
                 } else {
-                    pos.X = mPosition.X + GridSize.GRID_SIZE + 5;
+                    pos.X = mPosition.X + GridSize.GRID_SIZE;
                 }
             } else if (state == ActorMove.MoveState.UP) {
                 if (mPosition.Y <= 0f) {
                     pos.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
                 } else {
-                    pos.Y = mPosition.Y - GridSize.GRID_SIZE + 5;
+                    pos.Y = mPosition.Y - GridSize.GRID_SIZE;
                 }
             } else if (state == ActorMove.MoveState.DOWN) {
                 if (mPosition.Y >= Screen.HEIGHT - GridSize.GRID_SIZE) {
                     pos.Y = 0f;
                 } else {
-                    pos.Y = mPosition.Y + GridSize.GRID_SIZE + 5;
+                    pos.Y = mPosition.Y + GridSize.GRID_SIZE;
                 }
             }
 

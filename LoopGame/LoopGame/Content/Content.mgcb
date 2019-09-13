@@ -19,6 +19,12 @@
 #begin csv/TestStage.xlsx
 /copy:csv/TestStage.xlsx
 
+#begin csv/TestStage02.csv
+/copy:csv/TestStage02.csv
+
+#begin csv/TestStage02.xlsx
+/copy:csv/TestStage02.xlsx
+
 #begin Textures/boss_LEFT.png
 /importer:TextureImporter
 /processor:TextureProcessor
