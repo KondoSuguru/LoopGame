@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace LoopGame.Scene {
     class SceneBase {
-        public int mStageNo;
+        protected static int mStageNo;
     }
 }
