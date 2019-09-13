@@ -47,7 +47,7 @@ namespace LoopGame.Scene
 
         public Scene Next()
         {
-            return Scene.Ending;
+            return Scene.StageSelect;
         }
 
         public void Shutdown()
