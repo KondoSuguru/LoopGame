@@ -25,7 +25,6 @@ namespace LoopGame.Scene
         public void Initialize()
         {
             mStage = new Stage(this);
-            mStage.Load("TestStage02.csv");
             mStage.Load("TestStage0" + mStageNo.ToString() + ".csv");
             mIsEndFlag = false;
             mIsClear = false;
