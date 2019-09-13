@@ -43,21 +43,14 @@ namespace LoopGame.Actor
                 case MoveState.NONE:
                     break;
                 case MoveState.LEFT:
-                    if(mMovePoint.X == Screen.WIDTH - GridSize.GRID_SIZE)
-                    {
-                        pos.X = mMovePoint.X;
+                    if (!mIsBoxStageOrOtherBoxCollide) {
+                        pos.X += mSpeed;
                     }
-                    else
-                    {
-                        if (!mIsBoxStageOrOtherBoxCollide) {
-                            pos.X += mSpeed;
-                        }
-                        if (mHitBox != null) {
-                            if (mHitBox.GetPosition().X <= 0) {
-                                mHitBox.SetPosition(new Vector2(Screen.WIDTH, mHitBox.GetPosition().Y));
-                            } else {
-                                mHitBox.Translate(new Vector2(mSpeed, 0f));
-                            }
+                    if (mHitBox != null) {
+                        if (mHitBox.GetPosition().X <= 0) {
+                            mHitBox.SetPosition(new Vector2(Screen.WIDTH, mHitBox.GetPosition().Y));
+                        } else {
+                            mHitBox.Translate(new Vector2(mSpeed, 0f));
                         }
                     }
                     if (pos.X <= mMovePoint.X)
@@ -66,21 +59,14 @@ namespace LoopGame.Actor
                     }
                     break;
                 case MoveState.RIGHT:
-                    if (mMovePoint.X == 0)
-                    {
-                        pos.X = mMovePoint.X;
+                    if (!mIsBoxStageOrOtherBoxCollide) {
+                        pos.X += mSpeed;
                     }
-                    else
-                    {
-                        if (!mIsBoxStageOrOtherBoxCollide) {
-                            pos.X += mSpeed;
-                        }
-                        if (mHitBox != null) {
-                            if (mHitBox.GetPosition().X >= Screen.WIDTH - GridSize.GRID_SIZE) {
-                                mHitBox.SetPosition(new Vector2(-GridSize.GRID_SIZE, mHitBox.GetPosition().Y));
-                            } else {
-                                mHitBox.Translate(new Vector2(mSpeed, 0f));
-                            }
+                    if (mHitBox != null) {
+                        if (mHitBox.GetPosition().X >= Screen.WIDTH - GridSize.GRID_SIZE) {
+                            mHitBox.SetPosition(new Vector2(-GridSize.GRID_SIZE, mHitBox.GetPosition().Y));
+                        } else {
+                            mHitBox.Translate(new Vector2(mSpeed, 0f));
                         }
                     }
                     if (pos.X >= mMovePoint.X)
@@ -89,21 +75,14 @@ namespace LoopGame.Actor
                     }
                     break;
                 case MoveState.UP:
-                    if(mMovePoint.Y == Screen.HEIGHT - GridSize.GRID_SIZE)
-                    {
-                        pos.Y = mMovePoint.Y;
+                    if (!mIsBoxStageOrOtherBoxCollide) {
+                        pos.Y += mSpeed;
                     }
-                    else
-                    {
-                        if (!mIsBoxStageOrOtherBoxCollide) {
-                            pos.Y += mSpeed;
-                        }
-                        if (mHitBox != null) {
-                            if (mHitBox.GetPosition().Y <= 0) {
-                                mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.HEIGHT));
-                            } else {
-                                mHitBox.Translate(new Vector2(0f, mSpeed));
-                            }
+                    if (mHitBox != null) {
+                        if (mHitBox.GetPosition().Y <= 0) {
+                            mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.HEIGHT));
+                        } else {
+                            mHitBox.Translate(new Vector2(0f, mSpeed));
                         }
                     }
                     if (pos.Y <= mMovePoint.Y)
@@ -112,21 +91,14 @@ namespace LoopGame.Actor
                     }
                     break;
                 case MoveState.DOWN:
-                    if (mMovePoint.Y == 0)
-                    {
-                        pos.Y = mMovePoint.Y;
+                    if (!mIsBoxStageOrOtherBoxCollide) {
+                        pos.Y += mSpeed;
                     }
-                    else
-                    {
-                        if (!mIsBoxStageOrOtherBoxCollide) {
-                            pos.Y += mSpeed;
-                        }
-                        if (mHitBox != null) {
-                            if (mHitBox.GetPosition().Y >= Screen.HEIGHT - GridSize.GRID_SIZE) {
-                                mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, -GridSize.GRID_SIZE));
-                            } else {
-                                mHitBox.Translate(new Vector2(0f, mSpeed));
-                            }
+                    if (mHitBox != null) {
+                        if (mHitBox.GetPosition().Y >= Screen.HEIGHT - GridSize.GRID_SIZE) {
+                            mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, -GridSize.GRID_SIZE));
+                        } else {
+                            mHitBox.Translate(new Vector2(0f, mSpeed));
                         }
                     }
                     if (pos.Y >= mMovePoint.Y)
@@ -137,7 +109,7 @@ namespace LoopGame.Actor
             }
         }
 
-        public bool MoveLeft(Vector2 pos)
+        public bool MoveLeft(ref Vector2 pos)
         {
             if (mState != MoveState.NONE)
                 return false;
@@ -156,11 +128,16 @@ namespace LoopGame.Actor
             {
                 mMovePoint.X = Screen.WIDTH - GridSize.GRID_SIZE;
             }
+
+            if (mMovePoint.X == Screen.WIDTH - GridSize.GRID_SIZE) {
+                pos.X = mMovePoint.X + GridSize.GRID_SIZE;
+            }
             mSpeed = (mMovePoint.X - pos.X) / (GridSize.GRID_SIZE /4);
+
             return true;
         }
 
-        public bool MoveRight(Vector2 pos)
+        public bool MoveRight(ref Vector2 pos)
         {
             if (mState != MoveState.NONE)
                 return false;
@@ -178,11 +155,16 @@ namespace LoopGame.Actor
             {
                 mMovePoint.X = 0;
             }
+
+            if (mMovePoint.X == 0f) {
+                pos.X = mMovePoint.X - GridSize.GRID_SIZE;
+            }
             mSpeed = (mMovePoint.X - pos.X) / (GridSize.GRID_SIZE / 4);
+
             return true;
         }
 
-        public bool MoveUp(Vector2 pos)
+        public bool MoveUp(ref Vector2 pos)
         {
             if (mState != MoveState.NONE)
                 return false;
@@ -201,11 +183,16 @@ namespace LoopGame.Actor
             {
                 mMovePoint.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
             }
+
+            if (mMovePoint.Y == Screen.HEIGHT - GridSize.GRID_SIZE) {
+                pos.Y = mMovePoint.Y + GridSize.GRID_SIZE;
+            }
             mSpeed = (mMovePoint.Y - pos.Y) / (GridSize.GRID_SIZE / 4);
+
             return true;
         }
 
-        public bool MoveDown(Vector2 pos)
+        public bool MoveDown(ref Vector2 pos)
         {
             if (mState != MoveState.NONE)
                 return false;
@@ -223,7 +210,12 @@ namespace LoopGame.Actor
             {
                 mMovePoint.Y = 0;
             }
+
+            if (mMovePoint.Y == 0f) {
+                pos.Y = mMovePoint.Y - GridSize.GRID_SIZE;
+            }
             mSpeed = (mMovePoint.Y - pos.Y) / (GridSize.GRID_SIZE / 4);
+
             return true;
         }
 
@@ -237,7 +229,7 @@ namespace LoopGame.Actor
             mIsBoxStageOrOtherBoxCollide = false;
         }
 
-        private bool MoveOption(in Vector2 inVec) {
+        private bool MoveOption(Vector2 inVec) {
             var actors = ActorManager.Instance().GetActors();
             foreach (var actor in actors) {
                 if (!(actor is Box)) { //Box以外は興味ない
