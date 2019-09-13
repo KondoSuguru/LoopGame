@@ -13,22 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin csv/TestStage01.csv
-/copy:csv/TestStage01.csv
-
-#begin csv/TestStage01.xlsx
-/importer:
-/processor:
-/build:csv/TestStage01.xlsx
-
-#begin csv/TestStage02.csv
-/copy:csv/TestStage02.csv
-
-#begin csv/TestStage02.xlsx
-/importer:
-/processor:
-/build:csv/TestStage02.xlsx
-
 #begin Textures/boss_LEFT.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -76,4 +60,28 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/wall.png
+
+#begin Textures/UIzone.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/UIzone.png
+
+#begin csv/TestStage01.csv
+/copy:csv/TestStage01.csv
+
+#begin csv/TestStage01.xlsx
+/copy:csv/TestStage01.xlsx
+
+#begin csv/TestStage02.csv
+/copy:csv/TestStage02.csv
+
+#begin csv/TestStage02.xlsx
+/copy:csv/TestStage02.xlsx
 

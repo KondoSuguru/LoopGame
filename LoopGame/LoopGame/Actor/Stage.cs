@@ -34,6 +34,7 @@ namespace LoopGame.Actor {
                         case "2": work = new Space(); Player p = new Player(mMediator); p.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
                         case "3": work = new Space(); Box b = new Box(mMediator); b.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
                         case "4": work = new Goal(); break;
+                        case "5": work = new Kakushi(); break;
                         default: Debug.Assert(false); break;
                     }
                     work.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE));
@@ -67,13 +68,13 @@ namespace LoopGame.Actor {
 
         public bool IsCollision(Vector2 nextPos) {
             if (nextPos.X < 0) {
-                nextPos.X = Screen.WIDTH - GridSize.GRID_SIZE;
-            } else if (nextPos.X > Screen.WIDTH - GridSize.GRID_SIZE + 5) {
+                nextPos.X = Screen.PLAY_WIDTH - GridSize.GRID_SIZE;
+            } else if (nextPos.X > Screen.PLAY_WIDTH - GridSize.GRID_SIZE + 5) {
                 nextPos.X = 0;
             }
             if (nextPos.Y < 0) {
-                nextPos.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
-            } else if (nextPos.Y > Screen.HEIGHT - GridSize.GRID_SIZE + 5) {
+                nextPos.Y = Screen.PLAY_HEIGHT - GridSize.GRID_SIZE;
+            } else if (nextPos.Y > Screen.PLAY_HEIGHT - GridSize.GRID_SIZE + 5) {
                 nextPos.Y = 0;
             }
             int posX = (int)nextPos.X / GridSize.GRID_SIZE;

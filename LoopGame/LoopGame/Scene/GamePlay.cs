@@ -15,6 +15,7 @@ namespace LoopGame.Scene
     {
         private Stage mStage;
         private bool mIsEndFlag;
+        private bool mIsClear;
 
         public void Draw()
         {
@@ -27,6 +28,7 @@ namespace LoopGame.Scene
             mStage.Load("TestStage02.csv");
             mStage.Load("TestStage0" + mStageNo.ToString() + ".csv");
             mIsEndFlag = false;
+            mIsClear = false;
         }
 
         public bool IsEnd()
@@ -50,12 +52,18 @@ namespace LoopGame.Scene
             if (Input.GetKeyTrigger(Keys.Space)) {
                 mIsEndFlag = true;
             }
+
+            if (mIsClear)
+            {
+                return;
+            }
+
             if (Input.GetKeyTrigger(Keys.P)) {
                 mStage.Reset();
             }
             if(ActorManager.Instance().IsClear())
             {
-                mIsEndFlag = true;
+                mIsClear = true;
             }
 
             ActorManager.Instance().Update(gameTime);

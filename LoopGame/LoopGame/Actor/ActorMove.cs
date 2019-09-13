@@ -49,13 +49,13 @@ namespace LoopGame.Actor
                     }
                     if (mHitBox != null) {
                         if (mHitBox.GetPosition().X <= 0) {
-                            mHitBox.SetPosition(new Vector2(Screen.WIDTH, mHitBox.GetPosition().Y));
+                            mHitBox.SetPosition(new Vector2(Screen.PLAY_WIDTH, mHitBox.GetPosition().Y));
                         }
                         mHitBox.Translate(new Vector2(-SPEED, 0f));
                     }
                     if (pos.X <= mMovePoint.X)
                     {
-                        StateReset();
+                        StateReset(ref pos);
                     }
                     break;
                 case MoveState.RIGHT:
@@ -63,14 +63,14 @@ namespace LoopGame.Actor
                         pos.X += SPEED;
                     }
                     if (mHitBox != null) {
-                        if (mHitBox.GetPosition().X >= Screen.WIDTH - GridSize.GRID_SIZE) {
+                        if (mHitBox.GetPosition().X >= Screen.PLAY_WIDTH - GridSize.GRID_SIZE) {
                             mHitBox.SetPosition(new Vector2(-GridSize.GRID_SIZE, mHitBox.GetPosition().Y));
                         }
                         mHitBox.Translate(new Vector2(SPEED, 0f));
                     }
                     if (pos.X >= mMovePoint.X)
                     {
-                        StateReset();
+                        StateReset(ref pos);
                     }
                     break;
                 case MoveState.UP:
@@ -79,13 +79,13 @@ namespace LoopGame.Actor
                     }
                     if (mHitBox != null) {
                         if (mHitBox.GetPosition().Y <= 0) {
-                            mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.HEIGHT));
+                            mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.PLAY_HEIGHT));
                         }
                         mHitBox.Translate(new Vector2(0f, -SPEED));
                     }
                     if (pos.Y <= mMovePoint.Y)
                     {
-                        StateReset();
+                        StateReset(ref pos);
                     }
                     break;
                 case MoveState.DOWN:
@@ -93,14 +93,14 @@ namespace LoopGame.Actor
                         pos.Y += SPEED;
                     }
                     if (mHitBox != null) {
-                        if (mHitBox.GetPosition().Y >= Screen.HEIGHT - GridSize.GRID_SIZE) {
+                        if (mHitBox.GetPosition().Y >= Screen.PLAY_HEIGHT - GridSize.GRID_SIZE) {
                             mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, -GridSize.GRID_SIZE));
                         }
                         mHitBox.Translate(new Vector2(0f, SPEED));
                     }
                     if (pos.Y >= mMovePoint.Y)
                     {
-                        StateReset();
+                        StateReset(ref pos);
                     }
                     break;
             }
@@ -123,10 +123,10 @@ namespace LoopGame.Actor
             mMovePoint = new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y);
             if (mMovePoint.X <= -GridSize.GRID_SIZE)
             {
-                mMovePoint.X = Screen.WIDTH - GridSize.GRID_SIZE;
+                mMovePoint.X = Screen.PLAY_WIDTH - GridSize.GRID_SIZE;
             }
 
-            if (mMovePoint.X == Screen.WIDTH - GridSize.GRID_SIZE) {
+            if (mMovePoint.X == Screen.PLAY_WIDTH - GridSize.GRID_SIZE) {
                 pos.X = mMovePoint.X + GridSize.GRID_SIZE;
             }
             mSpeed = (mMovePoint.X - pos.X) / (GridSize.GRID_SIZE /4);
@@ -148,7 +148,7 @@ namespace LoopGame.Actor
             }
 
             mMovePoint = new Vector2( pos.X + GridSize.GRID_SIZE, pos.Y);
-            if (mMovePoint.X >= Screen.WIDTH)
+            if (mMovePoint.X >= Screen.PLAY_WIDTH)
             {
                 mMovePoint.X = 0;
             }
@@ -178,10 +178,10 @@ namespace LoopGame.Actor
             if (mMovePoint.Y <= -GridSize.GRID_SIZE)
 
             {
-                mMovePoint.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
+                mMovePoint.Y = Screen.PLAY_HEIGHT - GridSize.GRID_SIZE;
             }
 
-            if (mMovePoint.Y == Screen.HEIGHT - GridSize.GRID_SIZE) {
+            if (mMovePoint.Y == Screen.PLAY_HEIGHT - GridSize.GRID_SIZE) {
                 pos.Y = mMovePoint.Y + GridSize.GRID_SIZE;
             }
             mSpeed = (mMovePoint.Y - pos.Y) / (GridSize.GRID_SIZE / 4);
@@ -203,7 +203,7 @@ namespace LoopGame.Actor
             }
 
             mMovePoint = new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE);
-            if (mMovePoint.Y >= Screen.HEIGHT)
+            if (mMovePoint.Y >= Screen.PLAY_HEIGHT)
             {
                 mMovePoint.Y = 0;
             }
@@ -220,7 +220,18 @@ namespace LoopGame.Actor
             return mMediator.GetStage().IsCollision(nextPos);
         }
 
-        private void StateReset() {
+        private void StateReset(ref Vector2 pPos) {
+            int px, py;
+            px = (int)(pPos.X + 5) / 64;
+            py = (int)(pPos.Y + 5) / 64;
+            pPos = new Vector2(px,py) * 64;
+            if (mHitBox != null)
+            {
+                int bx, by;
+                bx = (int)(mHitBox.GetPosition().X + 5) / 64;
+                by = (int)(mHitBox.GetPosition().Y + 5) / 64;
+                mHitBox.SetPosition(new Vector2(bx,by) * 64);
+            }
             mState = MoveState.NONE;
             mHitBox = null;
             mIsBoxStageOrOtherBoxCollide = false;
@@ -236,24 +247,24 @@ namespace LoopGame.Actor
                 Vector2 p = inVec;
                 if (mState == MoveState.LEFT) {
                     if (inVec.X <= 5f) {
-                        p.X = Screen.WIDTH - GridSize.GRID_SIZE;
+                        p.X = Screen.PLAY_WIDTH - GridSize.GRID_SIZE;
                     } else {
                         p.X = inVec.X - GridSize.GRID_SIZE;
                     }
                 } else if (mState == MoveState.RIGHT) {
-                    if (inVec.X >= Screen.WIDTH - GridSize.GRID_SIZE - 5) {
+                    if (inVec.X >= Screen.PLAY_WIDTH - GridSize.GRID_SIZE - 5) {
                         p.X = 0f;
                     } else {
                         p.X = inVec.X + GridSize.GRID_SIZE;
                     }
                 } else if (mState == MoveState.UP) {
                     if (inVec.Y <= 5f) {
-                        p.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
+                        p.Y = Screen.PLAY_HEIGHT - GridSize.GRID_SIZE;
                     } else {
                         p.Y = inVec.Y - GridSize.GRID_SIZE;
                     }
                 } else if (mState == MoveState.DOWN) {
-                    if (inVec.Y >= Screen.HEIGHT - GridSize.GRID_SIZE - 5f) {
+                    if (inVec.Y >= Screen.PLAY_HEIGHT - GridSize.GRID_SIZE - 5f) {
                         p.Y = 0f;
                     } else {
                         p.Y = inVec.Y + GridSize.GRID_SIZE;
