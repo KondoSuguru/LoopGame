@@ -11,11 +11,15 @@ using System.Diagnostics;
 namespace LoopGame.Actor {
     class Stage {
         private List<List<Actor>> mMapList; // ListのListで縦横の2次元配列を表現
+        private List<List<Actor>> mSubMapList;
         private IGameMediator mMediator;
+        private string mFilename;
 
         public Stage(IGameMediator mediator) {
             mMapList = new List<List<Actor>>();
+            mSubMapList = new List<List<Actor>>();
             mMediator = mediator;
+            mFilename = "";
         }
 
         private List<Actor> AddBlock(int lineCnt, string[] line) {
@@ -47,6 +51,8 @@ namespace LoopGame.Actor {
         }
 
         public void Load(string filename, string path = "./csv/") {
+            mFilename = filename;
+
             CSVReader csvReader = new CSVReader();
             csvReader.Read(filename, path);
 
@@ -55,11 +61,13 @@ namespace LoopGame.Actor {
             // 1行ごとmapListに追加していく
             for (int lineCnt = 0; lineCnt < data.Count(); lineCnt++) {
                 mMapList.Add(AddBlock(lineCnt, data[lineCnt]));
+                mSubMapList.Add(AddBlock(lineCnt, data[lineCnt]));
             }
         }
 
         public void Unload() {
             mMapList.Clear();
+            mSubMapList.Clear();
         }
 
         public bool IsCollision(Vector2 nextPos) {
@@ -86,6 +94,13 @@ namespace LoopGame.Actor {
                 Debug.Assert(false);
                 return true;
             }
+        }
+
+        public void Reset() {
+            ActorManager.Instance().Clear();
+            Unload();
+
+            Load(mFilename);
         }
     }
 }

@@ -49,6 +49,9 @@ namespace LoopGame.Scene
             if (Input.GetKeyTrigger(Keys.Space)) {
                 mIsEndFlag = true;
             }
+            if (Input.GetKeyTrigger(Keys.P)) {
+                mStage.Reset();
+            }
 
             ActorManager.Instance().Update(gameTime);
         }
