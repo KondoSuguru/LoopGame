@@ -48,6 +48,7 @@ namespace LoopGame.Actor
             {
                 a.Update(gameTime);
             }
+
         }
 
         public void Draw()
@@ -78,6 +79,40 @@ namespace LoopGame.Actor
 
         public List<Actor> GetActors() {
             return mActors;
+        }
+
+        public bool IsClear()
+        {
+            int goalCount = 0;
+            int clearGoalCount = 0;
+
+            for (int i = 0; i < mActors.Count; i++)
+            {
+                for (int j = 0; j < mActors.Count; j++)
+                {
+                    if (mActors[i] is Goal && mActors[j] is Box)
+                    {
+                        Goal g = (Goal)mActors[i];
+                        Box b = (Box)mActors[j];
+
+                        if (g.GetPosition() == b.GetPosition())
+                        {
+                            clearGoalCount++;
+                        }
+                    }
+                }
+
+                if(mActors[i] is Goal)
+                {
+                    goalCount++;
+                }
+            }
+
+            if(goalCount == clearGoalCount)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

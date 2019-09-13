@@ -49,6 +49,10 @@ namespace LoopGame.Scene
             if (Input.GetKeyTrigger(Keys.Space)) {
                 mIsEndFlag = true;
             }
+            if(ActorManager.Instance().IsClear())
+            {
+                mIsEndFlag = true;
+            }
 
             ActorManager.Instance().Update(gameTime);
         }
