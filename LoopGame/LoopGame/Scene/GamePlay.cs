@@ -11,7 +11,7 @@ using LoopGame.Actor;
 
 namespace LoopGame.Scene
 {
-    class GamePlay : IScene, IGameMediator
+    class GamePlay : SceneBase, IScene, IGameMediator
     {
         private Stage mStage;
         private bool mIsEndFlag;
@@ -25,6 +25,7 @@ namespace LoopGame.Scene
         {
             mStage = new Stage(this);
             mStage.Load("TestStage02.csv");
+            mStage.Load("TestStage0" + mStageNo.ToString() + ".csv");
             mIsEndFlag = false;
         }
 

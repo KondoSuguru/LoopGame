@@ -13,17 +13,21 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin csv/TestStage.csv
-/copy:csv/TestStage.csv
+#begin csv/TestStage01.csv
+/copy:csv/TestStage01.csv
 
-#begin csv/TestStage.xlsx
-/copy:csv/TestStage.xlsx
+#begin csv/TestStage01.xlsx
+/importer:
+/processor:
+/build:csv/TestStage01.xlsx
 
 #begin csv/TestStage02.csv
 /copy:csv/TestStage02.csv
 
 #begin csv/TestStage02.xlsx
-/copy:csv/TestStage02.xlsx
+/importer:
+/processor:
+/build:csv/TestStage02.xlsx
 
 #begin Textures/boss_LEFT.png
 /importer:TextureImporter

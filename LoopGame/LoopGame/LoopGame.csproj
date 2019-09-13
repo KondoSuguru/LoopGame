@@ -60,7 +60,9 @@
     <Compile Include="Scene\GamePlay.cs" />
     <Compile Include="Scene\IScene.cs" />
     <Compile Include="Scene\Scene.cs" />
+    <Compile Include="Scene\SceneBase.cs" />
     <Compile Include="Scene\SceneManager.cs" />
+    <Compile Include="Scene\StageSelect.cs" />
     <Compile Include="Scene\Title.cs" />
     <Compile Include="Utility\Input.cs" />
     <Compile Include="Device\Loader.cs" />
