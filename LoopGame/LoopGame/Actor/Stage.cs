@@ -62,15 +62,15 @@ namespace LoopGame.Actor {
             mMapList.Clear();
         }
 
-        public bool IsCollision(Vector2 nextPos) {
+        public bool IsCollision(Vector2 nextPos, ActorMove.MoveState state) {
             if (nextPos.X < 0) {
                 nextPos.X = Screen.WIDTH - GridSize.GRID_SIZE;
-            } else if (nextPos.X > Screen.WIDTH - GridSize.GRID_SIZE) {
+            } else if (nextPos.X > Screen.WIDTH - GridSize.GRID_SIZE + 5) {
                 nextPos.X = 0;
             }
             if (nextPos.Y < 0) {
                 nextPos.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
-            } else if (nextPos.Y > Screen.HEIGHT - GridSize.GRID_SIZE) {
+            } else if (nextPos.Y > Screen.HEIGHT - GridSize.GRID_SIZE + 5) {
                 nextPos.Y = 0;
             }
             int posX = (int)nextPos.X / GridSize.GRID_SIZE;

@@ -7,63 +7,56 @@ using System.Threading.Tasks;
 using LoopGame.Device;
 using Microsoft.Xna.Framework;
 
-namespace LoopGame.Actor
-{
-    class Box : Actor
-    {
+namespace LoopGame.Actor {
+    class Box : Actor {
         IGameMediator mMediator;
         ActorMove mMove;
 
-        public Box(IGameMediator mediator) : base("box")
-        {
+        public Box(IGameMediator mediator) : base("box") {
             mMediator = mediator;
             mMove = new ActorMove(mMediator);
             GameDevice.Instance().GetRenderer().LoadContent(mFilename);
         }
 
-        public override void Draw()
-        {
+        public override void Draw() {
             GameDevice.Instance().GetRenderer().DrawTexture(mFilename, mPosition);
         }
 
-        public override void Update(GameTime gameTime)
-        {
+        public override void Update(GameTime gameTime) {
         }
 
-        public bool BranchUpdate(ActorMove.MoveState state) {
-            bool isMove = false;
+        public void BranchUpdate(ActorMove.MoveState state, ref bool isNotMove) {
+            var pos = mPosition;
 
-            switch (state) {
-                case ActorMove.MoveState.LEFT:
-                    var pos = new Vector2(mPosition.X - GridSize.GRID_SIZE, mPosition.Y);
-                    if (mMove.IsStageCollision(pos) || CollisionOtherBox(pos)) {
-                        isMove = true;
-                    }
-                    break;
-                case ActorMove.MoveState.RIGHT:
-                    pos = new Vector2(mPosition.X + GridSize.GRID_SIZE, mPosition.Y);
-                    if (mMove.IsStageCollision(pos) || CollisionOtherBox(pos)) {
-                        isMove = true;
-                    }
-                    break;
-                case ActorMove.MoveState.UP:
-                    pos = new Vector2(mPosition.X, mPosition.Y - GridSize.GRID_SIZE);
-                    if (mMove.IsStageCollision(pos) || CollisionOtherBox(pos)) {
-                        isMove = true;
-                    }
-                    break;
-                case ActorMove.MoveState.DOWN:
-                    pos = new Vector2(mPosition.X, mPosition.Y + GridSize.GRID_SIZE);
-                    if (mMove.IsStageCollision(pos) || CollisionOtherBox(pos)) {
-                        isMove = true;
-                    }
-                    break;
-                default:
-                    Debug.Assert(false);
-                    break;
+            if (state == ActorMove.MoveState.LEFT) {
+                if (mPosition.X <= 0f) {
+                    pos.X = Screen.WIDTH - GridSize.GRID_SIZE;
+                } else {
+                    pos.X = mPosition.X - GridSize.GRID_SIZE + 5;
+                }
+            } else if (state == ActorMove.MoveState.RIGHT) {
+                if (mPosition.X >= Screen.WIDTH - GridSize.GRID_SIZE) {
+                    pos.X = 0f;
+                } else {
+                    pos.X = mPosition.X + GridSize.GRID_SIZE + 5;
+                }
+            } else if (state == ActorMove.MoveState.UP) {
+                if (mPosition.Y <= 0f) {
+                    pos.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
+                } else {
+                    pos.Y = mPosition.Y - GridSize.GRID_SIZE + 5;
+                }
+            } else if (state == ActorMove.MoveState.DOWN) {
+                if (mPosition.Y >= Screen.HEIGHT - GridSize.GRID_SIZE) {
+                    pos.Y = 0f;
+                } else {
+                    pos.Y = mPosition.Y + GridSize.GRID_SIZE + 5;
+                }
             }
 
-            return isMove;
+            if (mMove.IsStageCollision(pos, state) || CollisionOtherBox(pos)) {
+                isNotMove = true;
+            }
         }
 
         private bool CollisionOtherBox(Vector2 pos) {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using LoopGame.Device;
+using System.Diagnostics;
 
 namespace LoopGame.Actor
 {
@@ -25,14 +26,14 @@ namespace LoopGame.Actor
         float mSpeed;
         IGameMediator mMediator;
         Actor mHitBox;
-        bool mIsBoxStageCollide;
+        bool mIsBoxStageOrOtherBoxCollide;
 
         public ActorMove(IGameMediator mediator)
         {
             mMediator = mediator;
             mState = MoveState.NONE;
             mHitBox = null;
-            mIsBoxStageCollide = false;
+            mIsBoxStageOrOtherBoxCollide = false;
         }
 
         public void Move(ref Vector2 pos)
@@ -48,7 +49,7 @@ namespace LoopGame.Actor
                     }
                     else
                     {
-                        if (!mIsBoxStageCollide) {
+                        if (!mIsBoxStageOrOtherBoxCollide) {
                             pos.X += mSpeed;
                         }
                         if (mHitBox != null) {
@@ -61,9 +62,7 @@ namespace LoopGame.Actor
                     }
                     if (pos.X <= mMovePoint.X)
                     {
-                        mState = MoveState.NONE;
-                        mHitBox = null;
-                        mIsBoxStageCollide = false;
+                        StateReset();
                     }
                     break;
                 case MoveState.RIGHT:
@@ -73,7 +72,7 @@ namespace LoopGame.Actor
                     }
                     else
                     {
-                        if (!mIsBoxStageCollide) {
+                        if (!mIsBoxStageOrOtherBoxCollide) {
                             pos.X += mSpeed;
                         }
                         if (mHitBox != null) {
@@ -86,9 +85,7 @@ namespace LoopGame.Actor
                     }
                     if (pos.X >= mMovePoint.X)
                     {
-                        mState = MoveState.NONE;
-                        mHitBox = null;
-                        mIsBoxStageCollide = false;
+                        StateReset();
                     }
                     break;
                 case MoveState.UP:
@@ -98,7 +95,7 @@ namespace LoopGame.Actor
                     }
                     else
                     {
-                        if (!mIsBoxStageCollide) {
+                        if (!mIsBoxStageOrOtherBoxCollide) {
                             pos.Y += mSpeed;
                         }
                         if (mHitBox != null) {
@@ -111,9 +108,7 @@ namespace LoopGame.Actor
                     }
                     if (pos.Y <= mMovePoint.Y)
                     {
-                        mState = MoveState.NONE;
-                        mHitBox = null;
-                        mIsBoxStageCollide = false;
+                        StateReset();
                     }
                     break;
                 case MoveState.DOWN:
@@ -123,7 +118,7 @@ namespace LoopGame.Actor
                     }
                     else
                     {
-                        if (!mIsBoxStageCollide) {
+                        if (!mIsBoxStageOrOtherBoxCollide) {
                             pos.Y += mSpeed;
                         }
                         if (mHitBox != null) {
@@ -136,9 +131,7 @@ namespace LoopGame.Actor
                     }
                     if (pos.Y >= mMovePoint.Y)
                     {
-                        mState = MoveState.NONE;
-                        mHitBox = null;
-                        mIsBoxStageCollide = false;
+                        StateReset();
                     }
                     break;
             }
@@ -148,25 +141,14 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return false;
-            if (IsStageCollision(new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y))) {
+            if (IsStageCollision(new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y), mState)) {
                 return false;
             }
 
             mState = MoveState.LEFT;
 
-            var actors = ActorManager.Instance().GetActors();
-            foreach (var actor in actors) {
-                if (!(actor is Box)) { //Box以外は興味ない
-                    continue;
-                }
-                if (Actor.IsCollision(new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y), actor)) {
-                    mIsBoxStageCollide = ((Box)actor).BranchUpdate(mState);
-                    if (mIsBoxStageCollide) {
-                        return false;
-                    }
-                    mHitBox = actor;
-                    break;
-                }
+            if (!MoveOption(pos)) {
+                return false;
             }
 
             mMovePoint = new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y);
@@ -182,24 +164,13 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return false;
-            if (IsStageCollision(new Vector2(pos.X + GridSize.GRID_SIZE, pos.Y)))
+            if (IsStageCollision(new Vector2(pos.X + GridSize.GRID_SIZE, pos.Y), mState))
                 return false;
 
             mState = MoveState.RIGHT;
 
-            var actors = ActorManager.Instance().GetActors();
-            foreach (var actor in actors) {
-                if (!(actor is Box)) { //Box以外は興味ない
-                    continue;
-                }
-                if (Actor.IsCollision(new Vector2(pos.X + GridSize.GRID_SIZE, pos.Y), actor)) {
-                    mIsBoxStageCollide = ((Box)actor).BranchUpdate(mState);
-                    if (mIsBoxStageCollide) {
-                        return false;
-                    }
-                    mHitBox = actor;
-                    break;
-                }
+            if (!MoveOption(pos)) {
+                return false;
             }
 
             mMovePoint = new Vector2( pos.X + GridSize.GRID_SIZE, pos.Y);
@@ -215,24 +186,13 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return false;
-            if (IsStageCollision(new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE))) 
+            if (IsStageCollision(new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE), mState)) 
                 return false;
 
             mState = MoveState.UP;
 
-            var actors = ActorManager.Instance().GetActors();
-            foreach (var actor in actors) {
-                if (!(actor is Box)) { //Box以外は興味ない
-                    continue;
-                }
-                if (Actor.IsCollision(new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE), actor)) {
-                    mIsBoxStageCollide = ((Box)actor).BranchUpdate(mState);
-                    if (mIsBoxStageCollide) {
-                        return false;
-                    }
-                    mHitBox = actor;
-                    break;
-                }
+            if (!MoveOption(pos)) {
+                return false;
             }
 
             mMovePoint = new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE);
@@ -249,24 +209,13 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return false;
-            if (IsStageCollision(new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE))) 
+            if (IsStageCollision(new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE), mState)) 
                 return false;
 
             mState = MoveState.DOWN;
 
-            var actors = ActorManager.Instance().GetActors();
-            foreach (var actor in actors) {
-                if (!(actor is Box)) { //Box以外は興味ない
-                    continue;
-                }
-                if (Actor.IsCollision(new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE), actor)) {
-                    mIsBoxStageCollide = ((Box)actor).BranchUpdate(mState);
-                    if (mIsBoxStageCollide) {
-                        return false;
-                    }
-                    mHitBox = actor;
-                    break;
-                }
+            if (!MoveOption(pos)) {
+                return false;
             }
 
             mMovePoint = new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE);
@@ -278,10 +227,61 @@ namespace LoopGame.Actor
             return true;
         }
 
-        public bool IsStageCollision(Vector2 nextPos) {
-            return mMediator.GetStage().IsCollision(nextPos);
+        public bool IsStageCollision(Vector2 nextPos, MoveState state) {
+            return mMediator.GetStage().IsCollision(nextPos, state);
         }
 
+        private void StateReset() {
+            mState = MoveState.NONE;
+            mHitBox = null;
+            mIsBoxStageOrOtherBoxCollide = false;
+        }
+
+        private bool MoveOption(in Vector2 inVec) {
+            var actors = ActorManager.Instance().GetActors();
+            foreach (var actor in actors) {
+                if (!(actor is Box)) { //Box以外は興味ない
+                    continue;
+                }
+
+                Vector2 p = inVec;
+                if (mState == MoveState.LEFT) {
+                    if (inVec.X <= 5f) {
+                        p.X = Screen.WIDTH - GridSize.GRID_SIZE;
+                    } else {
+                        p.X = inVec.X - GridSize.GRID_SIZE;
+                    }
+                } else if (mState == MoveState.RIGHT) {
+                    if (inVec.X >= Screen.WIDTH - GridSize.GRID_SIZE - 5) {
+                        p.X = 0f;
+                    } else {
+                        p.X = inVec.X + GridSize.GRID_SIZE;
+                    }
+                } else if (mState == MoveState.UP) {
+                    if (inVec.Y <= 5f) {
+                        p.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
+                    } else {
+                        p.Y = inVec.Y - GridSize.GRID_SIZE;
+                    }
+                } else if (mState == MoveState.DOWN) {
+                    if (inVec.Y >= Screen.HEIGHT - GridSize.GRID_SIZE - 5f) {
+                        p.Y = 0f;
+                    } else {
+                        p.Y = inVec.Y + GridSize.GRID_SIZE;
+                    }
+                }
+
+                if (Actor.IsCollision(p, actor)) {
+                    ((Box)actor).BranchUpdate(mState, ref mIsBoxStageOrOtherBoxCollide);
+                    if (mIsBoxStageOrOtherBoxCollide) {
+                        return false;
+                    }
+                    mHitBox = actor;
+                    break;
+                }
+            }
+            return true;
+        }
         //public void MoveLeft(ref Vector2 pos)
         //{
         //    pos.X -= GridSize.GRID_SIZE;

@@ -29,20 +29,32 @@ namespace LoopGame.Actor
 
         public override void Update(GameTime gameTime)
         {
-            if (Input.GetKeyState(Keys.Left))
-            {
+            //if (Input.GetKeyState(Keys.Left))
+            //{
+            //    mMove.MoveLeft(mPosition);
+            //}
+            //if (Input.GetKeyState(Keys.Right))
+            //{ 
+            //    mMove.MoveRight(mPosition);
+            //}
+            //if (Input.GetKeyState(Keys.Up))
+            //{
+            //    mMove.MoveUp(mPosition);
+            //}
+            //if (Input.GetKeyState(Keys.Down))
+            //{
+            //    mMove.MoveDown(mPosition);
+            //}
+            if (Input.GetKeyTrigger(Keys.Left)) {
                 mMove.MoveLeft(mPosition);
             }
-            if (Input.GetKeyState(Keys.Right))
-            { 
+            if (Input.GetKeyTrigger(Keys.Right)) {
                 mMove.MoveRight(mPosition);
             }
-            if (Input.GetKeyState(Keys.Up))
-            {
+            if (Input.GetKeyTrigger(Keys.Up)) {
                 mMove.MoveUp(mPosition);
             }
-            if (Input.GetKeyState(Keys.Down))
-            {
+            if (Input.GetKeyTrigger(Keys.Down)) {
                 mMove.MoveDown(mPosition);
             }
             mMove.Move(ref mPosition);
