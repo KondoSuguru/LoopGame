@@ -54,7 +54,7 @@ namespace LoopGame.Actor {
                 }
             }
 
-            if (mMove.IsStageCollision(pos, state) || CollisionOtherBox(pos)) {
+            if (mMove.IsStageCollision(pos) || CollisionOtherBox(pos)) {
                 isNotMove = true;
             }
         }

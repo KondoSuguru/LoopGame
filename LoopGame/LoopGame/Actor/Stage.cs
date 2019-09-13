@@ -62,7 +62,7 @@ namespace LoopGame.Actor {
             mMapList.Clear();
         }
 
-        public bool IsCollision(Vector2 nextPos, ActorMove.MoveState state) {
+        public bool IsCollision(Vector2 nextPos) {
             if (nextPos.X < 0) {
                 nextPos.X = Screen.WIDTH - GridSize.GRID_SIZE;
             } else if (nextPos.X > Screen.WIDTH - GridSize.GRID_SIZE + 5) {

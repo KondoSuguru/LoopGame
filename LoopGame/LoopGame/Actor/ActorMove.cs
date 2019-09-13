@@ -110,7 +110,7 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return false;
-            if (IsStageCollision(new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y), mState)) {
+            if (IsStageCollision(new Vector2(pos.X - GridSize.GRID_SIZE, pos.Y))) {
                 return false;
             }
 
@@ -138,7 +138,7 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return false;
-            if (IsStageCollision(new Vector2(pos.X + GridSize.GRID_SIZE, pos.Y), mState))
+            if (IsStageCollision(new Vector2(pos.X + GridSize.GRID_SIZE, pos.Y)))
                 return false;
 
             mState = MoveState.RIGHT;
@@ -165,7 +165,7 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return false;
-            if (IsStageCollision(new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE), mState)) 
+            if (IsStageCollision(new Vector2(pos.X, pos.Y - GridSize.GRID_SIZE))) 
                 return false;
 
             mState = MoveState.UP;
@@ -193,7 +193,7 @@ namespace LoopGame.Actor
         {
             if (mState != MoveState.NONE)
                 return false;
-            if (IsStageCollision(new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE), mState)) 
+            if (IsStageCollision(new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE))) 
                 return false;
 
             mState = MoveState.DOWN;
@@ -216,8 +216,8 @@ namespace LoopGame.Actor
             return true;
         }
 
-        public bool IsStageCollision(Vector2 nextPos, MoveState state) {
-            return mMediator.GetStage().IsCollision(nextPos, state);
+        public bool IsStageCollision(Vector2 nextPos) {
+            return mMediator.GetStage().IsCollision(nextPos);
         }
 
         private void StateReset() {
