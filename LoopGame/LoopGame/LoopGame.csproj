@@ -47,6 +47,7 @@
     <Compile Include="Actor\Box.cs" />
     <Compile Include="Actor\Goal.cs" />
     <Compile Include="Actor\IGameMediator.cs" />
+    <Compile Include="Actor\Kakushi.cs" />
     <Compile Include="Actor\Player.cs" />
     <Compile Include="Actor\Stage.cs" />
     <Compile Include="Actor\Space.cs" />

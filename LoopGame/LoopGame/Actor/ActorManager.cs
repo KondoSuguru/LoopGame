@@ -70,6 +70,14 @@ namespace LoopGame.Actor
                 }
             }
 
+            foreach (var a in mActors)
+            {
+                if (a is Kakushi)
+                {
+                    a.Draw();
+                }
+            }
+
         }
 
         public void Clear()
