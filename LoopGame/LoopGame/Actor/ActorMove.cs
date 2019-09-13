@@ -24,6 +24,7 @@ namespace LoopGame.Actor
 
         Vector2 mMovePoint;
         float mSpeed;
+        static readonly int SPEED = 4;
         IGameMediator mMediator;
         Actor mHitBox;
         bool mIsBoxStageOrOtherBoxCollide;
@@ -44,14 +45,13 @@ namespace LoopGame.Actor
                     break;
                 case MoveState.LEFT:
                     if (!mIsBoxStageOrOtherBoxCollide) {
-                        pos.X += mSpeed;
+                        pos.X -= SPEED;
                     }
                     if (mHitBox != null) {
                         if (mHitBox.GetPosition().X <= 0) {
                             mHitBox.SetPosition(new Vector2(Screen.WIDTH, mHitBox.GetPosition().Y));
-                        } else {
-                            mHitBox.Translate(new Vector2(mSpeed, 0f));
                         }
+                        mHitBox.Translate(new Vector2(-SPEED, 0f));
                     }
                     if (pos.X <= mMovePoint.X)
                     {
@@ -60,14 +60,13 @@ namespace LoopGame.Actor
                     break;
                 case MoveState.RIGHT:
                     if (!mIsBoxStageOrOtherBoxCollide) {
-                        pos.X += mSpeed;
+                        pos.X += SPEED;
                     }
                     if (mHitBox != null) {
                         if (mHitBox.GetPosition().X >= Screen.WIDTH - GridSize.GRID_SIZE) {
                             mHitBox.SetPosition(new Vector2(-GridSize.GRID_SIZE, mHitBox.GetPosition().Y));
-                        } else {
-                            mHitBox.Translate(new Vector2(mSpeed, 0f));
                         }
+                        mHitBox.Translate(new Vector2(SPEED, 0f));
                     }
                     if (pos.X >= mMovePoint.X)
                     {
@@ -76,14 +75,13 @@ namespace LoopGame.Actor
                     break;
                 case MoveState.UP:
                     if (!mIsBoxStageOrOtherBoxCollide) {
-                        pos.Y += mSpeed;
+                        pos.Y -= SPEED;
                     }
                     if (mHitBox != null) {
                         if (mHitBox.GetPosition().Y <= 0) {
                             mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.HEIGHT));
-                        } else {
-                            mHitBox.Translate(new Vector2(0f, mSpeed));
                         }
+                        mHitBox.Translate(new Vector2(0f, -SPEED));
                     }
                     if (pos.Y <= mMovePoint.Y)
                     {
@@ -92,14 +90,13 @@ namespace LoopGame.Actor
                     break;
                 case MoveState.DOWN:
                     if (!mIsBoxStageOrOtherBoxCollide) {
-                        pos.Y += mSpeed;
+                        pos.Y += SPEED;
                     }
                     if (mHitBox != null) {
                         if (mHitBox.GetPosition().Y >= Screen.HEIGHT - GridSize.GRID_SIZE) {
                             mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, -GridSize.GRID_SIZE));
-                        } else {
-                            mHitBox.Translate(new Vector2(0f, mSpeed));
                         }
+                        mHitBox.Translate(new Vector2(0f, SPEED));
                     }
                     if (pos.Y >= mMovePoint.Y)
                     {
