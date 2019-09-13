@@ -12,6 +12,7 @@ namespace LoopGame.Actor {
     class Stage {
         private List<List<Actor>> mMapList; // ListのListで縦横の2次元配列を表現
         private IGameMediator mMediator;
+        private string mFilename;
 
         public Stage(IGameMediator mediator) {
             mMapList = new List<List<Actor>>();
@@ -47,6 +48,8 @@ namespace LoopGame.Actor {
         }
 
         public void Load(string filename, string path = "./csv/") {
+            mFilename = filename;
+
             CSVReader csvReader = new CSVReader();
             csvReader.Read(filename, path);
 
@@ -86,6 +89,13 @@ namespace LoopGame.Actor {
                 Debug.Assert(false);
                 return true;
             }
+        }
+
+        public void Reset() {
+            Unload();
+            ActorManager.Instance().Clear();
+
+            Load(mFilename);
         }
     }
 }
