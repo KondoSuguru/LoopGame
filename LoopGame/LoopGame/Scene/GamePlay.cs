@@ -57,7 +57,7 @@ namespace LoopGame.Scene
                 mIsEndFlag = true;
             }
 
-            ActorManager.Instance().Update(gameTime);
+            //ActorManager.Instance().Update(gameTime);
         }
 
         public Stage GetStage() {
