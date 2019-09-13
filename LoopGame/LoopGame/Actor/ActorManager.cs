@@ -55,9 +55,20 @@ namespace LoopGame.Actor
             
             foreach (var a in mActors)
             {
-                a.Draw();
+                if (a is Wall || a is Goal)
+                {
+                    a.Draw();
+                }
             }
-            
+
+            foreach (var a in mActors)
+            {
+                if (a is Player || a is Box)
+                {
+                    a.Draw();
+                }
+            }
+
         }
 
         public void Clear()
