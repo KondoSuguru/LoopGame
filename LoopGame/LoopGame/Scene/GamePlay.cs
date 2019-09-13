@@ -52,8 +52,12 @@ namespace LoopGame.Scene
             if (Input.GetKeyTrigger(Keys.P)) {
                 mStage.Reset();
             }
+            if(ActorManager.Instance().IsClear())
+            {
+                mIsEndFlag = true;
+            }
 
-            ActorManager.Instance().Update(gameTime);
+            //ActorManager.Instance().Update(gameTime);
         }
 
         public Stage GetStage() {
