@@ -224,13 +224,13 @@ namespace LoopGame.Actor
             int px, py;
             px = (int)(pPos.X + 5) / 64;
             py = (int)(pPos.Y + 5) / 64;
-            pPos = new Vector2(px,py) * 64;
+            pPos = new Vector2(px, py) * 64;
             if (mHitBox != null)
             {
                 int bx, by;
                 bx = (int)(mHitBox.GetPosition().X + 5) / 64;
                 by = (int)(mHitBox.GetPosition().Y + 5) / 64;
-                mHitBox.SetPosition(new Vector2(bx,by) * 64);
+                mHitBox.SetPosition(new Vector2(bx, by) * 64);
             }
             mState = MoveState.NONE;
             mHitBox = null;

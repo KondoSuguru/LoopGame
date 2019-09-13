@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using LoopGame.Utility;
 using Microsoft.Xna.Framework.Input;
+using LoopGame.Device;
 
 namespace LoopGame.Scene {
     class StageSelect : SceneBase, IScene {
         private bool mIsEndFlag;
 
         public StageSelect() {
+            GameDevice.Instance().GetRenderer().LoadContent("STAGE_SELECT");
             mStageNo = 0;
             mIsEndFlag = false;
         }
 
         public void Draw() {
+            GameDevice.Instance().GetRenderer().DrawTexture("STAGE_SELECT", Vector2.Zero);
         }
 
         public void Initialize() {

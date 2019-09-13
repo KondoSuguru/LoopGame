@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using LoopGame.Utility;
 using Microsoft.Xna.Framework.Input;
 using LoopGame.Actor;
+using LoopGame.Device;
 
 namespace LoopGame.Scene
 {
@@ -17,9 +18,18 @@ namespace LoopGame.Scene
         private bool mIsEndFlag;
         private bool mIsClear;
 
+        public GamePlay()
+        {
+            GameDevice.Instance().GetRenderer().LoadContent("CLEAR");
+        }
+
         public void Draw()
         {
             ActorManager.Instance().Draw();
+            if (mIsClear)
+            {
+                GameDevice.Instance().GetRenderer().DrawTexture("CLEAR", Vector2.Zero);
+            }
         }
 
         public void Initialize()
