@@ -22,6 +22,7 @@ namespace LoopGame
             mGraphicsDeviceManager = new GraphicsDeviceManager(this);
             //コンテンツデータ（リソースデータ）のルートフォルダは"Contentに設定
             Content.RootDirectory = "Content";
+            Window.Title = "今日もおしごとキーパールーパー";
 
             // Screenクラスの値で画面サイズを設定
             mGraphicsDeviceManager.PreferredBackBufferWidth = Screen.WIDTH;

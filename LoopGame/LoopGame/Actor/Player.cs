@@ -15,7 +15,7 @@ namespace LoopGame.Actor
         ActorMove mMove;
         IGameMediator mMediator;
 
-        public Player(IGameMediator mediator) : base("boss_LEFT")
+        public Player(IGameMediator mediator) : base("kiparupa")
         {
             mMediator = mediator;
             mMove = new ActorMove(mMediator);

@@ -49,7 +49,7 @@ namespace LoopGame.Scene
             }
 
             var r = GameDevice.Instance().GetRenderer();
-            r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2- 135, Screen.HEIGHT /2 - 35));
+            r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2- 135, Screen.HEIGHT /2 - 135));
             if (mStageNo == 1) {
                 if (ActorMove.mWalkCount <= STAGE1_A) {
                     r.DrawTexture("goldStar", mStarPosition[0]);
