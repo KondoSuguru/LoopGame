@@ -54,7 +54,7 @@ namespace LoopGame.Scene
             }
 
             var r = GameDevice.Instance().GetRenderer();
-            r.DrawTexture("CLEAR", Vector2.Zero);
+            r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2 - 135, Screen.HEIGHT / 2 - 35));
             for (int i = 0; i < mStarPosition.Count; i++) {
                 r.DrawTexture(mStarName[i + mA], mStarPosition[i]);
             }
