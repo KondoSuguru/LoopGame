@@ -28,7 +28,7 @@ namespace LoopGame.Actor
         IGameMediator mMediator;
         Actor mHitBox;
         bool mIsBoxStageOrOtherBoxCollide;
-        int mWalkCount;
+        public static int mWalkCount;
 
         public ActorMove(IGameMediator mediator)
         {
@@ -81,7 +81,7 @@ namespace LoopGame.Actor
                     }
                     if (mHitBox != null) {
                         if (mHitBox.GetPosition().Y <= 0) {
-                            mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.PLAY_HEIGHT));
+                            mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, Screen.HEIGHT));
                         }
                         mHitBox.Translate(new Vector2(0f, -SPEED));
                     }
@@ -95,7 +95,7 @@ namespace LoopGame.Actor
                         pos.Y += SPEED;
                     }
                     if (mHitBox != null) {
-                        if (mHitBox.GetPosition().Y >= Screen.PLAY_HEIGHT - GridSize.GRID_SIZE) {
+                        if (mHitBox.GetPosition().Y >= Screen.HEIGHT - GridSize.GRID_SIZE) {
                             mHitBox.SetPosition(new Vector2(mHitBox.GetPosition().X, -GridSize.GRID_SIZE));
                         }
                         mHitBox.Translate(new Vector2(0f, SPEED));
@@ -180,10 +180,10 @@ namespace LoopGame.Actor
             if (mMovePoint.Y <= -GridSize.GRID_SIZE)
 
             {
-                mMovePoint.Y = Screen.PLAY_HEIGHT - GridSize.GRID_SIZE;
+                mMovePoint.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
             }
 
-            if (mMovePoint.Y == Screen.PLAY_HEIGHT - GridSize.GRID_SIZE) {
+            if (mMovePoint.Y == Screen.HEIGHT - GridSize.GRID_SIZE) {
                 pos.Y = mMovePoint.Y + GridSize.GRID_SIZE;
             }
             mSpeed = (mMovePoint.Y - pos.Y) / (GridSize.GRID_SIZE / 4);
@@ -205,7 +205,7 @@ namespace LoopGame.Actor
             }
 
             mMovePoint = new Vector2(pos.X, pos.Y + GridSize.GRID_SIZE);
-            if (mMovePoint.Y >= Screen.PLAY_HEIGHT)
+            if (mMovePoint.Y >= Screen.HEIGHT)
             {
                 mMovePoint.Y = 0;
             }
@@ -265,12 +265,12 @@ namespace LoopGame.Actor
                     }
                 } else if (mState == MoveState.UP) {
                     if (inVec.Y <= 5f) {
-                        p.Y = Screen.PLAY_HEIGHT - GridSize.GRID_SIZE;
+                        p.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
                     } else {
                         p.Y = inVec.Y - GridSize.GRID_SIZE;
                     }
                 } else if (mState == MoveState.DOWN) {
-                    if (inVec.Y >= Screen.PLAY_HEIGHT - GridSize.GRID_SIZE - 5f) {
+                    if (inVec.Y >= Screen.HEIGHT - GridSize.GRID_SIZE - 5f) {
                         p.Y = 0f;
                     } else {
                         p.Y = inVec.Y + GridSize.GRID_SIZE;

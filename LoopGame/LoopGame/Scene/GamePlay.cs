@@ -17,6 +17,10 @@ namespace LoopGame.Scene
         private Stage mStage;
         private bool mIsEndFlag;
         private bool mIsClear;
+        private const int STAGE1_A = 46;
+        private const int STAGE1_B = 52;
+        private const int STAGE1_C = 58;
+        private const int STAGE2_A = 54;
 
         public GamePlay()
         {
@@ -26,9 +30,21 @@ namespace LoopGame.Scene
         public void Draw()
         {
             ActorManager.Instance().Draw();
-            if (mIsClear)
+            if (!mIsClear)
             {
-                GameDevice.Instance().GetRenderer().DrawTexture("CLEAR", Vector2.Zero);
+                return;
+            }
+
+            var r = GameDevice.Instance().GetRenderer();
+            r.DrawTexture("CLEAR", Vector2.Zero);
+            if (mStageNo == 1) {
+                if (ActorMove.mWalkCount <= STAGE1_A) {
+                    r.DrawTexture("", Vector2.Zero);
+                } else if (STAGE1_A < ActorMove.mWalkCount && ActorMove.mWalkCount < STAGE1_C) {
+                    r.DrawTexture("", Vector2.Zero);
+                } else {
+                    r.DrawTexture("", Vector2.Zero);
+                }
             }
         }
 

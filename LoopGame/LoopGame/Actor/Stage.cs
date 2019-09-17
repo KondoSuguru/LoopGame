@@ -73,8 +73,8 @@ namespace LoopGame.Actor {
                 nextPos.X = 0;
             }
             if (nextPos.Y < 0) {
-                nextPos.Y = Screen.PLAY_HEIGHT - GridSize.GRID_SIZE;
-            } else if (nextPos.Y > Screen.PLAY_HEIGHT - GridSize.GRID_SIZE + 5) {
+                nextPos.Y = Screen.HEIGHT - GridSize.GRID_SIZE;
+            } else if (nextPos.Y > Screen.HEIGHT - GridSize.GRID_SIZE + 5) {
                 nextPos.Y = 0;
             }
             int posX = (int)nextPos.X / GridSize.GRID_SIZE;
