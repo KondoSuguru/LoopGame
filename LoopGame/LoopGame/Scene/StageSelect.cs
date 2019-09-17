@@ -19,7 +19,7 @@ namespace LoopGame.Scene {
         }
 
         public void Draw() {
-            GameDevice.Instance().GetRenderer().DrawTexture("STAGE_SELECT", Vector2.Zero);
+            GameDevice.Instance().GetRenderer().DrawTexture("STAGE_SELECT", new Vector2(Screen.WIDTH / 2 - 290, Screen.HEIGHT / 2 - 125));
         }
 
         public void Initialize() {
