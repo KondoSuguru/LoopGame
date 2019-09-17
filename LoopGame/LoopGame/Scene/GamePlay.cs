@@ -25,10 +25,12 @@ namespace LoopGame.Scene
         public GamePlay()
         {
             GameDevice.Instance().GetRenderer().LoadContent("CLEAR");
+            GameDevice.Instance().GetRenderer().LoadContent("floor");
         }
 
         public void Draw()
         {
+            GameDevice.Instance().GetRenderer().DrawTexture("floor", Vector2.Zero);
             ActorManager.Instance().Draw();
             if (!mIsClear)
             {
