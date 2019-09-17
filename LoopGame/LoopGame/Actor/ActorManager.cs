@@ -16,6 +16,7 @@ namespace LoopGame.Actor
         private ActorManager()
         {
             mActors = new List<Actor>();
+            GameDevice.Instance().GetRenderer().LoadContent("number");
         }
 
         public static ActorManager Instance()
@@ -62,9 +63,15 @@ namespace LoopGame.Actor
                 }
             }
 
+            Player temp = null;
             foreach (var a in mActors)
             {
-                if (a is Player || a is Box)
+                if (a is Player)
+                {
+                    a.Draw();
+                    temp = (Player)a;
+                }
+                else if (a is Box)
                 {
                     a.Draw();
                 }
@@ -78,6 +85,12 @@ namespace LoopGame.Actor
                 }
             }
 
+            if (temp != null) {
+                GameDevice.Instance().GetRenderer().DrawNumber(
+                    "number",
+                    new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE, GridSize.GRID_SIZE * 2),
+                    temp.GetMove().GetWalkCount());
+            }
         }
 
         public void Clear()

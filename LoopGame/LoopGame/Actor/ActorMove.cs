@@ -28,6 +28,7 @@ namespace LoopGame.Actor
         IGameMediator mMediator;
         Actor mHitBox;
         bool mIsBoxStageOrOtherBoxCollide;
+        int mWalkCount;
 
         public ActorMove(IGameMediator mediator)
         {
@@ -35,6 +36,7 @@ namespace LoopGame.Actor
             mState = MoveState.NONE;
             mHitBox = null;
             mIsBoxStageOrOtherBoxCollide = false;
+            mWalkCount = 0;
         }
 
         public void Move(ref Vector2 pos)
@@ -55,7 +57,7 @@ namespace LoopGame.Actor
                     }
                     if (pos.X <= mMovePoint.X)
                     {
-                        StateReset(ref pos);
+                        ResetState(ref pos);
                     }
                     break;
                 case MoveState.RIGHT:
@@ -70,7 +72,7 @@ namespace LoopGame.Actor
                     }
                     if (pos.X >= mMovePoint.X)
                     {
-                        StateReset(ref pos);
+                        ResetState(ref pos);
                     }
                     break;
                 case MoveState.UP:
@@ -85,7 +87,7 @@ namespace LoopGame.Actor
                     }
                     if (pos.Y <= mMovePoint.Y)
                     {
-                        StateReset(ref pos);
+                        ResetState(ref pos);
                     }
                     break;
                 case MoveState.DOWN:
@@ -100,7 +102,7 @@ namespace LoopGame.Actor
                     }
                     if (pos.Y >= mMovePoint.Y)
                     {
-                        StateReset(ref pos);
+                        ResetState(ref pos);
                     }
                     break;
             }
@@ -220,7 +222,7 @@ namespace LoopGame.Actor
             return mMediator.GetStage().IsCollision(nextPos);
         }
 
-        private void StateReset(ref Vector2 pPos) {
+        private void ResetState(ref Vector2 pPos) {
             int px, py;
             px = (int)(pPos.X + 5) / 64;
             py = (int)(pPos.Y + 5) / 64;
@@ -234,6 +236,10 @@ namespace LoopGame.Actor
             }
             mState = MoveState.NONE;
             mHitBox = null;
+
+            if (!mIsBoxStageOrOtherBoxCollide) {
+                mWalkCount += 1;
+            }
             mIsBoxStageOrOtherBoxCollide = false;
         }
 
@@ -281,6 +287,10 @@ namespace LoopGame.Actor
                 }
             }
             return true;
+        }
+
+        public int GetWalkCount() {
+            return mWalkCount;
         }
         //public void MoveLeft(ref Vector2 pos)
         //{

@@ -56,5 +56,9 @@ namespace LoopGame.Actor
             //}
             mMove.Move(ref mPosition);
         }
+
+        public ActorMove GetMove() {
+            return mMove;
+        }
     }
 }
