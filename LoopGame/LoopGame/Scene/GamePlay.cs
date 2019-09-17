@@ -17,13 +17,11 @@ namespace LoopGame.Scene
         private Stage mStage;
         private bool mIsEndFlag;
         private bool mIsClear;
-        private const int STAGE1_A = 46;
-        private const int STAGE1_B = 52;
-        private const int STAGE1_C = 58;
-        private const int STAGE2_A = 54;
-        private const int STAGE2_B = 60;
-        private const int STAGE2_C = 66;
+        private int mRankA;
+        private int mRankB;
+        List<string> mStarName;
         List<Vector2> mStarPosition;
+        int mA;
 
         public GamePlay()
         {
@@ -32,6 +30,12 @@ namespace LoopGame.Scene
             r.LoadContent("floor");
             r.LoadContent("goldStar");
             r.LoadContent("grayStar");
+
+            mStarName = new List<string>() {
+                "goldStar", "goldStar", "goldStar",
+                "goldStar", "grayStar", "goldStar",
+                "goldStar", "grayStar", "grayStar"
+            };
 
             mStarPosition = new List<Vector2>();
             mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 128, 350)); //左
@@ -43,6 +47,7 @@ namespace LoopGame.Scene
         {
             GameDevice.Instance().GetRenderer().DrawTexture("floor", Vector2.Zero);
             ActorManager.Instance().Draw();
+
             if (!mIsClear)
             {
                 return;
@@ -50,34 +55,8 @@ namespace LoopGame.Scene
 
             var r = GameDevice.Instance().GetRenderer();
             r.DrawTexture("CLEAR", Vector2.Zero);
-            if (mStageNo == 1) {
-                if (ActorMove.mWalkCount <= STAGE1_A) {
-                    r.DrawTexture("goldStar", mStarPosition[0]);
-                    r.DrawTexture("goldStar", mStarPosition[1]);
-                    r.DrawTexture("goldStar", mStarPosition[2]);
-                } else if (STAGE1_A < ActorMove.mWalkCount && ActorMove.mWalkCount < STAGE1_C) {
-                    r.DrawTexture("goldStar", mStarPosition[0]);
-                    r.DrawTexture("grayStar", mStarPosition[1]);
-                    r.DrawTexture("goldStar", mStarPosition[2]);
-                } else {
-                    r.DrawTexture("goldStar", mStarPosition[0]);
-                    r.DrawTexture("grayStar", mStarPosition[1]);
-                    r.DrawTexture("grayStar", mStarPosition[2]);
-                }
-            } else if (mStageNo == 2) {
-                if (ActorMove.mWalkCount <= STAGE2_A) {
-                    r.DrawTexture("goldStar", mStarPosition[0]);
-                    r.DrawTexture("goldStar", mStarPosition[1]);
-                    r.DrawTexture("goldStar", mStarPosition[2]);
-                } else if (STAGE2_A < ActorMove.mWalkCount && ActorMove.mWalkCount < STAGE2_C) {
-                    r.DrawTexture("goldStar", mStarPosition[0]);
-                    r.DrawTexture("grayStar", mStarPosition[1]);
-                    r.DrawTexture("goldStar", mStarPosition[2]);
-                } else {
-                    r.DrawTexture("goldStar", mStarPosition[0]);
-                    r.DrawTexture("grayStar", mStarPosition[1]);
-                    r.DrawTexture("grayStar", mStarPosition[2]);
-                }
+            for (int i = 0; i < mStarPosition.Count; i++) {
+                r.DrawTexture(mStarName[i + mA], mStarPosition[i]);
             }
         }
 
@@ -87,6 +66,14 @@ namespace LoopGame.Scene
             mStage.Load("TestStage0" + mStageNo.ToString() + ".csv");
             mIsEndFlag = false;
             mIsClear = false;
+
+            if (mStageNo == 1) {
+                mRankA = 46;
+                mRankB = 52;
+            } else if (mStageNo == 2) {
+                mRankA = 54;
+                mRankB = 60;
+            }
         }
 
         public bool IsEnd()
@@ -119,12 +106,16 @@ namespace LoopGame.Scene
             if (Input.GetKeyTrigger(Keys.P)) {
                 mStage.Reset();
             }
-            if (Input.GetKeyTrigger(Keys.O)) {
-                mIsClear = true;
-            }
             if(ActorManager.Instance().IsClear())
             {
                 mIsClear = true;
+                if (ActorMove.mWalkCount <= mRankA) {
+                    mA = 0;
+                } else if (mRankA < ActorMove.mWalkCount && ActorMove.mWalkCount <= mRankB) {
+                    mA = 3;
+                } else {
+                    mA = 6;
+                }
             }
 
             ActorManager.Instance().Update(gameTime);
