@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin csv/TestStage01.csv
+/copy:csv/TestStage01.csv
+
+#begin csv/TestStage01.xlsx
+/copy:csv/TestStage01.xlsx
+
+#begin csv/TestStage02.csv
+/copy:csv/TestStage02.csv
+
+#begin csv/TestStage02.xlsx
+/copy:csv/TestStage02.xlsx
+
 #begin Textures/boss_LEFT.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -37,6 +49,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/box.png
 
+#begin Textures/CLEAR.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/CLEAR.png
+
 #begin Textures/goal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -49,7 +73,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/goal.png
 
-#begin Textures/wall.png
+#begin Textures/number.bmp
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -59,9 +83,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/wall.png
+/build:Textures/number.bmp
 
-#begin Textures/UIzone.png
+#begin Textures/P.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -71,19 +95,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UIzone.png
-
-#begin Textures/CLEAR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/CLEAR.png
+/build:Textures/P.png
 
 #begin Textures/STAGE_SELECT.png
 /importer:TextureImporter
@@ -109,19 +121,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/TITLE.png
 
-#begin csv/TestStage01.csv
-/copy:csv/TestStage01.csv
-
-#begin csv/TestStage01.xlsx
-/copy:csv/TestStage01.xlsx
-
-#begin csv/TestStage02.csv
-/copy:csv/TestStage02.csv
-
-#begin csv/TestStage02.xlsx
-/copy:csv/TestStage02.xlsx
-
-#begin Textures/number.bmp
+#begin Textures/UIzone.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -131,5 +131,53 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/number.bmp
+/build:Textures/UIzone.png
+
+#begin Textures/wall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/wall.png
+
+#begin Textures/grayStar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/grayStar.png
+
+#begin Textures/goldStar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/goldStar.png
+
+#begin Textures/floor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/floor.png
 
