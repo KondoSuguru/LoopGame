@@ -48,5 +48,9 @@ namespace LoopGame.Actor
             }
             return false;
         }
+
+        internal void SetPosition(object p) {
+            throw new NotImplementedException();
+        }
     }
 }

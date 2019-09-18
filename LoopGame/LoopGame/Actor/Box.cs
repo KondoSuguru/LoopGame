@@ -11,10 +11,12 @@ namespace LoopGame.Actor {
     class Box : Actor {
         IGameMediator mMediator;
         ActorMove mMove;
+        List<Vector2> mFootprint;
 
         public Box(IGameMediator mediator) : base("box") {
             mMediator = mediator;
             mMove = new ActorMove(mMediator);
+            mFootprint = new List<Vector2>();
             GameDevice.Instance().GetRenderer().LoadContent(mFilename);
         }
 
@@ -57,6 +59,17 @@ namespace LoopGame.Actor {
             if (mMove.IsStageCollision(pos) || CollisionOtherBox(pos)) {
                 isNotMove = true;
             }
+        }
+
+        public void AddFootprint(Vector2 pos) {
+            mFootprint.Add(pos);
+        }
+
+        public List<Vector2> GetPrevious() {
+            return mFootprint;
+        }
+        public void SetPrevious(Vector2 pos) {
+            mFootprint.Add(pos);
         }
 
         private bool CollisionOtherBox(Vector2 pos) {

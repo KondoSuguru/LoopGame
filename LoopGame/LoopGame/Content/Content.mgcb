@@ -25,6 +25,42 @@
 #begin csv/TestStage02.xlsx
 /copy:csv/TestStage02.xlsx
 
+#begin csv/TestStage03.csv
+/copy:csv/TestStage03.csv
+
+#begin csv/TestStage03.xlsx
+/copy:csv/TestStage03.xlsx
+
+#begin csv/TestStage04.csv
+/copy:csv/TestStage04.csv
+
+#begin csv/TestStage04.xlsx
+/copy:csv/TestStage04.xlsx
+
+#begin csv/TestStage05.csv
+/copy:csv/TestStage05.csv
+
+#begin csv/TestStage05.xlsx
+/copy:csv/TestStage05.xlsx
+
+#begin csv/TestStage06.csv
+/copy:csv/TestStage06.csv
+
+#begin csv/TestStage06.xlsx
+/copy:csv/TestStage06.xlsx
+
+#begin csv/TestStage07.csv
+/copy:csv/TestStage07.csv
+
+#begin csv/TestStage07.xlsx
+/copy:csv/TestStage07.xlsx
+
+#begin csv/TestStage08.csv
+/copy:csv/TestStage08.csv
+
+#begin csv/TestStage08.xlsx
+/copy:csv/TestStage08.xlsx
+
 #begin Textures/boss_LEFT.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -61,6 +97,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/CLEAR.png
 
+#begin Textures/floor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/floor.png
+
 #begin Textures/goal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -72,6 +120,54 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/goal.png
+
+#begin Textures/goldStar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/goldStar.png
+
+#begin Textures/grayStar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/grayStar.png
+
+#begin Textures/kiparupa.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/kiparupa.png
+
+#begin Textures/kiparupa_anm.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/kiparupa_anm.png
 
 #begin Textures/number.bmp
 /importer:TextureImporter
@@ -144,99 +240,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/wall.png
-
-#begin Textures/grayStar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/grayStar.png
-
-#begin Textures/goldStar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/goldStar.png
-
-#begin Textures/floor.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/floor.png
-
-#begin Textures/kiparupa.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/kiparupa.png
-
-#begin Textures/kiparupa_anm.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/kiparupa_anm.png
-
-#begin csv/TestStage04.csv
-/copy:csv/TestStage04.csv
-
-#begin csv/TestStage04.xlsx
-/copy:csv/TestStage04.xlsx
-
-#begin csv/TestStage05.csv
-/copy:csv/TestStage05.csv
-
-#begin csv/TestStage05.xlsx
-/copy:csv/TestStage05.xlsx
-
-#begin csv/TestStage06.csv
-/copy:csv/TestStage06.csv
-
-#begin csv/TestStage06.xlsx
-/copy:csv/TestStage06.xlsx
-
-#begin csv/TestStage07.csv
-/copy:csv/TestStage07.csv
-
-#begin csv/TestStage07.xlsx
-/copy:csv/TestStage07.xlsx
-#begin csv/TestStage03.csv
-/copy:csv/TestStage03.csv
-
-#begin csv/TestStage03.xlsx
-/copy:csv/TestStage03.xlsx
-
-#begin csv/TestStage04.csv
-/copy:csv/TestStage04.csv
-
-#begin csv/TestStage04.xlsx
-/copy:csv/TestStage04.xlsx
 
