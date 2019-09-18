@@ -46,6 +46,26 @@ namespace LoopGame.Scene {
                 mStageNo = 2;
                 mIsEndFlag = true;
             }
+            else if (Input.GetKeyTrigger(Keys.D4))
+            {
+                mStageNo = 4;
+                mIsEndFlag = true;
+            }
+            else if (Input.GetKeyTrigger(Keys.D5))
+            {
+                mStageNo = 5;
+                mIsEndFlag = true;
+            }
+            else if (Input.GetKeyTrigger(Keys.D6))
+            {
+                mStageNo = 6;
+                mIsEndFlag = true;
+            }
+            else if (Input.GetKeyTrigger(Keys.D7))
+            {
+                mStageNo = 7;
+                mIsEndFlag = true;
+            }
         }
     }
 }
