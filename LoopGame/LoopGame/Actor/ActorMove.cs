@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using LoopGame.Device;
 using System.Diagnostics;
+using LoopGame.Utility;
+using Microsoft.Xna.Framework.Input;
 
 namespace LoopGame.Actor
 {
@@ -29,6 +31,7 @@ namespace LoopGame.Actor
         Actor mHitBox;
         bool mIsBoxStageOrOtherBoxCollide;
         public static int mWalkCount;
+        List<Vector2> mFootprint;
 
         public ActorMove(IGameMediator mediator)
         {
@@ -37,6 +40,7 @@ namespace LoopGame.Actor
             mHitBox = null;
             mIsBoxStageOrOtherBoxCollide = false;
             mWalkCount = 0;
+            mFootprint = new List<Vector2>();
         }
 
         public void Move(ref Vector2 pos)
@@ -239,6 +243,8 @@ namespace LoopGame.Actor
 
             if (!mIsBoxStageOrOtherBoxCollide) {
                 mWalkCount += 1;
+
+                mFootprint.Add(pPos);
             }
             mIsBoxStageOrOtherBoxCollide = false;
         }
@@ -292,6 +298,20 @@ namespace LoopGame.Actor
         public int GetWalkCount() {
             return mWalkCount;
         }
+
+        public void AddFootprint(Vector2 pos) {
+            mFootprint.Add(pos);
+        }
+
+        public void PreviousPosition(ref Vector2 pos) {
+            if (mFootprint.Count <= 1) {
+                return;
+            }
+            pos = mFootprint[mFootprint.Count - 2];
+            mFootprint.RemoveAt(mFootprint.Count - 1);
+            mWalkCount -= 1;
+        }
+
         //public void MoveLeft(ref Vector2 pos)
         //{
         //    pos.X -= GridSize.GRID_SIZE;

@@ -31,7 +31,7 @@ namespace LoopGame.Actor {
                     switch (s) {
                         case "0": work = new Space(); break;
                         case "1": work = new Wall(); break;
-                        case "2": work = new Space(); Player p = new Player(mMediator); p.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
+                        case "2": work = new Space(); Player p = new Player(mMediator); p.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); p.GetMove().AddFootprint(p.GetPosition()); break;
                         case "3": work = new Space(); Box b = new Box(mMediator); b.SetPosition(new Vector2(colCnt * GridSize.GRID_SIZE, lineCnt * GridSize.GRID_SIZE)); break;
                         case "4": work = new Goal(); break;
                         case "5": work = new Kakushi(); break;

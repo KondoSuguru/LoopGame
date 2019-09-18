@@ -73,6 +73,9 @@ namespace LoopGame.Scene
             } else if (mStageNo == 2) {
                 mRankA = 54;
                 mRankB = 60;
+            } else if (mStageNo == 3) {
+                mRankA = 75;
+                mRankB = 86;
             }
         }
 

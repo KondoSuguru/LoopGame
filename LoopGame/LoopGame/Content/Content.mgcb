@@ -205,3 +205,9 @@
 /processorParam:TextureFormat=Color
 /build:Textures/kiparupa_anm.png
 
+#begin csv/TestStage03.csv
+/copy:csv/TestStage03.csv
+
+#begin csv/TestStage03.xlsx
+/copy:csv/TestStage03.xlsx
+

@@ -47,6 +47,10 @@ namespace LoopGame.Actor
             }
 
             mMove.Move(ref mPosition);
+
+            if (Input.GetKeyTrigger(Keys.O)) {
+                mMove.PreviousPosition(ref mPosition);
+            }
         }
 
         public ActorMove GetMove() {
