@@ -52,6 +52,7 @@
     <Compile Include="Actor\Stage.cs" />
     <Compile Include="Actor\Space.cs" />
     <Compile Include="Actor\Wall.cs" />
+    <Compile Include="Device\Animation.cs" />
     <Compile Include="Device\BGMLoader.cs" />
     <Compile Include="Device\CSVReader.cs" />
     <Compile Include="Device\GridSize.cs" />

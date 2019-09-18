@@ -92,6 +92,11 @@ namespace LoopGame.Utility {
             return mCurrentKey.IsKeyDown(key);
         }
 
+        //キーが離された瞬間
+        public static bool GetKeyUp(Keys key) {
+            return !mCurrentKey.IsKeyDown(key) && mPreviousKey.IsKeyDown(key);
+        }
+
         // マウス関連
         /// <summary>
         /// マウスの左ボタンが押された瞬間か？
