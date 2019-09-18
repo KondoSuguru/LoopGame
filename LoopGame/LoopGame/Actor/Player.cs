@@ -37,15 +37,9 @@ namespace LoopGame.Actor
 
             if (Input.GetKeyState(Keys.Left)) {
                 mMove.MoveLeft(ref mPosition);
-                mAnim.SetMotion(2);
-            } else if (Input.GetKeyUp(Keys.Left)) {
-                mAnim.SetMotion(0);
             }
             if (Input.GetKeyState(Keys.Right)) {
                 mMove.MoveRight(ref mPosition);
-                mAnim.SetMotion(3);
-            } else if (Input.GetKeyUp(Keys.Right)) {
-                mAnim.SetMotion(1);
             }
             if (Input.GetKeyState(Keys.Up)) {
                 mMove.MoveUp(ref mPosition);
