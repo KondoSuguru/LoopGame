@@ -231,22 +231,31 @@ namespace LoopGame.Actor
             px = (int)(pPos.X + 5) / 64;
             py = (int)(pPos.Y + 5) / 64;
             pPos = new Vector2(px, py) * 64;
-            if (mHitBox != null)
-            {
-                int bx, by;
-                bx = (int)(mHitBox.GetPosition().X + 5) / 64;
-                by = (int)(mHitBox.GetPosition().Y + 5) / 64;
-                mHitBox.SetPosition(new Vector2(bx, by) * 64);
-            }
-            mState = MoveState.NONE;
-            mHitBox = null;
 
             if (!mIsBoxStageOrOtherBoxCollide) {
                 mWalkCount += 1;
 
                 mFootprint.Add(pPos);
+
+                var actors = ActorManager.Instance().GetActors();
+                foreach (var actor in actors) {
+                    if (actor is Box) {
+                        ((Box)actor).SetPrevious(actor.GetPosition());
+                    }
+                }
             }
             mIsBoxStageOrOtherBoxCollide = false;
+
+            if (mHitBox != null)
+            {
+                int bx, by;
+                bx = (int)(mHitBox.GetPosition().X + 5) / 64;
+                by = (int)(mHitBox.GetPosition().Y + 5) / 64;
+                Vector2 bp = new Vector2(bx, by) * 64;
+                mHitBox.SetPosition(bp);
+            }
+            mState = MoveState.NONE;
+            mHitBox = null;
         }
 
         private bool MoveOption(Vector2 inVec) {
@@ -299,7 +308,7 @@ namespace LoopGame.Actor
             return mWalkCount;
         }
 
-        public void AddFootprint(Vector2 pos) {
+        public void AddPlayerFootprint(Vector2 pos) {
             mFootprint.Add(pos);
         }
 
@@ -309,6 +318,16 @@ namespace LoopGame.Actor
             }
             pos = mFootprint[mFootprint.Count - 2];
             mFootprint.RemoveAt(mFootprint.Count - 1);
+
+            var actors = ActorManager.Instance().GetActors();
+            foreach (var actor in actors) {
+                if (actor is Box) {
+                    var b = ((Box)actor).GetPrevious();
+                    actor.SetPosition(b[b.Count - 2]);
+                    b.RemoveAt(b.Count - 1);
+                }
+            }
+
             mWalkCount -= 1;
         }
 
