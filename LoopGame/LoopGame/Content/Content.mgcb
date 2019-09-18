@@ -211,3 +211,9 @@
 #begin csv/TestStage03.xlsx
 /copy:csv/TestStage03.xlsx
 
+#begin csv/TestStage04.csv
+/copy:csv/TestStage04.csv
+
+#begin csv/TestStage04.xlsx
+/copy:csv/TestStage04.xlsx
+

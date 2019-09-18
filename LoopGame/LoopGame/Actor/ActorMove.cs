@@ -28,10 +28,13 @@ namespace LoopGame.Actor
         float mSpeed;
         static readonly int SPEED = 4;
         IGameMediator mMediator;
+        Actor mBox;
         Actor mHitBox;
         bool mIsBoxStageOrOtherBoxCollide;
         public static int mWalkCount;
-        List<Vector2> mFootprint;
+        List<Vector2> mPlayerFootprint;
+        List<Vector2> mBoxFootprint;
+        List<bool> mIsHit;
 
         public ActorMove(IGameMediator mediator)
         {
@@ -40,7 +43,9 @@ namespace LoopGame.Actor
             mHitBox = null;
             mIsBoxStageOrOtherBoxCollide = false;
             mWalkCount = 0;
-            mFootprint = new List<Vector2>();
+            mPlayerFootprint = new List<Vector2>();
+            mBoxFootprint = new List<Vector2>();
+            mIsHit = new List<bool>();
         }
 
         public void Move(ref Vector2 pos)
@@ -231,22 +236,32 @@ namespace LoopGame.Actor
             px = (int)(pPos.X + 5) / 64;
             py = (int)(pPos.Y + 5) / 64;
             pPos = new Vector2(px, py) * 64;
+
+            if (!mIsBoxStageOrOtherBoxCollide) {
+                mWalkCount += 1;
+
+                mPlayerFootprint.Add(pPos);
+
+                if (mHitBox != null) {
+                    mIsHit.Add(true);
+                } else {
+                    mIsHit.Add(false);
+                }
+            }
+            mIsBoxStageOrOtherBoxCollide = false;
+
             if (mHitBox != null)
             {
                 int bx, by;
                 bx = (int)(mHitBox.GetPosition().X + 5) / 64;
                 by = (int)(mHitBox.GetPosition().Y + 5) / 64;
-                mHitBox.SetPosition(new Vector2(bx, by) * 64);
+                Vector2 bp = new Vector2(bx, by) * 64;
+                mHitBox.SetPosition(bp);
+                mBoxFootprint.Add(bp);
+                mBox = mHitBox;
             }
             mState = MoveState.NONE;
             mHitBox = null;
-
-            if (!mIsBoxStageOrOtherBoxCollide) {
-                mWalkCount += 1;
-
-                mFootprint.Add(pPos);
-            }
-            mIsBoxStageOrOtherBoxCollide = false;
         }
 
         private bool MoveOption(Vector2 inVec) {
@@ -299,16 +314,25 @@ namespace LoopGame.Actor
             return mWalkCount;
         }
 
-        public void AddFootprint(Vector2 pos) {
-            mFootprint.Add(pos);
+        public void AddPlayerFootprint(Vector2 pos) {
+            mPlayerFootprint.Add(pos);
+        }
+        public void AddBoxFootprint(Vector2 pos) {
+            mBoxFootprint.Add(pos);
         }
 
         public void PreviousPosition(ref Vector2 pos) {
-            if (mFootprint.Count <= 1) {
+            if (mPlayerFootprint.Count <= 1) {
                 return;
             }
-            pos = mFootprint[mFootprint.Count - 2];
-            mFootprint.RemoveAt(mFootprint.Count - 1);
+            pos = mPlayerFootprint[mPlayerFootprint.Count - 2];
+            mPlayerFootprint.RemoveAt(mPlayerFootprint.Count - 1);
+
+            //if (mIsHit.Last() == true) {
+            //    mBox.SetPosition(mBoxFootprint[mBoxFootprint.Count - 2]);
+            //    mBoxFootprint.RemoveAt(mBoxFootprint.Count - 1);
+            //}
+
             mWalkCount -= 1;
         }
 
