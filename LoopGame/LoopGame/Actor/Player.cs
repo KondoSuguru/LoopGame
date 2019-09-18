@@ -26,14 +26,12 @@ namespace LoopGame.Actor
 
         public override void Draw()
         {
-            //GameDevice.Instance().GetRenderer().DrawTexture(mFilename, mPosition);
             mAnim.Draw(mPosition);
         }
 
         public override void Update(GameTime gameTime)
         {
             mAnim.Update(gameTime);
-            mAnim.ChangeMotion();
 
             if (Input.GetKeyState(Keys.Left)) {
                 mMove.MoveLeft(ref mPosition);
@@ -48,18 +46,6 @@ namespace LoopGame.Actor
                 mMove.MoveDown(ref mPosition);
             }
 
-            //if (Input.GetKeyTrigger(Keys.Left)) {
-            //    mMove.MoveLeft(ref mPosition);
-            //}
-            //if (Input.GetKeyTrigger(Keys.Right)) {
-            //    mMove.MoveRight(ref mPosition);
-            //}
-            //if (Input.GetKeyTrigger(Keys.Up)) {
-            //    mMove.MoveUp(ref mPosition);
-            //}
-            //if (Input.GetKeyTrigger(Keys.Down)) {
-            //    mMove.MoveDown(ref mPosition);
-            //}
             mMove.Move(ref mPosition);
         }
 

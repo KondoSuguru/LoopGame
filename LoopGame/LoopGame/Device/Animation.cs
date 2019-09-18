@@ -24,6 +24,8 @@ namespace LoopGame.Device {
         }
 
         public void Update(GameTime gameTime) {
+            ChangeMotion();
+
             mCurrentTimer += 1f;
 
             if (mCurrentTimer >= mChangeAnimationTimer) {
@@ -44,7 +46,7 @@ namespace LoopGame.Device {
             mSize.Y = nomber * mSize.Height;
         }
 
-        public void ChangeMotion() {
+        private void ChangeMotion() {
             if (Input.GetKeyTrigger(Keys.Left)) {
                 SetMotion(2);
             } else if (Input.GetKeyUp(Keys.Left)) {
