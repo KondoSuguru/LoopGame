@@ -23,7 +23,7 @@ namespace LoopGame.Scene
 
         public void Draw()
         {
-            GameDevice.Instance().GetRenderer().DrawTexture("TITLE", new Vector2(Screen.WIDTH /2 - 115 ,Screen.HEIGHT / 2 - 40));
+            GameDevice.Instance().GetRenderer().DrawTexture("TITLE", new Vector2(Screen.WIDTH /2 - 352 ,Screen.HEIGHT / 2 - 150));
         }
 
         public void Initialize()
