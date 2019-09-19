@@ -40,7 +40,7 @@ namespace LoopGame.Scene {
         }
 
         public void Initialize() {
-            mStageNo = 1;
+            //mStageNo = 1;
             mIsEndFlag = false;
         }
 
