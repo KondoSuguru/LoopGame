@@ -69,7 +69,7 @@ namespace LoopGame.Scene
                 r.DrawTexture("undoButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
             }
             ActorManager.Instance().DrawWalkCount();
-
+            r.DrawNumber("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2, GridSize.GRID_SIZE), mStageNo);
 
             if (!mIsClear)
             {
