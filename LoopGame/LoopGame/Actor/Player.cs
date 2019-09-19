@@ -48,7 +48,7 @@ namespace LoopGame.Actor
 
             mMove.Move(ref mPosition);
 
-            if (Input.GetKeyTrigger(Keys.O)) {
+            if (Input.GetKeyUp(Keys.Z)) {
                 mMove.PreviousPosition(ref mPosition);
             }
         }

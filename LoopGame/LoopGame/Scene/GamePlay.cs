@@ -30,6 +30,11 @@ namespace LoopGame.Scene
             r.LoadContent("floor");
             r.LoadContent("goldStar");
             r.LoadContent("grayStar");
+            r.LoadContent("stateFrame");
+            r.LoadContent("resetButton");
+            r.LoadContent("resetButtonDown");
+            r.LoadContent("undoButton");
+            r.LoadContent("undoButtonDown");
 
             mStarName = new List<string>() {
                 "goldStar", "goldStar", "goldStar",
@@ -45,15 +50,32 @@ namespace LoopGame.Scene
 
         public void Draw()
         {
+            var r = GameDevice.Instance().GetRenderer();
             GameDevice.Instance().GetRenderer().DrawTexture("floor", Vector2.Zero);
             ActorManager.Instance().Draw();
+
+            r.DrawTexture("stateFrame", new Vector2(Screen.PLAY_WIDTH, 0));
+            if (Input.GetKeyState(Keys.X)){
+                r.DrawTexture("resetButtonDown", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
+            }
+            else {
+                r.DrawTexture("resetButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
+            }
+            if (Input.GetKeyState(Keys.Z))
+            {
+                r.DrawTexture("undoButtonDown", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
+            }
+            else {
+                r.DrawTexture("undoButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
+            }
+            ActorManager.Instance().DrawWalkCount();
+
 
             if (!mIsClear)
             {
                 return;
             }
 
-            var r = GameDevice.Instance().GetRenderer();
             r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2 - 135, Screen.HEIGHT / 2 - 135));
             for (int i = 0; i < mStarPosition.Count; i++) {
                 r.DrawTexture(mStarName[i + mA], mStarPosition[i]);
@@ -106,7 +128,7 @@ namespace LoopGame.Scene
                 return;
             }
 
-            if (Input.GetKeyTrigger(Keys.P)) {
+            if (Input.GetKeyUp(Keys.X)) {
                 mStage.Reset();
             }
             if(ActorManager.Instance().IsClear())
