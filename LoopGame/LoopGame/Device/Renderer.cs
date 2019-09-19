@@ -182,13 +182,15 @@ namespace LoopGame.Device {
                 digit++;
             }
 
+            position.X -= width * digit;
+
             // 数字を文字列化し、1文字ずつ取り出す
             foreach (var n in number.ToString()) {
                 // 数字のテクスチャが数字1つにつき幅32高さ64
                 // 文字と文字を引き算し、整数値を取得している
                 mSpriteBatch.Draw(
                     mTextures[assetName],
-                    position - new Vector2(width * digit, 0f),
+                    position,
                     new Rectangle((n - '0') * width, 0, width, 64),
                     Color.White * alpha);
 
