@@ -152,13 +152,50 @@ namespace LoopGame.Device {
                     mTextures[assetName],
                     position,
                     new Rectangle((n - '0') * width, 0, width, 64),
-                    Color.White);
+                    Color.White * alpha);
 
                 // 1文字描画したら1桁分右にずらす
                 position.X += width;
             }
         }
 
+        public void DrawNumberRightEdgeAlignment(
+            string assetName,
+            Vector2 position,
+            int number,
+            float alpha = 1f) {
+            Debug.Assert(
+                mTextures.ContainsKey(assetName),
+                "描画時にアセット名の指定を間違えたか、" +
+                "画像の読み込み自体できていません");
+
+            // マイナスの数は0
+            if (number < 0) {
+                number = 0;
+            }
+
+            int width = 32; // 画像横幅
+
+            //桁数計算(本当は=1)
+            int digit = 0;
+            for (int i = number; i >= 10; i /= 10) {
+                digit++;
+            }
+
+            // 数字を文字列化し、1文字ずつ取り出す
+            foreach (var n in number.ToString()) {
+                // 数字のテクスチャが数字1つにつき幅32高さ64
+                // 文字と文字を引き算し、整数値を取得している
+                mSpriteBatch.Draw(
+                    mTextures[assetName],
+                    position - new Vector2(width * digit, 0f),
+                    new Rectangle((n - '0') * width, 0, width, 64),
+                    Color.White * alpha);
+
+                // 1文字描画したら1桁分右にずらす
+                position.X += width;
+            }
+        }
 
         public void DrawNumber(
             string assetName,

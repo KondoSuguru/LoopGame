@@ -304,10 +304,6 @@ namespace LoopGame.Actor
             return true;
         }
 
-        public int GetWalkCount() {
-            return mWalkCount;
-        }
-
         public void AddPlayerFootprint(Vector2 pos) {
             mFootprint.Add(pos);
         }

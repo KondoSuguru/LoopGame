@@ -54,78 +54,53 @@ namespace LoopGame.Actor
 
         public void Draw()
         {
-            
-            foreach (var a in mActors)
-            {
-                if (a is Wall || a is Goal)
-                {
-                    a.Draw();
-                }
-            }
-
-            Player temp = null;
-            foreach (var a in mActors)
-            {
-                if (a is Player)
-                {
-                    a.Draw();
-                    temp = (Player)a;
-                }
-                else if (a is Box)
-                {
-                    a.Draw();
-                }
-            }
+            List<Actor> playerAndBoxes = new List<Actor>();
+            List<Kakushi> kakushis = new List<Kakushi>();
 
             foreach (var a in mActors)
             {
-                if (a is Kakushi)
-                {
+                if (a is Wall || a is Goal) {
                     a.Draw();
+                } else if (a is Player || a is Box) {
+                    playerAndBoxes.Add(a);
+                } else if (a is Kakushi) {
+                    kakushis.Add((Kakushi)a);
                 }
             }
 
-            if (temp != null) {
-                GameDevice.Instance().GetRenderer().DrawNumber(
-                    "number",
-                    new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 1.5f, GridSize.GRID_SIZE * 3),
-                    temp.GetMove().GetWalkCount());
+            foreach (var pab in playerAndBoxes) {
+                pab.Draw();
             }
+            foreach (var kakushi in kakushis) {
+                kakushi.Draw();
+            }
+
+            //foreach (var a in mActors)
+            //{
+            //    if (a is Player)
+            //    {
+            //        a.Draw();
+            //        temp = (Player)a;
+            //    }
+            //    else if (a is Box)
+            //    {
+            //        a.Draw();
+            //    }
+            //}
+
+            //foreach (var a in mActors)
+            //{
+            //    if (a is Kakushi)
+            //    {
+            //        a.Draw();
+            //    }
+            //}
         }
 
         //とりあえず作っただけだからなんとかしてくれ
         public void DrawWalkCount()
         {
-            Player temp = null;
-            Vector2 drawPos;
-
-            foreach (var a in mActors)
-            {
-                if (a is Player)
-                {
-                    temp = (Player)a;
-                }
-            }
-
-            if (temp == null)
-            {
-                return;
-            }
-
-            if(temp.GetMove().GetWalkCount() < 10)
-            {
-                drawPos = new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2.0f, GridSize.GRID_SIZE * 3);
-            }
-            else if(temp.GetMove().GetWalkCount() < 100)
-            {
-                drawPos = new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 1.5f, GridSize.GRID_SIZE * 3);
-            }
-            else
-            {
-                drawPos = new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 1.0f, GridSize.GRID_SIZE * 3);
-            }
-
-            GameDevice.Instance().GetRenderer().DrawNumber("number", drawPos, temp.GetMove().GetWalkCount());
+            GameDevice.Instance().GetRenderer().DrawNumberRightEdgeAlignment("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2.0f, GridSize.GRID_SIZE * 3), ActorMove.mWalkCount);
         }
 
         public void Clear()
