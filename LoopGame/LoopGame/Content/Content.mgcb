@@ -301,3 +301,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/undoButtonDown.png
 
+#begin data/rankData.txt
+/copy:data/rankData.txt
+
