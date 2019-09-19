@@ -22,6 +22,7 @@ namespace LoopGame.Scene
         List<string> mStarName;
         List<Vector2> mStarPosition;
         int mA;
+        int mRecord;
 
         public GamePlay()
         {
@@ -70,6 +71,7 @@ namespace LoopGame.Scene
             }
             ActorManager.Instance().DrawWalkCount();
             r.DrawNumber("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2, GridSize.GRID_SIZE), mStageNo);
+            r.DrawNumber("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 1f, GridSize.GRID_SIZE * 5), mRecord);
 
             if (!mIsClear)
             {
@@ -89,16 +91,10 @@ namespace LoopGame.Scene
             mIsEndFlag = false;
             mIsClear = false;
 
-            if (mStageNo == 1) {
-                mRankA = 46;
-                mRankB = 52;
-            } else if (mStageNo == 2) {
-                mRankA = 54;
-                mRankB = 60;
-            } else if (mStageNo == 3) {
-                mRankA = 75;
-                mRankB = 86;
-            }
+            var rankList = FileManager.LoadRank("./Content/data/rankData.txt", mStageNo);
+            mRankA = rankList[0];
+            mRankB = rankList[1];
+            mRecord = rankList[2];
         }
 
         public bool IsEnd()
