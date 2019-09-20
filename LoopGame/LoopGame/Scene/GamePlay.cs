@@ -58,16 +58,18 @@ namespace LoopGame.Scene
             mAnim = new Animation("kiparupa_anm", new Rectangle(0, 0, 64, 64), 0.25f);
             mMenuCursor = new List<Vector2>()
             {
-                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 132),
-                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 32),
-                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 + 68),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 182),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 82),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 + 18),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 + 118),
+
             };
         }
 
         public void Draw()
         {
             var r = GameDevice.Instance().GetRenderer();
-            GameDevice.Instance().GetRenderer().DrawTexture("floor", Vector2.Zero);
+            r.DrawTexture("floor", Vector2.Zero);
             ActorManager.Instance().Draw();
 
             r.DrawTexture("stateFrame", new Vector2(Screen.PLAY_WIDTH, 0));
@@ -94,9 +96,20 @@ namespace LoopGame.Scene
             if (mIsMenu)
             {
                 r.DrawTexture("menuBG", Vector2.Zero);
-                GameDevice.Instance().GetRenderer().DrawTexture("titlemodoru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 140));
-                GameDevice.Instance().GetRenderer().DrawTexture("selectmodoru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 40));
-                GameDevice.Instance().GetRenderer().DrawTexture("gameowaru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 60));
+
+                r.DrawTexture("titlemodoruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 190));
+                r.DrawTexture("selectmodoruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 90));
+                r.DrawTexture("menutojiruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 10));
+                r.DrawTexture("gameowaruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 110));
+
+                switch (mMenuNum)
+                {
+                    case 0: r.DrawTexture("titlemodoru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 190)); break;
+                    case 1: r.DrawTexture("selectmodoru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 90)); break;
+                    case 2: r.DrawTexture("menutojiru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 10)); break;
+                    case 3: r.DrawTexture("gameowaru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 110)); break;
+                }
+
                 mAnim.Draw(mMenuCursor[mMenuNum]);
             }
 
@@ -166,7 +179,7 @@ namespace LoopGame.Scene
                 {
                     mAnim.Update(gameTime);
                     mAnim.SetMotion(0);
-                    if (Input.GetKeyTrigger(Keys.Space))
+                    if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                     {
                         mNextScene = Scene.StageSelect;
                         mIsEndFlag = true;
@@ -213,23 +226,20 @@ namespace LoopGame.Scene
                 {
                     mMenuNum++;
                 }
-                mMenuNum = (mMenuNum + 3) % 3;
+                mMenuNum = (mMenuNum + 4) % 4;
 
-                if (Input.GetKeyTrigger(Keys.Space))
+                if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                 {
-                    if (mMenuNum == 0)
+                    switch (mMenuNum)
                     {
-                        mNextScene = Scene.Title;
-                        mIsEndFlag = true;
-                    }
-                    if (mMenuNum == 1)
-                    {
-                        mNextScene = Scene.StageSelect;
-                        mIsEndFlag = true;
-                    }
-                    if(mMenuNum == 2)
-                    {
-                        Game1.mIsEndGame = true;
+                        case 0:
+                            mNextScene = Scene.Title;
+                            mIsEndFlag = true; break;
+                        case 1:
+                            mNextScene = Scene.StageSelect;
+                            mIsEndFlag = true; break;
+                        case 2: mIsMenu = false; break;
+                        case 3: Game1.mIsEndGame = true; break;
                     }
                 }
             }

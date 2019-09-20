@@ -36,14 +36,27 @@ namespace LoopGame.Scene {
             r.LoadContent("TITLE");
             r.LoadContent("titleStart");
             r.LoadContent("titleEnd");
+            r.LoadContent("titleStartDark");
+            r.LoadContent("titleEndDark");
+            r.LoadContent("titleBG");
+            r.LoadContent("floor");
         }
 
         public void Draw() {
             var r = GameDevice.Instance().GetRenderer();
-            r.DrawTexture("TITLE", new Vector2(Screen.WIDTH / 2 - 352, Screen.HEIGHT / 2 - 200));
-            r.DrawTexture("titleStart", new Vector2(300, Screen.HEIGHT - 150));
-            r.DrawTexture("titleEnd", new Vector2(Screen.WIDTH - 492, Screen.HEIGHT - 150));
-
+            r.DrawTexture("floor", Vector2.Zero);
+            r.DrawTexture("titleBG", Vector2.Zero);
+            r.DrawTexture("TITLE", new Vector2(Screen.WIDTH / 2 - 352, Screen.HEIGHT / 2 - 185));
+            if (mMode == Mode.Next)
+            {
+                r.DrawTexture("titleStart", new Vector2(300, Screen.HEIGHT - 150));
+                r.DrawTexture("titleEndDark", new Vector2(Screen.WIDTH - 492, Screen.HEIGHT - 150));
+            }
+            else
+            {
+                r.DrawTexture("titleStartDark", new Vector2(300, Screen.HEIGHT - 150));
+                r.DrawTexture("titleEnd", new Vector2(Screen.WIDTH - 492, Screen.HEIGHT - 150));
+            }
             mAnim.Draw(mPositions[(int)mMode]);
         }
 
@@ -65,7 +78,7 @@ namespace LoopGame.Scene {
         }
 
         public void Update(GameTime gameTime) {
-            if (Input.GetKeyTrigger(Keys.Space)) {
+            if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter)) {
                 if (mMode == Mode.Next) {
                     mIsEndFlag = true;
                 } else if (mMode == Mode.End) {
