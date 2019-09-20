@@ -27,31 +27,39 @@ namespace LoopGame.Scene {
             r.LoadContent("titlemodoru");
             r.LoadContent("selectmodoru");
             r.LoadContent("gameowaru");
+            r.LoadContent("STAGE_SELECT");
+            r.LoadContent("kiparupa_anm");
+            r.LoadContent("menuBG");
+            r.LoadContent("titlemodoru");
+            r.LoadContent("selectmodoru");
+            r.LoadContent("gameowaru");
+            r.LoadContent("menutojiru");
+            r.LoadContent("titlemodoruDark");
+            r.LoadContent("selectmodoruDark");
+            r.LoadContent("gameowaruDark");
+            r.LoadContent("menutojiruDark");
             var s = GameDevice.Instance().GetSound();
             s.LoadSE("stage_choice");
             s.LoadSE("cursor");
             s.LoadSE("menu");
-            mStageNo = 1;
+            mStageNo = 0;
             mIsEndFlag = false;
             mIsMenu = false;
             mMenuNum = 0;
             mAnim = new Animation("kiparupa_anm", new Rectangle(0, 0, 64, 64), 0.25f);
 
-            mCursorPosition = new List<Vector2>();
-            mCursorPosition.Add(new Vector2(320, 192));
-            mCursorPosition.Add(new Vector2(544, 192));
-            mCursorPosition.Add(new Vector2(768, 192));
-            mCursorPosition.Add(new Vector2(320, 320));
-            mCursorPosition.Add(new Vector2(544, 320));
-            mCursorPosition.Add(new Vector2(768, 320));
-            mCursorPosition.Add(new Vector2(320, 448));
-            mCursorPosition.Add(new Vector2(544, 448));
-            mCursorPosition.Add(new Vector2(768, 448));
+            mCursorPosition = new List<Vector2>()
+            {
+                new Vector2(320, 192),new Vector2(544, 192),new Vector2(768, 192),
+                new Vector2(320, 320),new Vector2(544, 320),new Vector2(768, 320),
+                new Vector2(320, 448),new Vector2(544, 448),new Vector2(768, 448),
+            };
 
             mMenuCursor = new List<Vector2>()
             {
-                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 82),
-                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 + 18),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 132),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 32),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 + 68),
             };
         }
 
@@ -60,19 +68,26 @@ namespace LoopGame.Scene {
             GameDevice.Instance().GetRenderer().DrawTexture("STAGE_SELECT", Vector2.Zero);
             if (!mIsMenu)
             {
-                mAnim.Draw(mCursorPosition[mStageNo - 1]);
+                mAnim.Draw(mCursorPosition[mStageNo]);
             }
             else
             {
                 GameDevice.Instance().GetRenderer().DrawTexture("menuBG", Vector2.Zero);
-                GameDevice.Instance().GetRenderer().DrawTexture("titlemodoru", new Vector2(Screen. WIDTH / 2 - 192, Screen.HEIGHT /2 - 90));
-                GameDevice.Instance().GetRenderer().DrawTexture("gameowaru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 10));
+                GameDevice.Instance().GetRenderer().DrawTexture("titlemodoruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 140));
+                GameDevice.Instance().GetRenderer().DrawTexture("menutojiruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 40));
+                GameDevice.Instance().GetRenderer().DrawTexture("gameowaruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 60));
+                switch (mMenuNum)
+                {
+                    case 0: GameDevice.Instance().GetRenderer().DrawTexture("titlemodoru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 140)); break;
+                    case 1:  GameDevice.Instance().GetRenderer().DrawTexture("menutojiru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 40));break;
+                    case 2: GameDevice.Instance().GetRenderer().DrawTexture("gameowaru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 60)); break;
+                }
                 mAnim.Draw(mMenuCursor[mMenuNum]);
             }
         }
 
         public void Initialize() {
-            //mStageNo = 1;
+            mStageNo = 0;
             mIsEndFlag = false;
             mIsMenu = false;
             var s = GameDevice.Instance().GetSound();
@@ -145,8 +160,11 @@ namespace LoopGame.Scene {
                     }
                     s.PlaySE("cursor");
                 }
-                if (Input.GetKeyTrigger(Keys.Space))
+                mStageNo = (mStageNo + mStageCount) % mStageCount;
+
+                if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                 {
+                    mStageNo++;
                     mNextScene = Scene.GamePlay;
                     mIsEndFlag = true;
                     s.PlaySE("stage_choice");
@@ -166,21 +184,22 @@ namespace LoopGame.Scene {
                     mMenuNum++;
                     s.PlaySE("cursor");
                 }
-                mMenuNum = Math.Abs(mMenuNum) % 2;
+                mMenuNum = (mMenuNum + 3) % 3;
 
-                if (Input.GetKeyTrigger(Keys.Space))
+                if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                 {
-                    if(mMenuNum == 0)
+                    switch (mMenuNum)
                     {
-                        mNextScene = Scene.Title;
-                        mIsEndFlag = true;
-                        s.PlaySE("choice");
+                        case 0:
+                            mNextScene = Scene.Title;
+                            mIsEndFlag = true;
+                            break;
+                        case 1:
+                            mIsMenu = false;
+                            break;
+                        case 2: Game1.mIsEndGame = true; break;
                     }
-                    if (mMenuNum == 1)
-                    {
-                        Game1.mIsEndGame = true;
-                        s.PlaySE("choice");
-                    }
+                    s.PlaySE("stage_choice");
                 }
             }
         }

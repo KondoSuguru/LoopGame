@@ -82,6 +82,12 @@
 /processorParam:Quality=Best
 /build:Sound/menu.wav
 
+#begin Sound/reset.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/reset.wav
+
 #begin Sound/stage_choice.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -100,11 +106,11 @@
 /processorParam:Quality=Best
 /build:Sound/titleBGM.mp3
 
-#begin Sound/water_shed1.wav
+#begin Sound/undo.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sound/water_shed1.wav
+/build:Sound/undo.wav
 
 #begin Textures/boss_LEFT.png
 /importer:TextureImporter
@@ -178,6 +184,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/gameowaru.png
 
+#begin Textures/gameowaruDark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/gameowaruDark.png
+
 #begin Textures/goal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -250,6 +268,30 @@
 /processorParam:TextureFormat=Color
 /build:Textures/menuBG.png
 
+#begin Textures/menutojiru.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/menutojiru.png
+
+#begin Textures/menutojiruDark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/menutojiruDark.png
+
 #begin Textures/number.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -310,6 +352,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/selectmodoru.png
 
+#begin Textures/selectmodoruDark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/selectmodoruDark.png
+
 #begin Textures/STAGE_SELECT.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -346,6 +400,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/TITLE.png
 
+#begin Textures/titleBG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/titleBG.png
+
 #begin Textures/titleEnd.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -357,6 +423,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/titleEnd.png
+
+#begin Textures/titleEndDark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/titleEndDark.png
 
 #begin Textures/titlemodoru.png
 /importer:TextureImporter
@@ -370,6 +448,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/titlemodoru.png
 
+#begin Textures/titlemodoruDark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/titlemodoruDark.png
+
 #begin Textures/titleStart.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -381,6 +471,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/titleStart.png
+
+#begin Textures/titleStartDark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/titleStartDark.png
 
 #begin Textures/UIzone.png
 /importer:TextureImporter

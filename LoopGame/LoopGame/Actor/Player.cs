@@ -22,6 +22,7 @@ namespace LoopGame.Actor
             mMediator = mediator;
             mMove = new ActorMove(mMediator);
             mAnim = new Animation(mFilename, new Rectangle(0, 0, 64, 64), 0.25f);
+            GameDevice.Instance().GetSound().LoadSE("undo");
         }
 
         public override void Draw()
@@ -50,6 +51,7 @@ namespace LoopGame.Actor
 
             if (Input.GetKeyUp(Keys.Z)) {
                 mMove.PreviousPosition(ref mPosition);
+                GameDevice.Instance().GetSound().PlaySE("undo");
             }
         }
 
