@@ -42,8 +42,8 @@ namespace LoopGame.Scene {
 
             mMenuCursor = new List<Vector2>()
             {
-                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2),
-                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 + 100),
+                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 - 50),
+                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 + 50),
             };
         }
 

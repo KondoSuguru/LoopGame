@@ -150,6 +150,11 @@ namespace LoopGame.Scene
             {
                 if (mIsClear)
                 {
+                    if (Input.GetKeyTrigger(Keys.Space))
+                    {
+                        mNextScene = Scene.StageSelect;
+                        mIsEndFlag = true;
+                    }
                     return;
                 }
 
