@@ -41,6 +41,7 @@ namespace LoopGame.Scene
             r.LoadContent("resetButtonDown");
             r.LoadContent("undoButton");
             r.LoadContent("undoButtonDown");
+            GameDevice.Instance().GetSound().LoadBGM("bgm_maoudamashii_healing16");
 
             mStarName = new List<string>() {
                 "goldStar", "goldStar", "goldStar",
@@ -140,6 +141,7 @@ namespace LoopGame.Scene
 
         public void Update(GameTime gameTime)
         {
+            GameDevice.Instance().GetSound().PlayBGM("bgm_maoudamashii_healing16");
             if (Input.GetKeyTrigger(Keys.Escape))
             {
                 mIsMenu = !mIsMenu;

@@ -346,3 +346,9 @@
 /processorParam:Quality=Best
 /build:Sound/water-shed1.wav
 
+#begin Sound/bgm_maoudamashii_healing16.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/bgm_maoudamashii_healing16.mp3
+
