@@ -36,6 +36,10 @@ namespace LoopGame.Scene {
             r.LoadContent("TITLE");
             r.LoadContent("titleStart");
             r.LoadContent("titleEnd");
+            var s = GameDevice.Instance().GetSound();
+            s.LoadSE("choice");
+            s.LoadSE("cursor");
+            s.LoadBGM("titleBGM");
         }
 
         public void Draw() {
@@ -65,12 +69,15 @@ namespace LoopGame.Scene {
         }
 
         public void Update(GameTime gameTime) {
+            var s = GameDevice.Instance().GetSound();
+            s.PlayBGM("titleBGM");
             if (Input.GetKeyTrigger(Keys.Space)) {
                 if (mMode == Mode.Next) {
                     mIsEndFlag = true;
                 } else if (mMode == Mode.End) {
                     Game1.mIsEndGame = true;
                 }
+                s.PlaySE("choice");
             }
 
             if (Input.GetKeyTrigger(Keys.Right) || Input.GetKeyTrigger(Keys.Left)) {
@@ -79,6 +86,8 @@ namespace LoopGame.Scene {
                 } else {
                     mMode = Mode.Next;
                 }
+
+                s.PlaySE("cursor");
             }
 
             mAnim.Update(gameTime);

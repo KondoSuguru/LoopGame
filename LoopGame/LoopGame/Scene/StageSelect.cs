@@ -20,12 +20,17 @@ namespace LoopGame.Scene {
         private Scene mNextScene;
 
         public StageSelect() {
-            GameDevice.Instance().GetRenderer().LoadContent("STAGE_SELECT");
-            GameDevice.Instance().GetRenderer().LoadContent("kiparupa_anm");
-            GameDevice.Instance().GetRenderer().LoadContent("menuBG");
-            GameDevice.Instance().GetRenderer().LoadContent("titlemodoru");
-            GameDevice.Instance().GetRenderer().LoadContent("selectmodoru");
-            GameDevice.Instance().GetRenderer().LoadContent("gameowaru");
+            var r = GameDevice.Instance().GetRenderer();
+            r.LoadContent("STAGE_SELECT");
+            r.LoadContent("kiparupa_anm");
+            r.LoadContent("menuBG");
+            r.LoadContent("titlemodoru");
+            r.LoadContent("selectmodoru");
+            r.LoadContent("gameowaru");
+            var s = GameDevice.Instance().GetSound();
+            s.LoadSE("stage_choice");
+            s.LoadSE("cursor");
+            s.LoadSE("menu");
             mStageNo = 1;
             mIsEndFlag = false;
             mIsMenu = false;
@@ -70,6 +75,10 @@ namespace LoopGame.Scene {
             //mStageNo = 1;
             mIsEndFlag = false;
             mIsMenu = false;
+            var s = GameDevice.Instance().GetSound();
+            if (s.IsStoppedBGM()) {
+                s.PlayBGM("titleBGM");
+            }
         }
 
         public bool IsEnd() {
@@ -81,20 +90,23 @@ namespace LoopGame.Scene {
         }
 
         public void Shutdown() {
+            GameDevice.Instance().GetSound().StopBGM();
         }
 
         public void Update(GameTime gameTime)
         {
             mAnim.Update(gameTime);
+            var s = GameDevice.Instance().GetSound();
 
             if (Input.GetKeyTrigger(Keys.Escape))
             {
                 mIsMenu = !mIsMenu;
                 mMenuNum = 0;
+                s.PlaySE("menu");
             }
 
             if (!mIsMenu)
-            {         
+            {
                 mAnim.SetMotion(2);
 
                 if (Input.GetKeyTrigger(Keys.Right))
@@ -104,6 +116,7 @@ namespace LoopGame.Scene {
                     {
                         mStageNo = 1;
                     }
+                    s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Left))
                 {
@@ -112,6 +125,7 @@ namespace LoopGame.Scene {
                     {
                         mStageNo = mCursorPosition.Count();
                     }
+                    s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Up))
                 {
@@ -120,6 +134,7 @@ namespace LoopGame.Scene {
                     {
                         mStageNo += mStageCount;
                     }
+                    s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Down))
                 {
@@ -128,13 +143,14 @@ namespace LoopGame.Scene {
                     {
                         mStageNo -= mStageCount;
                     }
+                    s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Space))
                 {
                     mNextScene = Scene.GamePlay;
                     mIsEndFlag = true;
+                    s.PlaySE("stage_choice");
                 }
-                
             }
             else
             {
@@ -143,10 +159,12 @@ namespace LoopGame.Scene {
                 if (Input.GetKeyTrigger(Keys.Up))
                 {
                     mMenuNum--;
+                    s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Down))
                 {
                     mMenuNum++;
+                    s.PlaySE("cursor");
                 }
                 mMenuNum = Math.Abs(mMenuNum) % 2;
 
@@ -156,10 +174,12 @@ namespace LoopGame.Scene {
                     {
                         mNextScene = Scene.Title;
                         mIsEndFlag = true;
+                        s.PlaySE("choice");
                     }
-                    if(mMenuNum == 1)
+                    if (mMenuNum == 1)
                     {
                         Game1.mIsEndGame = true;
+                        s.PlaySE("choice");
                     }
                 }
             }

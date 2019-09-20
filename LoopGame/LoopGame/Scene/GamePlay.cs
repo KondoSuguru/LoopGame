@@ -42,7 +42,11 @@ namespace LoopGame.Scene
             r.LoadContent("undoButton");
             r.LoadContent("undoButtonDown");
             r.LoadContent("clearBG");
-            GameDevice.Instance().GetSound().LoadBGM("tekuteku arukou");
+            var s = GameDevice.Instance().GetSound();
+            s.LoadBGM("tekuteku_arukou");
+            s.LoadSE("cursor");
+            s.LoadSE("choice");
+            s.LoadSE("menu");
 
             mStarName = new List<string>() {
                 "goldStar", "goldStar", "goldStar",
@@ -149,7 +153,8 @@ namespace LoopGame.Scene
 
         public void Update(GameTime gameTime)
         {
-            GameDevice.Instance().GetSound().PlayBGM("tekuteku arukou");
+            var s = GameDevice.Instance().GetSound();
+            s.PlayBGM("tekuteku_arukou");
             if (Input.GetKeyTrigger(Keys.Escape))
             {
                 if (mIsClear)
@@ -158,6 +163,7 @@ namespace LoopGame.Scene
                 }
                 mIsMenu = !mIsMenu;
                 mMenuNum = 0;
+                s.PlaySE("menu");
             }
 
             if (!mIsMenu)
@@ -170,6 +176,7 @@ namespace LoopGame.Scene
                     {
                         mNextScene = Scene.StageSelect;
                         mIsEndFlag = true;
+                        s.PlaySE("choice");
                     }
                     return;
                 }
@@ -208,10 +215,12 @@ namespace LoopGame.Scene
                 if (Input.GetKeyTrigger(Keys.Up))
                 {
                     mMenuNum--;
+                    s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Down))
                 {
                     mMenuNum++;
+                    s.PlaySE("cursor");
                 }
                 mMenuNum = (mMenuNum + 3) % 3;
 
@@ -231,6 +240,7 @@ namespace LoopGame.Scene
                     {
                         Game1.mIsEndGame = true;
                     }
+                    s.PlaySE("choice");
                 }
             }
         }
