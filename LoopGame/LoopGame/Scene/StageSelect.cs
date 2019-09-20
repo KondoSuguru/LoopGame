@@ -23,6 +23,9 @@ namespace LoopGame.Scene {
             GameDevice.Instance().GetRenderer().LoadContent("STAGE_SELECT");
             GameDevice.Instance().GetRenderer().LoadContent("kiparupa_anm");
             GameDevice.Instance().GetRenderer().LoadContent("menuBG");
+            GameDevice.Instance().GetRenderer().LoadContent("titlemodoru");
+            GameDevice.Instance().GetRenderer().LoadContent("selectmodoru");
+            GameDevice.Instance().GetRenderer().LoadContent("gameowaru");
             mStageNo = 1;
             mIsEndFlag = false;
             mIsMenu = false;
@@ -42,8 +45,8 @@ namespace LoopGame.Scene {
 
             mMenuCursor = new List<Vector2>()
             {
-                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 - 50),
-                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 + 50),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 82),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 + 18),
             };
         }
 
@@ -57,6 +60,8 @@ namespace LoopGame.Scene {
             else
             {
                 GameDevice.Instance().GetRenderer().DrawTexture("menuBG", Vector2.Zero);
+                GameDevice.Instance().GetRenderer().DrawTexture("titlemodoru", new Vector2(Screen. WIDTH / 2 - 192, Screen.HEIGHT /2 - 90));
+                GameDevice.Instance().GetRenderer().DrawTexture("gameowaru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 10));
                 mAnim.Draw(mMenuCursor[mMenuNum]);
             }
         }
