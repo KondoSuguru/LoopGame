@@ -42,6 +42,7 @@ namespace LoopGame.Scene
             r.LoadContent("undoButton");
             r.LoadContent("undoButtonDown");
             r.LoadContent("clearBG");
+            r.LoadContent("gamemenuframe");
             var s = GameDevice.Instance().GetSound();
             s.LoadBGM("tekuteku_arukou");
             s.LoadSE("cursor");
@@ -102,7 +103,7 @@ namespace LoopGame.Scene
             if (mIsMenu)
             {
                 r.DrawTexture("menuBG", Vector2.Zero);
-
+                r.DrawTexture("gamemenuframe", new Vector2( Screen.WIDTH / 2 - 256, 50));
                 r.DrawTexture("titlemodoruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 190));
                 r.DrawTexture("selectmodoruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 90));
                 r.DrawTexture("menutojiruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 10));
@@ -170,7 +171,7 @@ namespace LoopGame.Scene
         {
             var s = GameDevice.Instance().GetSound();
             s.PlayBGM("tekuteku_arukou");
-            if (Input.GetKeyTrigger(Keys.Escape)|| Input.GetKeyTrigger(Keys.C))
+            if (Input.GetKeyTrigger(Keys.Q))
             {
                 if (mIsClear)
                 {
@@ -249,6 +250,7 @@ namespace LoopGame.Scene
                             mNextScene = Scene.Title;
                             mIsEndFlag = true; break;
                         case 1:
+                            mStageNo--;
                             mNextScene = Scene.StageSelect;
                             mIsEndFlag = true; break;
                         case 2: mIsMenu = false; break;

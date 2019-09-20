@@ -38,6 +38,7 @@ namespace LoopGame.Scene {
             r.LoadContent("selectmodoruDark");
             r.LoadContent("gameowaruDark");
             r.LoadContent("menutojiruDark");
+            r.LoadContent("selectmenuframe");
             var s = GameDevice.Instance().GetSound();
             s.LoadSE("stage_choice");
             s.LoadSE("cursor");
@@ -73,6 +74,7 @@ namespace LoopGame.Scene {
             else
             {
                 GameDevice.Instance().GetRenderer().DrawTexture("menuBG", Vector2.Zero);
+                GameDevice.Instance().GetRenderer().DrawTexture("selectmenuframe", new Vector2(Screen.WIDTH / 2 - 256, 100));
                 GameDevice.Instance().GetRenderer().DrawTexture("titlemodoruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 140));
                 GameDevice.Instance().GetRenderer().DrawTexture("menutojiruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 40));
                 GameDevice.Instance().GetRenderer().DrawTexture("gameowaruDark", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 60));
@@ -112,7 +114,7 @@ namespace LoopGame.Scene {
             mAnim.Update(gameTime);
             var s = GameDevice.Instance().GetSound();
 
-            if (Input.GetKeyTrigger(Keys.Escape) || Input.GetKeyTrigger(Keys.C))
+            if (Input.GetKeyTrigger(Keys.Q))
             {
                 mIsMenu = !mIsMenu;
                 mMenuNum = 0;
@@ -126,37 +128,21 @@ namespace LoopGame.Scene {
                 if (Input.GetKeyTrigger(Keys.Right))
                 {
                     mStageNo++;
-                    if (mStageNo > mStageCount)
-                    {
-                        mStageNo = 1;
-                    }
                     s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Left))
                 {
                     mStageNo--;
-                    if (mStageNo < 1)
-                    {
-                        mStageNo = mCursorPosition.Count();
-                    }
                     s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Up))
                 {
                     mStageNo -= 3;
-                    if (mStageNo < 1)
-                    {
-                        mStageNo += mStageCount;
-                    }
                     s.PlaySE("cursor");
                 }
                 if (Input.GetKeyTrigger(Keys.Down))
                 {
                     mStageNo += 3;
-                    if (mStageNo > mStageCount)
-                    {
-                        mStageNo -= mStageCount;
-                    }
                     s.PlaySE("cursor");
                 }
                 mStageNo = (mStageNo + mStageCount) % mStageCount;
