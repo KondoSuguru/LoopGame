@@ -41,7 +41,7 @@ namespace LoopGame.Scene
             r.LoadContent("resetButtonDown");
             r.LoadContent("undoButton");
             r.LoadContent("undoButtonDown");
-            GameDevice.Instance().GetSound().LoadBGM("bgm_maoudamashii_healing16");
+            GameDevice.Instance().GetSound().LoadBGM("tekuteku arukou");
 
             mStarName = new List<string>() {
                 "goldStar", "goldStar", "goldStar",
@@ -57,9 +57,9 @@ namespace LoopGame.Scene
             mAnim = new Animation("kiparupa_anm", new Rectangle(0, 0, 64, 64), 0.25f);
             mMenuCursor = new List<Vector2>()
             {
-                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 - 100),
-                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2),
-                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 + 100),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 132),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 - 32),
+                new Vector2(Screen.WIDTH/2 + 160, Screen.HEIGHT / 2 + 68),
             };
         }
 
@@ -93,6 +93,9 @@ namespace LoopGame.Scene
             if (mIsMenu)
             {
                 r.DrawTexture("menuBG", Vector2.Zero);
+                GameDevice.Instance().GetRenderer().DrawTexture("titlemodoru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 140));
+                GameDevice.Instance().GetRenderer().DrawTexture("selectmodoru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 - 40));
+                GameDevice.Instance().GetRenderer().DrawTexture("gameowaru", new Vector2(Screen.WIDTH / 2 - 192, Screen.HEIGHT / 2 + 60));
                 mAnim.Draw(mMenuCursor[mMenuNum]);
             }
 
@@ -137,13 +140,18 @@ namespace LoopGame.Scene
         {
             mStage.Unload();
             ActorManager.Instance().Clear();
+            GameDevice.Instance().GetSound().StopBGM();
         }
 
         public void Update(GameTime gameTime)
         {
-            GameDevice.Instance().GetSound().PlayBGM("bgm_maoudamashii_healing16");
+            GameDevice.Instance().GetSound().PlayBGM("tekuteku arukou");
             if (Input.GetKeyTrigger(Keys.Escape))
             {
+                if (mIsClear)
+                {
+                    return;
+                }
                 mIsMenu = !mIsMenu;
                 mMenuNum = 0;
             }
@@ -199,7 +207,7 @@ namespace LoopGame.Scene
                 {
                     mMenuNum++;
                 }
-                mMenuNum = Math.Abs(mMenuNum) % 3;
+                mMenuNum = (mMenuNum + 3) % 3;
 
                 if (Input.GetKeyTrigger(Keys.Space))
                 {

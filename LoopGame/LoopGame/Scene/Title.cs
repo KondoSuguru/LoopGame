@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using LoopGame.Device;
 
 namespace LoopGame.Scene {
-    class Title : IScene {
+    class Title : SceneBase, IScene {
         private bool mIsEndFlag;
         private List<Vector2> mPositions;
         private enum Mode {
@@ -48,6 +48,7 @@ namespace LoopGame.Scene {
         }
 
         public void Initialize() {
+            mStageNo = 1;
             mIsEndFlag = false;
             mMode = Mode.Next;
         }
