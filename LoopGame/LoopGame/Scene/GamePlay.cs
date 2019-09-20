@@ -23,6 +23,11 @@ namespace LoopGame.Scene
         List<Vector2> mStarPosition;
         int mA;
         int mRecord;
+        private bool mIsMenu;
+        private List<Vector2> mMenuCursor;
+        private int mMenuNum;
+        private Scene mNextScene;
+        private Animation mAnim;
 
         public GamePlay()
         {
@@ -47,6 +52,14 @@ namespace LoopGame.Scene
             mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 128, 350)); //左
             mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2, 350)); //右
             mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 64, 300)); //中
+
+            mAnim = new Animation("kiparupa_anm", new Rectangle(0, 0, 64, 64), 0.25f);
+            mMenuCursor = new List<Vector2>()
+            {
+                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 - 100),
+                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2),
+                new Vector2(Screen.WIDTH/2, Screen.HEIGHT / 2 + 100),
+            };
         }
 
         public void Draw()
@@ -55,23 +68,32 @@ namespace LoopGame.Scene
             GameDevice.Instance().GetRenderer().DrawTexture("floor", Vector2.Zero);
             ActorManager.Instance().Draw();
 
-            r.DrawTexture("stateFrame", new Vector2(Screen.PLAY_WIDTH, 0));
-            if (Input.GetKeyState(Keys.X)){
-                r.DrawTexture("resetButtonDown", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
-            }
-            else {
-                r.DrawTexture("resetButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
-            }
-            if (Input.GetKeyState(Keys.Z))
-            {
-                r.DrawTexture("undoButtonDown", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
-            }
-            else {
-                r.DrawTexture("undoButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
-            }
+            r.DrawTexture("stateFrame", new Vector2(Screen.PLAY_WIDTH, 0));         
+            r.DrawTexture("resetButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));                
+            r.DrawTexture("undoButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
+            
             ActorManager.Instance().DrawWalkCount();
             r.DrawNumber("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2, GridSize.GRID_SIZE), mStageNo);
             r.DrawNumber("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 1f, GridSize.GRID_SIZE * 5), mRecord);
+
+            if (!mIsMenu)
+            {
+                if (Input.GetKeyState(Keys.X))
+                {
+                    r.DrawTexture("resetButtonDown", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
+                }
+                if (Input.GetKeyState(Keys.Z))
+                {
+                    r.DrawTexture("undoButtonDown", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
+                }
+            }
+
+
+            if (mIsMenu)
+            {
+                r.DrawTexture("menuBG", Vector2.Zero);
+                mAnim.Draw(mMenuCursor[mMenuNum]);
+            }
 
             if (!mIsClear)
             {
@@ -95,6 +117,9 @@ namespace LoopGame.Scene
             mRankA = rankList[0];
             mRankB = rankList[1];
             mRecord = rankList[2];
+
+            mIsMenu = false;
+            mMenuNum = 0;
         }
 
         public bool IsEnd()
@@ -104,7 +129,7 @@ namespace LoopGame.Scene
 
         public Scene Next()
         {
-            return Scene.StageSelect;
+            return mNextScene;
         }
 
         public void Shutdown()
@@ -115,31 +140,75 @@ namespace LoopGame.Scene
 
         public void Update(GameTime gameTime)
         {
-            if (Input.GetKeyTrigger(Keys.Space)) {
-                mIsEndFlag = true;
+            if (Input.GetKeyTrigger(Keys.Escape))
+            {
+                mIsMenu = !mIsMenu;
+                mMenuNum = 0;
             }
 
-            if (mIsClear)
+            if (!mIsMenu)
             {
-                return;
-            }
+                if (mIsClear)
+                {
+                    return;
+                }
 
-            if (Input.GetKeyUp(Keys.X)) {
-                mStage.Reset();
+                if (Input.GetKeyUp(Keys.X))
+                {
+                    mStage.Reset();
+                }
+                if (ActorManager.Instance().IsClear())
+                {
+                    mIsClear = true;
+                    if (ActorMove.mWalkCount <= mRankA)
+                    {
+                        mA = 0;
+                    }
+                    else if (mRankA < ActorMove.mWalkCount && ActorMove.mWalkCount <= mRankB)
+                    {
+                        mA = 3;
+                    }
+                    else
+                    {
+                        mA = 6;
+                    }
+                }
+                ActorManager.Instance().Update(gameTime);
             }
-            if(ActorManager.Instance().IsClear())
+            else
             {
-                mIsClear = true;
-                if (ActorMove.mWalkCount <= mRankA) {
-                    mA = 0;
-                } else if (mRankA < ActorMove.mWalkCount && ActorMove.mWalkCount <= mRankB) {
-                    mA = 3;
-                } else {
-                    mA = 6;
+                mAnim.Update(gameTime);
+                mAnim.SetMotion(0);
+
+                if (Input.GetKeyTrigger(Keys.Up))
+                {
+                    mMenuNum--;
+                }
+                if (Input.GetKeyTrigger(Keys.Down))
+                {
+                    mMenuNum++;
+                }
+                mMenuNum = Math.Abs(mMenuNum) % 3;
+
+                if (Input.GetKeyTrigger(Keys.Space))
+                {
+                    if (mMenuNum == 0)
+                    {
+                        mNextScene = Scene.Title;
+                        mIsEndFlag = true;
+                    }
+                    if (mMenuNum == 1)
+                    {
+                        mNextScene = Scene.StageSelect;
+                        mIsEndFlag = true;
+                    }
+                    if(mMenuNum == 2)
+                    {
+                        Game1.mIsEndGame = true;
+                    }
                 }
             }
 
-            ActorManager.Instance().Update(gameTime);
         }
 
         public Stage GetStage() {
