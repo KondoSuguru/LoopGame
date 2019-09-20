@@ -41,6 +41,7 @@ namespace LoopGame.Scene
             r.LoadContent("resetButtonDown");
             r.LoadContent("undoButton");
             r.LoadContent("undoButtonDown");
+            r.LoadContent("clearBG");
 
             mStarName = new List<string>() {
                 "goldStar", "goldStar", "goldStar",
@@ -49,9 +50,9 @@ namespace LoopGame.Scene
             };
 
             mStarPosition = new List<Vector2>();
-            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 128, 350)); //左
-            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2, 350)); //右
-            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 64, 300)); //中
+            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 128, 250)); //左
+            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2, 250)); //右
+            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 64, 200)); //中
 
             mAnim = new Animation("kiparupa_anm", new Rectangle(0, 0, 64, 64), 0.25f);
             mMenuCursor = new List<Vector2>()
@@ -76,7 +77,7 @@ namespace LoopGame.Scene
             r.DrawNumberRightEdgeAlignment("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2, GridSize.GRID_SIZE), mStageNo);
             r.DrawNumberRightEdgeAlignment("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2f, GridSize.GRID_SIZE * 5), mRecord);
 
-            if (!mIsMenu)
+            if (!mIsMenu && !mIsClear)
             {
                 if (Input.GetKeyState(Keys.X))
                 {
@@ -103,10 +104,13 @@ namespace LoopGame.Scene
                 return;
             }
 
-            r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2 - 135, Screen.HEIGHT / 2 - 135));
+            r.DrawTexture("clearBG", Vector2.Zero);
+            r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2 - 135, Screen.HEIGHT / 2 - 180));
             for (int i = 0; i < mStarPosition.Count; i++) {
                 r.DrawTexture(mStarName[i + mA], mStarPosition[i]);
             }
+            r.DrawTexture("selectmodoru", new Vector2(Screen.PLAY_WIDTH / 2 - 192, Screen.HEIGHT - 180));
+            mAnim.Draw(new Vector2(Screen.PLAY_WIDTH / 2 + 160, Screen.HEIGHT - 170));
         }
 
         public void Initialize()
@@ -157,6 +161,8 @@ namespace LoopGame.Scene
             {
                 if (mIsClear)
                 {
+                    mAnim.Update(gameTime);
+                    mAnim.SetMotion(0);
                     if (Input.GetKeyTrigger(Keys.Space))
                     {
                         mNextScene = Scene.StageSelect;
