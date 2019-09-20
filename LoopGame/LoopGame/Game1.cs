@@ -15,6 +15,7 @@ namespace LoopGame
         private GraphicsDeviceManager mGraphicsDeviceManager;//グラフィックスデバイスを管理するオブジェクト
         private SpriteBatch mSpriteBatch;//画像をスクリーン上に描画するためのオブジェクト
         private SceneManager mSceneManager;
+        public static bool mIsEndGame;
 
         public Game1()
         {
@@ -27,6 +28,8 @@ namespace LoopGame
             // Screenクラスの値で画面サイズを設定
             mGraphicsDeviceManager.PreferredBackBufferWidth = Screen.WIDTH;
             mGraphicsDeviceManager.PreferredBackBufferHeight = Screen.HEIGHT;
+
+            mIsEndGame = false;
         }
 
         protected override void Initialize()
@@ -55,10 +58,7 @@ namespace LoopGame
 
         protected override void Update(GameTime gameTime)
         {
-            // ゲーム終了処理（ゲームパッドのBackボタンかキーボードのエスケープボタンが押されたら終了）
-            if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) ||
-                 (Keyboard.GetState().IsKeyDown(Keys.Escape)))
-            {
+            if (mIsEndGame) {
                 Exit();
             }
 
