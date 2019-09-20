@@ -74,7 +74,7 @@ namespace LoopGame.Scene
             
             ActorManager.Instance().DrawWalkCount();
             r.DrawNumber("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2, GridSize.GRID_SIZE), mStageNo);
-            r.DrawNumber("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 1f, GridSize.GRID_SIZE * 5), mRecord);
+            r.DrawNumberRightEdgeAlignment("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2f, GridSize.GRID_SIZE * 5), mRecord);
 
             if (!mIsMenu)
             {
@@ -206,6 +206,10 @@ namespace LoopGame.Scene
                     {
                         Game1.mIsEndGame = true;
                     }
+                }
+
+                if (ActorMove.mWalkCount < mRecord) {
+                    FileManager.WriteRank("./Content/data/rankData.txt", mStageNo, mRecord);
                 }
             }
 

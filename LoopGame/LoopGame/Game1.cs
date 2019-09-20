@@ -17,7 +17,6 @@ namespace LoopGame
         private SceneManager mSceneManager;
         public static bool mIsEndGame;
 
-
         public Game1()
         {
             //グラフィックスデバイス管理者の実体生成

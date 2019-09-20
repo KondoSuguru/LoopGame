@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using LoopGame.Actor;
 
 namespace LoopGame.Device {
     class FileManager {
@@ -12,7 +13,8 @@ namespace LoopGame.Device {
                 string s;
                 string sn = "Stage" + stageNum.ToString();
                 List<int> data = new List<int>();
-                while ((s = sr.ReadLine()) != null/* && s.Contains(sn)*/) {
+                while (!sr.EndOfStream) {
+                    s = sr.ReadLine();
                     if (!s.Contains(sn)) {
                         continue;
                     }
@@ -25,6 +27,21 @@ namespace LoopGame.Device {
 
                 return data;
             }
+        }
+
+        public static void WriteRank(string filename, int stageNum, int currentRecord) {
+            var read = new StringBuilder();
+            var strArray = File.ReadAllLines(filename, Encoding.UTF8);
+
+            for (int i = 0; i < strArray.GetLength(0); i++) {
+                if (i == stageNum - 1) {
+                    read.AppendLine(strArray[i].Replace(currentRecord.ToString(), ActorMove.mWalkCount.ToString()));
+                } else {
+                    read.AppendLine(strArray[i]);
+                }
+            }
+
+            File.WriteAllText(filename, read.ToString());
         }
     }
 }
