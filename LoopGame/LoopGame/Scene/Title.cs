@@ -31,11 +31,15 @@ namespace LoopGame.Scene {
 
             GameDevice.Instance().GetRenderer().LoadContent("TITLE");
             GameDevice.Instance().GetRenderer().LoadContent("boss_LEFT");
+            GameDevice.Instance().GetRenderer().LoadContent("titleStart");
+            GameDevice.Instance().GetRenderer().LoadContent("titleEnd");
         }
 
         public void Draw() {
             var r = GameDevice.Instance().GetRenderer();
-            r.DrawTexture("TITLE", new Vector2(Screen.WIDTH / 2 - 352, Screen.HEIGHT / 2 - 150));
+            r.DrawTexture("TITLE", new Vector2(Screen.WIDTH / 2 - 352, Screen.HEIGHT / 2 - 200));
+            r.DrawTexture("titleStart", new Vector2(300, Screen.HEIGHT - 150));
+            r.DrawTexture("titleEnd", new Vector2(Screen.WIDTH - 492, Screen.HEIGHT - 150));
 
             if (mMode == Mode.Next) {
                 r.DrawTexture("boss_LEFT", mPositions[0], Color.Red);
