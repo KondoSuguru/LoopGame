@@ -77,7 +77,7 @@ namespace LoopGame.Device {
         /// </summary>
         /// <param name="name">アセット名</param>
         /// <param name="filepath">ファイルパス</param>
-        public void LoadBGM(string name, string filepath = "./") {
+        public void LoadBGM(string name, string filepath = "./Sound/") {
             // すでに登録されているか？
             if (bgms.ContainsKey(name)) {
                 return;
@@ -180,7 +180,7 @@ namespace LoopGame.Device {
         /// </summary>
         /// <param name="name">アセット名</param>
         /// <param name="filepath">ファイルパス</param>
-        public void LoadSE(string name, string filepath = "./") {
+        public void LoadSE(string name, string filepath = "./Sound/") {
             // すでに登録されているか？
             if (soundEffects.ContainsKey(name)) {
                 return;

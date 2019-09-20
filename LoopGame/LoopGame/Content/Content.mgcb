@@ -316,3 +316,9 @@
 /processorParam:TextureFormat=Color
 /build:Textures/menuBG.png
 
+#begin Sound/water-shed1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/water-shed1.wav
+
