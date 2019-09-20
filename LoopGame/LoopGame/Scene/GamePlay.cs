@@ -68,12 +68,12 @@ namespace LoopGame.Scene
             GameDevice.Instance().GetRenderer().DrawTexture("floor", Vector2.Zero);
             ActorManager.Instance().Draw();
 
-            r.DrawTexture("stateFrame", new Vector2(Screen.PLAY_WIDTH, 0));         
-            r.DrawTexture("resetButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));                
+            r.DrawTexture("stateFrame", new Vector2(Screen.PLAY_WIDTH, 0));
+            r.DrawTexture("resetButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
             r.DrawTexture("undoButton", new Vector2(Screen.PLAY_WIDTH, GridSize.GRID_SIZE * 6));
             
             ActorManager.Instance().DrawWalkCount();
-            r.DrawNumber("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2, GridSize.GRID_SIZE), mStageNo);
+            r.DrawNumberRightEdgeAlignment("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2, GridSize.GRID_SIZE), mStageNo);
             r.DrawNumberRightEdgeAlignment("number", new Vector2(Screen.PLAY_WIDTH + GridSize.GRID_SIZE * 2f, GridSize.GRID_SIZE * 5), mRecord);
 
             if (!mIsMenu)

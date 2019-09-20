@@ -41,6 +41,7 @@ namespace LoopGame.Actor
             mIsBoxStageOrOtherBoxCollide = false;
             mWalkCount = 0;
             mFootprint = new List<Vector2>();
+            GameDevice.Instance().GetSound().LoadSE("water-shed1");
         }
 
         public void Move(ref Vector2 pos)
@@ -137,6 +138,8 @@ namespace LoopGame.Actor
             }
             mSpeed = (mMovePoint.X - pos.X) / (GridSize.GRID_SIZE /4);
 
+            GameDevice.Instance().GetSound().PlaySE("water-shed1");
+
             return true;
         }
 
@@ -163,6 +166,8 @@ namespace LoopGame.Actor
                 pos.X = mMovePoint.X - GridSize.GRID_SIZE;
             }
             mSpeed = (mMovePoint.X - pos.X) / (GridSize.GRID_SIZE / 4);
+
+            GameDevice.Instance().GetSound().PlaySE("water-shed1");
 
             return true;
         }
@@ -192,6 +197,8 @@ namespace LoopGame.Actor
             }
             mSpeed = (mMovePoint.Y - pos.Y) / (GridSize.GRID_SIZE / 4);
 
+            GameDevice.Instance().GetSound().PlaySE("water-shed1");
+
             return true;
         }
 
@@ -218,6 +225,8 @@ namespace LoopGame.Actor
                 pos.Y = mMovePoint.Y - GridSize.GRID_SIZE;
             }
             mSpeed = (mMovePoint.Y - pos.Y) / (GridSize.GRID_SIZE / 4);
+
+            GameDevice.Instance().GetSound().PlaySE("water-shed1");
 
             return true;
         }
@@ -256,6 +265,7 @@ namespace LoopGame.Actor
             }
             mState = MoveState.NONE;
             mHitBox = null;
+            GameDevice.Instance().GetSound().StoppedSE();
         }
 
         private bool MoveOption(Vector2 inVec) {

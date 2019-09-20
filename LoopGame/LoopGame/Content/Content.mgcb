@@ -316,6 +316,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/menuBG.png
 
+#begin Textures/titleEnd.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/titleEnd.png
+
 #begin Textures/titleStart.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -328,17 +340,11 @@
 /processorParam:TextureFormat=Color
 /build:Textures/titleStart.png
 
-#begin Textures/titleEnd.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/titleEnd.png
+#begin Sound/water-shed1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/water-shed1.wav
 
 #begin Textures/selectmodoru.png
 /importer:TextureImporter

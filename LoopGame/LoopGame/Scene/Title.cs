@@ -20,19 +20,22 @@ namespace LoopGame.Scene {
             ModeCount
         }
         Mode mMode;
+        Animation mAnim;
 
         public Title() {
             mIsEndFlag = false;
             mPositions = new List<Vector2>() {
-                new Vector2(100f, 500f),
-                new Vector2(600f, 500f)
+                new Vector2(370f, 360f),
+                new Vector2(600f, 360f)
             };
             mMode = Mode.Next;
+            mAnim = new Animation("kiparupa_anm", new Rectangle(0, GridSize.GRID_SIZE, GridSize.GRID_SIZE, GridSize.GRID_SIZE), 0.25f);
 
-            GameDevice.Instance().GetRenderer().LoadContent("TITLE");
-            GameDevice.Instance().GetRenderer().LoadContent("boss_LEFT");
-            GameDevice.Instance().GetRenderer().LoadContent("titleStart");
-            GameDevice.Instance().GetRenderer().LoadContent("titleEnd");
+            var r = GameDevice.Instance().GetRenderer();
+            r.LoadContent("kiparupa_anm");
+            r.LoadContent("TITLE");
+            r.LoadContent("titleStart");
+            r.LoadContent("titleEnd");
         }
 
         public void Draw() {
@@ -41,15 +44,7 @@ namespace LoopGame.Scene {
             r.DrawTexture("titleStart", new Vector2(300, Screen.HEIGHT - 150));
             r.DrawTexture("titleEnd", new Vector2(Screen.WIDTH - 492, Screen.HEIGHT - 150));
 
-            if (mMode == Mode.Next) {
-                r.DrawTexture("boss_LEFT", mPositions[0], Color.Red);
-                r.DrawTexture("boss_LEFT", mPositions[1], Color.White);
-            }
-
-            if (mMode == Mode.End) {
-                r.DrawTexture("boss_LEFT", mPositions[1], Color.Red);
-                r.DrawTexture("boss_LEFT", mPositions[0], Color.White);
-            }
+            mAnim.Draw(mPositions[(int)mMode]);
         }
 
         public void Initialize() {
@@ -84,6 +79,13 @@ namespace LoopGame.Scene {
                 } else {
                     mMode = Mode.Next;
                 }
+            }
+
+            mAnim.Update(gameTime);
+            if (mMode == Mode.Next) {
+                mAnim.SetMotion(2);
+            } else if (mMode == Mode.End) {
+                mAnim.SetMotion(0);
             }
         }
     }
