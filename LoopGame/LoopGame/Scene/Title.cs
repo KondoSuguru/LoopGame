@@ -66,7 +66,7 @@ namespace LoopGame.Scene {
         }
 
         public void Initialize() {
-            mStageNo = 1;
+            mStageNo = 0;
             mIsEndFlag = false;
             mMode = Mode.Next;
         }

@@ -52,14 +52,14 @@ namespace LoopGame.Scene
 
             mStarName = new List<string>() {
                 "goldStar", "goldStar", "goldStar",
-                "goldStar", "grayStar", "goldStar",
+                "goldStar", "goldStar", "grayStar",
                 "goldStar", "grayStar", "grayStar"
             };
 
             mStarPosition = new List<Vector2>();
-            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 128, 250)); //左
-            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2, 250)); //右
-            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 64, 200)); //中
+            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 192, 225)); //左
+            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 - 64, 225)); //中
+            mStarPosition.Add(new Vector2(Screen.PLAY_WIDTH / 2 + 64, 225)); //右
 
             mAnim = new Animation("kiparupa_anm", new Rectangle(0, 0, 64, 64), 0.25f);
             mMenuCursor = new List<Vector2>()
@@ -125,7 +125,7 @@ namespace LoopGame.Scene
             }
 
             r.DrawTexture("clearBG", Vector2.Zero);
-            r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2 - 135, Screen.HEIGHT / 2 - 180));
+            r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2 - 256, Screen.HEIGHT / 2 - 200));
             for (int i = 0; i < mStarPosition.Count; i++) {
                 r.DrawTexture(mStarName[i + mA], mStarPosition[i]);
             }
@@ -170,7 +170,7 @@ namespace LoopGame.Scene
         {
             var s = GameDevice.Instance().GetSound();
             s.PlayBGM("tekuteku_arukou");
-            if (Input.GetKeyTrigger(Keys.Escape))
+            if (Input.GetKeyTrigger(Keys.Escape)|| Input.GetKeyTrigger(Keys.C))
             {
                 if (mIsClear)
                 {
@@ -189,6 +189,7 @@ namespace LoopGame.Scene
                     mAnim.SetMotion(0);
                     if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                     {
+                        mStageNo--;
                         mNextScene = Scene.StageSelect;
                         mIsEndFlag = true;
                         s.PlaySE("stage_choice");

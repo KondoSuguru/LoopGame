@@ -87,7 +87,6 @@ namespace LoopGame.Scene {
         }
 
         public void Initialize() {
-            mStageNo = 0;
             mIsEndFlag = false;
             mIsMenu = false;
             var s = GameDevice.Instance().GetSound();
@@ -113,7 +112,7 @@ namespace LoopGame.Scene {
             mAnim.Update(gameTime);
             var s = GameDevice.Instance().GetSound();
 
-            if (Input.GetKeyTrigger(Keys.Escape))
+            if (Input.GetKeyTrigger(Keys.Escape) || Input.GetKeyTrigger(Keys.C))
             {
                 mIsMenu = !mIsMenu;
                 mMenuNum = 0;
