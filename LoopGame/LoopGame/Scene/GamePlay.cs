@@ -172,6 +172,10 @@ namespace LoopGame.Scene
                     {
                         mA = 6;
                     }
+
+                    if (ActorMove.mWalkCount < mRecord) {
+                        FileManager.WriteRank("./Content/data/rankData.txt", mStageNo, mRecord);
+                    }
                 }
                 ActorManager.Instance().Update(gameTime);
             }
@@ -207,12 +211,7 @@ namespace LoopGame.Scene
                         Game1.mIsEndGame = true;
                     }
                 }
-
-                if (ActorMove.mWalkCount < mRecord) {
-                    FileManager.WriteRank("./Content/data/rankData.txt", mStageNo, mRecord);
-                }
             }
-
         }
 
         public Stage GetStage() {
