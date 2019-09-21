@@ -9,6 +9,7 @@ namespace LoopGame.Scene
     enum Scene
     {
         Title,
+        Rule,
         StageSelect,
         GamePlay,
         Ending,

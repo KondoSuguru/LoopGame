@@ -38,6 +38,7 @@ namespace LoopGame
 
             mSceneManager = new SceneManager();
             mSceneManager.Add(Scene.Scene.Title, new Title());
+            mSceneManager.Add(Scene.Scene.Rule, new RuleScene());
             mSceneManager.Add(Scene.Scene.StageSelect, new StageSelect());
             mSceneManager.Add(Scene.Scene.GamePlay, new GamePlay());
             mSceneManager.Add(Scene.Scene.Ending, new Ending());

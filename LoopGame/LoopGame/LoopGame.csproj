@@ -62,6 +62,7 @@
     <Compile Include="Scene\Ending.cs" />
     <Compile Include="Scene\GamePlay.cs" />
     <Compile Include="Scene\IScene.cs" />
+    <Compile Include="Scene\RuleScene.cs" />
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Scene\SceneBase.cs" />
     <Compile Include="Scene\SceneManager.cs" />
