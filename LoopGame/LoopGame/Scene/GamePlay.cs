@@ -221,6 +221,7 @@ namespace LoopGame.Scene
 
                     if (ActorMove.mWalkCount < mRecord) {
                         FileManager.WriteRank("./Content/data/rankData.txt", mStageNo, mRecord);
+                        mRecord = ActorMove.mWalkCount;
                     }
                 }
                 ActorManager.Instance().Update(gameTime);
