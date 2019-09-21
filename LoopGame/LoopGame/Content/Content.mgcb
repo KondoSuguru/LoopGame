@@ -61,6 +61,12 @@
 #begin csv/TestStage08.xlsx
 /copy:csv/TestStage08.xlsx
 
+#begin csv/TestStage09.csv
+/copy:csv/TestStage09.csv
+
+#begin csv/TestStage09.xlsx
+/copy:csv/TestStage09.xlsx
+
 #begin data/rankData.txt
 /copy:data/rankData.txt
 
@@ -111,6 +117,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/undo.wav
+
+#begin Sound/water_shed1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/water_shed1.wav
 
 #begin Textures/boss_LEFT.png
 /importer:TextureImporter
@@ -171,6 +183,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/floor.png
+
+#begin Textures/gamemenuframe.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/gamemenuframe.png
 
 #begin Textures/gameowaru.png
 /importer:TextureImporter
@@ -327,6 +351,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/resetButtonDown.png
+
+#begin Textures/selectmenuframe.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/selectmenuframe.png
 
 #begin Textures/selectmodoru.png
 /importer:TextureImporter
@@ -519,34 +555,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/wall.png
-
-#begin Sound/water_shed1.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sound/water_shed1.wav
-
-#begin Textures/gamemenuframe.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/gamemenuframe.png
-
-#begin Textures/selectmenuframe.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/selectmenuframe.png
 
