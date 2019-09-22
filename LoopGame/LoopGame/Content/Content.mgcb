@@ -13,60 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin csv/TestStage01.csv
-/copy:csv/TestStage01.csv
-
-#begin csv/TestStage01.xlsx
-/copy:csv/TestStage01.xlsx
-
-#begin csv/TestStage02.csv
-/copy:csv/TestStage02.csv
-
-#begin csv/TestStage02.xlsx
-/copy:csv/TestStage02.xlsx
-
-#begin csv/TestStage03.csv
-/copy:csv/TestStage03.csv
-
-#begin csv/TestStage03.xlsx
-/copy:csv/TestStage03.xlsx
-
-#begin csv/TestStage04.csv
-/copy:csv/TestStage04.csv
-
-#begin csv/TestStage04.xlsx
-/copy:csv/TestStage04.xlsx
-
-#begin csv/TestStage05.csv
-/copy:csv/TestStage05.csv
-
-#begin csv/TestStage05.xlsx
-/copy:csv/TestStage05.xlsx
-
-#begin csv/TestStage06.csv
-/copy:csv/TestStage06.csv
-
-#begin csv/TestStage06.xlsx
-/copy:csv/TestStage06.xlsx
-
-#begin csv/TestStage07.csv
-/copy:csv/TestStage07.csv
-
-#begin csv/TestStage07.xlsx
-/copy:csv/TestStage07.xlsx
-
-#begin csv/TestStage08.csv
-/copy:csv/TestStage08.csv
-
-#begin csv/TestStage08.xlsx
-/copy:csv/TestStage08.xlsx
-
-#begin csv/TestStage09.csv
-/copy:csv/TestStage09.csv
-
-#begin csv/TestStage09.xlsx
-/copy:csv/TestStage09.xlsx
-
 #begin data/rankData.txt
 /copy:data/rankData.txt
 
@@ -591,4 +537,58 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/fade.png
+
+#begin csv/Stage01.csv
+/copy:csv/Stage01.csv
+
+#begin csv/Stage01.xlsx
+/copy:csv/Stage01.xlsx
+
+#begin csv/Stage02.csv
+/copy:csv/Stage02.csv
+
+#begin csv/Stage02.xlsx
+/copy:csv/Stage02.xlsx
+
+#begin csv/Stage03.csv
+/copy:csv/Stage03.csv
+
+#begin csv/Stage03.xlsx
+/copy:csv/Stage03.xlsx
+
+#begin csv/Stage04.csv
+/copy:csv/Stage04.csv
+
+#begin csv/Stage04.xlsx
+/copy:csv/Stage04.xlsx
+
+#begin csv/Stage05.csv
+/copy:csv/Stage05.csv
+
+#begin csv/Stage05.xlsx
+/copy:csv/Stage05.xlsx
+
+#begin csv/Stage06.csv
+/copy:csv/Stage06.csv
+
+#begin csv/Stage06.xlsx
+/copy:csv/Stage06.xlsx
+
+#begin csv/Stage07.csv
+/copy:csv/Stage07.csv
+
+#begin csv/Stage07.xlsx
+/copy:csv/Stage07.xlsx
+
+#begin csv/Stage08.csv
+/copy:csv/Stage08.csv
+
+#begin csv/Stage08.xlsx
+/copy:csv/Stage08.xlsx
+
+#begin csv/Stage09.csv
+/copy:csv/Stage09.csv
+
+#begin csv/Stage09.xlsx
+/copy:csv/Stage09.xlsx
 
