@@ -10,7 +10,6 @@ using LoopGame.Device;
 
 namespace LoopGame.Scene {
     class StageSelect : SceneBase, IScene {
-        private bool mIsEndFlag;
         private List<Vector2> mCursorPosition;
         private List<Vector2> mMenuCursor;
         private readonly int mStageCount = 9;
@@ -21,12 +20,6 @@ namespace LoopGame.Scene {
 
         public StageSelect() {
             var r = GameDevice.Instance().GetRenderer();
-            r.LoadContent("STAGE_SELECT");
-            r.LoadContent("kiparupa_anm");
-            r.LoadContent("menuBG");
-            r.LoadContent("titlemodoru");
-            r.LoadContent("selectmodoru");
-            r.LoadContent("gameowaru");
             r.LoadContent("STAGE_SELECT");
             r.LoadContent("kiparupa_anm");
             r.LoadContent("menuBG");
@@ -86,6 +79,8 @@ namespace LoopGame.Scene {
                 }
                 mAnim.Draw(mMenuCursor[mMenuNum]);
             }
+
+            FadeDraw();
         }
 
         public void Initialize() {
@@ -95,6 +90,7 @@ namespace LoopGame.Scene {
             if (s.IsStoppedBGM()) {
                 s.PlayBGM("titleBGM");
             }
+            FadeInit();
         }
 
         public bool IsEnd() {
@@ -102,6 +98,7 @@ namespace LoopGame.Scene {
         }
 
         public Scene Next() {
+            mStageNo++;
             return mNextScene;
         }
 
@@ -113,6 +110,10 @@ namespace LoopGame.Scene {
         {
             mAnim.Update(gameTime);
             var s = GameDevice.Instance().GetSound();
+
+            FadeUpdate(gameTime);
+            if (mFadeState == FadeState.OUT)
+                return;
 
             if (Input.GetKeyTrigger(Keys.Q))
             {
@@ -149,9 +150,9 @@ namespace LoopGame.Scene {
 
                 if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                 {
-                    mStageNo++;
+                    
                     mNextScene = Scene.GamePlay;
-                    mIsEndFlag = true;
+                    SetFadeState(FadeState.OUT);
                     s.PlaySE("stage_choice");
                 }
             }
@@ -177,7 +178,7 @@ namespace LoopGame.Scene {
                     {
                         case 0:
                             mNextScene = Scene.Title;
-                            mIsEndFlag = true;
+                            SetFadeState(FadeState.OUT);
                             break;
                         case 1:
                             mIsMenu = false;

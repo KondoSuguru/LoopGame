@@ -11,7 +11,7 @@ using LoopGame.Device;
 
 namespace LoopGame.Scene {
     class Title : SceneBase, IScene {
-        private bool mIsEndFlag;
+        //private bool mIsEndFlag;
         private List<Vector2> mPositions;
         private enum Mode {
             Next,
@@ -40,6 +40,7 @@ namespace LoopGame.Scene {
             r.LoadContent("titleEndDark");
             r.LoadContent("titleBG");
             r.LoadContent("floor");
+            r.LoadContent("fade");
             var s = GameDevice.Instance().GetSound();
             s.LoadSE("choice");
             s.LoadSE("stage_choice");
@@ -63,12 +64,15 @@ namespace LoopGame.Scene {
                 r.DrawTexture("titleEnd", new Vector2(Screen.WIDTH - 492, Screen.HEIGHT - 150));
             }
             mAnim.Draw(mPositions[(int)mMode]);
+
+            FadeDraw();
         }
 
         public void Initialize() {
             mStageNo = 0;
             mIsEndFlag = false;
             mMode = Mode.Next;
+            FadeInit();
         }
 
         public bool IsEnd() {
@@ -85,9 +89,22 @@ namespace LoopGame.Scene {
         public void Update(GameTime gameTime) {
             var s = GameDevice.Instance().GetSound();
             s.PlayBGM("titleBGM");
+
+            mAnim.Update(gameTime);
+            if (mMode == Mode.Next) {
+                mAnim.SetMotion(2);
+            } else if (mMode == Mode.End) {
+                mAnim.SetMotion(0);
+            }
+
+            FadeUpdate(gameTime);
+            if (mFadeState == FadeState.OUT)
+                return;
+
             if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter)) {
                 if (mMode == Mode.Next) {
-                    mIsEndFlag = true;
+                    //mIsEndFlag = true;
+                    SetFadeState(FadeState.OUT);
                 } else if (mMode == Mode.End) {
                     Game1.mIsEndGame = true;
                 }
@@ -100,16 +117,9 @@ namespace LoopGame.Scene {
                 } else {
                     mMode = Mode.Next;
                 }
-
                 s.PlaySE("cursor");
             }
 
-            mAnim.Update(gameTime);
-            if (mMode == Mode.Next) {
-                mAnim.SetMotion(2);
-            } else if (mMode == Mode.End) {
-                mAnim.SetMotion(0);
-            }
         }
     }
 }

@@ -15,7 +15,6 @@ namespace LoopGame.Scene
     class GamePlay : SceneBase, IScene, IGameMediator
     {
         private Stage mStage;
-        private bool mIsEndFlag;
         private bool mIsClear;
         private int mRankA;
         private int mRankB;
@@ -120,18 +119,19 @@ namespace LoopGame.Scene
                 mAnim.Draw(mMenuCursor[mMenuNum]);
             }
 
-            if (!mIsClear)
+            if (mIsClear)
             {
-                return;
+                r.DrawTexture("clearBG", Vector2.Zero);
+                r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2 - 256, Screen.HEIGHT / 2 - 200));
+                for (int i = 0; i < mStarPosition.Count; i++)
+                {
+                    r.DrawTexture(mStarName[i + mA], mStarPosition[i]);
+                }
+                r.DrawTexture("selectmodoru", new Vector2(Screen.PLAY_WIDTH / 2 - 192, Screen.HEIGHT - 180));
+                mAnim.Draw(new Vector2(Screen.PLAY_WIDTH / 2 + 160, Screen.HEIGHT - 170));
             }
 
-            r.DrawTexture("clearBG", Vector2.Zero);
-            r.DrawTexture("CLEAR", new Vector2(Screen.PLAY_WIDTH / 2 - 256, Screen.HEIGHT / 2 - 200));
-            for (int i = 0; i < mStarPosition.Count; i++) {
-                r.DrawTexture(mStarName[i + mA], mStarPosition[i]);
-            }
-            r.DrawTexture("selectmodoru", new Vector2(Screen.PLAY_WIDTH / 2 - 192, Screen.HEIGHT - 180));
-            mAnim.Draw(new Vector2(Screen.PLAY_WIDTH / 2 + 160, Screen.HEIGHT - 170));
+            FadeDraw();
         }
 
         public void Initialize()
@@ -148,6 +148,7 @@ namespace LoopGame.Scene
 
             mIsMenu = false;
             mMenuNum = 0;
+            FadeInit();
         }
 
         public bool IsEnd()
@@ -157,6 +158,9 @@ namespace LoopGame.Scene
 
         public Scene Next()
         {
+            if(mIsClear || mNextScene == Scene.StageSelect)
+                mStageNo--;
+
             return mNextScene;
         }
 
@@ -171,6 +175,11 @@ namespace LoopGame.Scene
         {
             var s = GameDevice.Instance().GetSound();
             s.PlayBGM("tekuteku_arukou");
+
+            FadeUpdate(gameTime);
+            if (mFadeState == FadeState.OUT)
+                return;
+
             if (Input.GetKeyTrigger(Keys.Q))
             {
                 if (mIsClear)
@@ -190,9 +199,9 @@ namespace LoopGame.Scene
                     mAnim.SetMotion(0);
                     if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                     {
-                        mStageNo--;
+                        
                         mNextScene = Scene.StageSelect;
-                        mIsEndFlag = true;
+                        SetFadeState(FadeState.OUT);
                         s.PlaySE("stage_choice");
                     }
                     return;
@@ -249,11 +258,10 @@ namespace LoopGame.Scene
                     {
                         case 0:
                             mNextScene = Scene.Title;
-                            mIsEndFlag = true; break;
+                            SetFadeState(FadeState.OUT); break;
                         case 1:
-                            mStageNo--;
                             mNextScene = Scene.StageSelect;
-                            mIsEndFlag = true; break;
+                            SetFadeState(FadeState.OUT); break;
                         case 2: mIsMenu = false; break;
                         case 3: Game1.mIsEndGame = true; break;
                     }
