@@ -48,6 +48,7 @@ namespace LoopGame.Scene
             s.LoadSE("choice");
             s.LoadSE("stage_choice");
             s.LoadSE("menu");
+            s.LoadSE("menu_close");
             s.LoadSE("reset");
 
             mStarName = new List<string>() {
@@ -186,9 +187,10 @@ namespace LoopGame.Scene
                 {
                     return;
                 }
+                string se = mIsMenu ? "menu_close" : "menu";
                 mIsMenu = !mIsMenu;
                 mMenuNum = 0;
-                s.PlaySE("menu");
+                s.PlaySE(se);
             }
 
             if (!mIsMenu)
@@ -254,18 +256,29 @@ namespace LoopGame.Scene
 
                 if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                 {
+                    string se = "";
                     switch (mMenuNum)
                     {
                         case 0:
                             mNextScene = Scene.Title;
-                            SetFadeState(FadeState.OUT); break;
+                            SetFadeState(FadeState.OUT);
+                            se = "stage_choice";
+                            break;
                         case 1:
                             mNextScene = Scene.StageSelect;
-                            SetFadeState(FadeState.OUT); break;
-                        case 2: mIsMenu = false; break;
-                        case 3: Game1.mIsEndGame = true; break;
+                            SetFadeState(FadeState.OUT);
+                            se = "stage_choice";
+                            break;
+                        case 2:
+                            mIsMenu = false;
+                            se = "menu_close";
+                            break;
+                        case 3:
+                            Game1.mIsEndGame = true;
+                            se = "stage_choice";
+                            break;
                     }
-                    s.PlaySE("stage_choice");
+                    s.PlaySE(se);
                 }
             }
         }

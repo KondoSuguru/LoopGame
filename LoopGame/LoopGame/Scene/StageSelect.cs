@@ -36,6 +36,7 @@ namespace LoopGame.Scene {
             s.LoadSE("stage_choice");
             s.LoadSE("cursor");
             s.LoadSE("menu");
+            s.LoadSE("menu_close");
             mStageNo = 0;
             mIsEndFlag = false;
             mIsMenu = false;
@@ -117,9 +118,10 @@ namespace LoopGame.Scene {
 
             if (Input.GetKeyTrigger(Keys.Q))
             {
+                string se = mIsMenu ? "menu_close" : "menu";
                 mIsMenu = !mIsMenu;
                 mMenuNum = 0;
-                s.PlaySE("menu");
+                s.PlaySE(se);
             }
 
             if (!mIsMenu)
@@ -174,18 +176,24 @@ namespace LoopGame.Scene {
 
                 if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                 {
+                    string se = "";
                     switch (mMenuNum)
                     {
                         case 0:
                             mNextScene = Scene.Title;
                             SetFadeState(FadeState.OUT);
+                            se = "stage_choice";
                             break;
                         case 1:
                             mIsMenu = false;
+                            se = "menu_close";
                             break;
-                        case 2: Game1.mIsEndGame = true; break;
+                        case 2:
+                            Game1.mIsEndGame = true;
+                            se = "stage_choice";
+                            break;
                     }
-                    s.PlaySE("stage_choice");
+                    s.PlaySE(se);
                 }
             }
         }

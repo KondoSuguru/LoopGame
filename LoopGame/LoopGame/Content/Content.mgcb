@@ -13,6 +13,60 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin csv/Stage01.csv
+/copy:csv/Stage01.csv
+
+#begin csv/Stage01.xlsx
+/copy:csv/Stage01.xlsx
+
+#begin csv/Stage02.csv
+/copy:csv/Stage02.csv
+
+#begin csv/Stage02.xlsx
+/copy:csv/Stage02.xlsx
+
+#begin csv/Stage03.csv
+/copy:csv/Stage03.csv
+
+#begin csv/Stage03.xlsx
+/copy:csv/Stage03.xlsx
+
+#begin csv/Stage04.csv
+/copy:csv/Stage04.csv
+
+#begin csv/Stage04.xlsx
+/copy:csv/Stage04.xlsx
+
+#begin csv/Stage05.csv
+/copy:csv/Stage05.csv
+
+#begin csv/Stage05.xlsx
+/copy:csv/Stage05.xlsx
+
+#begin csv/Stage06.csv
+/copy:csv/Stage06.csv
+
+#begin csv/Stage06.xlsx
+/copy:csv/Stage06.xlsx
+
+#begin csv/Stage07.csv
+/copy:csv/Stage07.csv
+
+#begin csv/Stage07.xlsx
+/copy:csv/Stage07.xlsx
+
+#begin csv/Stage08.csv
+/copy:csv/Stage08.csv
+
+#begin csv/Stage08.xlsx
+/copy:csv/Stage08.xlsx
+
+#begin csv/Stage09.csv
+/copy:csv/Stage09.csv
+
+#begin csv/Stage09.xlsx
+/copy:csv/Stage09.xlsx
+
 #begin data/rankData.txt
 /copy:data/rankData.txt
 
@@ -33,6 +87,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/menu.wav
+
+#begin Sound/menu_close.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/menu_close.wav
 
 #begin Sound/reset.wav
 /importer:WavImporter
@@ -117,6 +177,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/clearBG.png
+
+#begin Textures/fade.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/fade.png
 
 #begin Textures/floor.png
 /importer:TextureImporter
@@ -297,6 +369,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/resetButtonDown.png
+
+#begin Textures/rule1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/rule1.png
+
+#begin Textures/rule2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/rule2.png
 
 #begin Textures/selectmenuframe.png
 /importer:TextureImporter
@@ -501,94 +597,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/wall.png
-
-#begin Textures/rule2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/rule2.png
-
-#begin Textures/rule1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/rule1.png
-
-#begin Textures/fade.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/fade.png
-
-#begin csv/Stage01.csv
-/copy:csv/Stage01.csv
-
-#begin csv/Stage01.xlsx
-/copy:csv/Stage01.xlsx
-
-#begin csv/Stage02.csv
-/copy:csv/Stage02.csv
-
-#begin csv/Stage02.xlsx
-/copy:csv/Stage02.xlsx
-
-#begin csv/Stage03.csv
-/copy:csv/Stage03.csv
-
-#begin csv/Stage03.xlsx
-/copy:csv/Stage03.xlsx
-
-#begin csv/Stage04.csv
-/copy:csv/Stage04.csv
-
-#begin csv/Stage04.xlsx
-/copy:csv/Stage04.xlsx
-
-#begin csv/Stage05.csv
-/copy:csv/Stage05.csv
-
-#begin csv/Stage05.xlsx
-/copy:csv/Stage05.xlsx
-
-#begin csv/Stage06.csv
-/copy:csv/Stage06.csv
-
-#begin csv/Stage06.xlsx
-/copy:csv/Stage06.xlsx
-
-#begin csv/Stage07.csv
-/copy:csv/Stage07.csv
-
-#begin csv/Stage07.xlsx
-/copy:csv/Stage07.xlsx
-
-#begin csv/Stage08.csv
-/copy:csv/Stage08.csv
-
-#begin csv/Stage08.xlsx
-/copy:csv/Stage08.xlsx
-
-#begin csv/Stage09.csv
-/copy:csv/Stage09.csv
-
-#begin csv/Stage09.xlsx
-/copy:csv/Stage09.xlsx
 
