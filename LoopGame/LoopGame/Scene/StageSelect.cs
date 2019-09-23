@@ -128,25 +128,26 @@ namespace LoopGame.Scene {
             {
                 mAnim.SetMotion(2);
 
+                string se = "cursor";
                 if (Input.GetKeyTrigger(Keys.Right))
                 {
                     mStageNo++;
-                    s.PlaySE("cursor");
+                    s.PlaySE(se);
                 }
                 if (Input.GetKeyTrigger(Keys.Left))
                 {
                     mStageNo--;
-                    s.PlaySE("cursor");
+                    s.PlaySE(se);
                 }
                 if (Input.GetKeyTrigger(Keys.Up))
                 {
                     mStageNo -= 3;
-                    s.PlaySE("cursor");
+                    s.PlaySE(se);
                 }
                 if (Input.GetKeyTrigger(Keys.Down))
                 {
                     mStageNo += 3;
-                    s.PlaySE("cursor");
+                    s.PlaySE(se);
                 }
                 mStageNo = (mStageNo + mStageCount) % mStageCount;
 
@@ -176,13 +177,12 @@ namespace LoopGame.Scene {
 
                 if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                 {
-                    string se = "";
+                    string se = "stage_choice";
                     switch (mMenuNum)
                     {
                         case 0:
                             mNextScene = Scene.Title;
                             SetFadeState(FadeState.OUT);
-                            se = "stage_choice";
                             break;
                         case 1:
                             mIsMenu = false;
@@ -190,7 +190,6 @@ namespace LoopGame.Scene {
                             break;
                         case 2:
                             Game1.mIsEndGame = true;
-                            se = "stage_choice";
                             break;
                     }
                     s.PlaySE(se);

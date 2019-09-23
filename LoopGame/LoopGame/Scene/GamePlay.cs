@@ -44,6 +44,7 @@ namespace LoopGame.Scene
             r.LoadContent("gamemenuframe");
             var s = GameDevice.Instance().GetSound();
             s.LoadBGM("tekuteku_arukou");
+            s.LoadBGM("clear");
             s.LoadSE("cursor");
             s.LoadSE("choice");
             s.LoadSE("stage_choice");
@@ -175,7 +176,8 @@ namespace LoopGame.Scene
         public void Update(GameTime gameTime)
         {
             var s = GameDevice.Instance().GetSound();
-            s.PlayBGM("tekuteku_arukou");
+            string bgm = mIsClear ? "clear" : "tekuteku_arukou";
+            s.PlayBGM(bgm);
 
             FadeUpdate(gameTime);
             if (mFadeState == FadeState.OUT)
@@ -201,7 +203,6 @@ namespace LoopGame.Scene
                     mAnim.SetMotion(0);
                     if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                     {
-                        
                         mNextScene = Scene.StageSelect;
                         SetFadeState(FadeState.OUT);
                         s.PlaySE("stage_choice");
@@ -217,6 +218,7 @@ namespace LoopGame.Scene
                 if (ActorManager.Instance().IsClear())
                 {
                     mIsClear = true;
+                    s.StopBGM();
                     if (ActorMove.mWalkCount <= mRankA)
                     {
                         mA = 0;
@@ -256,18 +258,16 @@ namespace LoopGame.Scene
 
                 if (Input.GetKeyTrigger(Keys.Space) || Input.GetKeyTrigger(Keys.Enter))
                 {
-                    string se = "";
+                    string se = "stage_choice";
                     switch (mMenuNum)
                     {
                         case 0:
                             mNextScene = Scene.Title;
                             SetFadeState(FadeState.OUT);
-                            se = "stage_choice";
                             break;
                         case 1:
                             mNextScene = Scene.StageSelect;
                             SetFadeState(FadeState.OUT);
-                            se = "stage_choice";
                             break;
                         case 2:
                             mIsMenu = false;
@@ -275,7 +275,6 @@ namespace LoopGame.Scene
                             break;
                         case 3:
                             Game1.mIsEndGame = true;
-                            se = "stage_choice";
                             break;
                     }
                     s.PlaySE(se);
